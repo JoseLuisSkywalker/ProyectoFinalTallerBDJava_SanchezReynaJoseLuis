@@ -4,8 +4,9 @@
  */
 package vista;
 
+import java.awt.Color;
 import java.awt.Image;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  *
@@ -21,11 +22,21 @@ public class VentanaInicio extends javax.swing.JFrame {
     public VentanaInicio() {
         initComponents();
         setSize(1000, 750);        
-        setResizable(false); 
- 
-           System.out.println(getClass().getResource("/Imagenes/logo.png"));
+        setResizable(false);
         
-          //cositas de diseño 
+        //Para que nimbus respete los colores de los botones. 
+        prepararBoton(btnMedicos);
+        prepararBoton(btnPacientes);
+        prepararBoton(btnModificarMedicos);
+        prepararBoton(btnAgregarMedicos);
+        prepararBoton(btnEliminarMedicos);
+        prepararBoton(btnConsultarMedicos);
+        
+        
+        //para la tabla, problemas con nimbus
+        jScrollPane1.getViewport().setBackground(new Color(110, 46, 46));
+        jScrollPane1.setBackground(new Color(110, 46, 46));   
+
          
         
         ImageIcon iconoOriginal = new ImageIcon(
@@ -55,51 +66,216 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         panelFondoIzquierdo = new javax.swing.JPanel();
         Logotipo = new javax.swing.JLabel();
+        btnMedicos = new javax.swing.JButton();
+        btnPacientes = new javax.swing.JButton();
         panelFondoDerecho = new javax.swing.JPanel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        internalMedicos = new javax.swing.JInternalFrame();
+        btnModificarMedicos = new javax.swing.JButton();
+        btnAgregarMedicos = new javax.swing.JButton();
+        btnEliminarMedicos = new javax.swing.JButton();
+        btnConsultarMedicos = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaMedicos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         panelFondoIzquierdo.setBackground(new java.awt.Color(61, 4, 4));
+        panelFondoIzquierdo.setMaximumSize(new java.awt.Dimension(160, 32767));
+        panelFondoIzquierdo.setLayout(null);
 
-        javax.swing.GroupLayout panelFondoIzquierdoLayout = new javax.swing.GroupLayout(panelFondoIzquierdo);
-        panelFondoIzquierdo.setLayout(panelFondoIzquierdoLayout);
-        panelFondoIzquierdoLayout.setHorizontalGroup(
-            panelFondoIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFondoIzquierdoLayout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(Logotipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
-        );
-        panelFondoIzquierdoLayout.setVerticalGroup(
-            panelFondoIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFondoIzquierdoLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(Logotipo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(587, Short.MAX_VALUE))
-        );
+        Logotipo.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/logo.png")); // NOI18N
+        panelFondoIzquierdo.add(Logotipo);
+        Logotipo.setBounds(37, 23, 160, 160);
+
+        btnMedicos.setBackground(new java.awt.Color(92, 0, 0));
+        btnMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        btnMedicos.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/medicoBtn.png")); // NOI18N
+        btnMedicos.setText("Médicos");
+        btnMedicos.setBorder(null);
+        btnMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMedicosActionPerformed(evt);
+            }
+        });
+        panelFondoIzquierdo.add(btnMedicos);
+        btnMedicos.setBounds(0, 300, 230, 50);
+
+        btnPacientes.setBackground(new java.awt.Color(92, 0, 0));
+        btnPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnPacientes.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/pacientBtn.png")); // NOI18N
+        btnPacientes.setText("Pacientes");
+        btnPacientes.setBorder(null);
+        btnPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPacientesActionPerformed(evt);
+            }
+        });
+        panelFondoIzquierdo.add(btnPacientes);
+        btnPacientes.setBounds(0, 400, 230, 50);
 
         getContentPane().add(panelFondoIzquierdo);
         panelFondoIzquierdo.setBounds(0, 0, 230, 770);
 
         panelFondoDerecho.setBackground(new java.awt.Color(110, 46, 46));
+        panelFondoDerecho.setLayout(null);
 
-        javax.swing.GroupLayout panelFondoDerechoLayout = new javax.swing.GroupLayout(panelFondoDerecho);
-        panelFondoDerecho.setLayout(panelFondoDerechoLayout);
-        panelFondoDerechoLayout.setHorizontalGroup(
-            panelFondoDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
-        );
-        panelFondoDerechoLayout.setVerticalGroup(
-            panelFondoDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-        );
+        jDesktopPane1.setBackground(new java.awt.Color(110, 46, 46));
+
+        internalMedicos.setBackground(new java.awt.Color(61, 4, 4));
+        internalMedicos.setClosable(true);
+        internalMedicos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalMedicos.setPreferredSize(new java.awt.Dimension(40, 30));
+        internalMedicos.setVisible(false);
+        internalMedicos.getContentPane().setLayout(null);
+
+        btnModificarMedicos.setBackground(new java.awt.Color(110, 46, 46));
+        btnModificarMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificarMedicos.setText("Modificar");
+        btnModificarMedicos.setBorder(null);
+        btnModificarMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarMedicosActionPerformed(evt);
+            }
+        });
+        internalMedicos.getContentPane().add(btnModificarMedicos);
+        btnModificarMedicos.setBounds(20, 80, 240, 40);
+
+        btnAgregarMedicos.setBackground(new java.awt.Color(110, 46, 46));
+        btnAgregarMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarMedicos.setText("Agregar");
+        btnAgregarMedicos.setBorder(null);
+        btnAgregarMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMedicosActionPerformed(evt);
+            }
+        });
+        internalMedicos.getContentPane().add(btnAgregarMedicos);
+        btnAgregarMedicos.setBounds(20, 20, 240, 40);
+
+        btnEliminarMedicos.setBackground(new java.awt.Color(110, 46, 46));
+        btnEliminarMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarMedicos.setText("Eliminar");
+        btnEliminarMedicos.setBorder(null);
+        btnEliminarMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarMedicosActionPerformed(evt);
+            }
+        });
+        internalMedicos.getContentPane().add(btnEliminarMedicos);
+        btnEliminarMedicos.setBounds(320, 20, 240, 40);
+
+        btnConsultarMedicos.setBackground(new java.awt.Color(110, 46, 46));
+        btnConsultarMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarMedicos.setText("Consultar");
+        btnConsultarMedicos.setBorder(null);
+        btnConsultarMedicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarMedicosActionPerformed(evt);
+            }
+        });
+        internalMedicos.getContentPane().add(btnConsultarMedicos);
+        btnConsultarMedicos.setBounds(320, 80, 240, 40);
+
+        jScrollPane1.setBackground(new java.awt.Color(140, 59, 59));
+        jScrollPane1.setBorder(null);
+
+        tablaMedicos.setBackground(new java.awt.Color(110, 46, 46));
+        tablaMedicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaMedicos);
+
+        internalMedicos.getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 270, 540, 310);
+
+        jDesktopPane1.add(internalMedicos);
+        internalMedicos.setBounds(0, 0, 600, 650);
+
+        panelFondoDerecho.add(jDesktopPane1);
+        jDesktopPane1.setBounds(80, 40, 690, 680);
 
         getContentPane().add(panelFondoDerecho);
         panelFondoDerecho.setBounds(230, 0, 890, 770);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+//============ METODOS DISENO BOTONES START ================ 
+private void hacerClickOscuro(JButton boton) {
+
+    // Color original guardado en una variable local
+    Color original = boton.getBackground();
+
+    // Color más oscuro
+    Color oscuro = original.darker();
+
+    boton.setBackground(oscuro);
+
+    // Regresar al color original después de 150 ms
+    Timer t = new Timer(150, e -> {
+        boton.setBackground(original);
+    });
+
+    t.setRepeats(false);
+    t.start();
+}
+
+private void prepararBoton(JButton boton) {
+    boton.setUI(new javax.swing.plaf.basic.BasicButtonUI());
+    boton.setContentAreaFilled(true);
+    boton.setOpaque(true);
+    boton.setBorderPainted(false);
+}
+//=========== METODOS DISENO BOTONES END ============= 
+
+    private void btnMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicosActionPerformed
+        internalMedicos.setVisible(true); 
+        hacerClickOscuro(btnMedicos); 
+     
+    }//GEN-LAST:event_btnMedicosActionPerformed
+
+    private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
+        hacerClickOscuro(btnPacientes); 
+    }//GEN-LAST:event_btnPacientesActionPerformed
+
+    private void btnModificarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModificarMedicosActionPerformed
+
+    private void btnAgregarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarMedicosActionPerformed
+
+    private void btnEliminarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarMedicosActionPerformed
+
+    private void btnConsultarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarMedicosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarMedicosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,7 +304,17 @@ public class VentanaInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logotipo;
+    private javax.swing.JButton btnAgregarMedicos;
+    private javax.swing.JButton btnConsultarMedicos;
+    private javax.swing.JButton btnEliminarMedicos;
+    private javax.swing.JButton btnMedicos;
+    private javax.swing.JButton btnModificarMedicos;
+    private javax.swing.JButton btnPacientes;
+    private javax.swing.JInternalFrame internalMedicos;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelFondoDerecho;
     private javax.swing.JPanel panelFondoIzquierdo;
+    private javax.swing.JTable tablaMedicos;
     // End of variables declaration//GEN-END:variables
 }
