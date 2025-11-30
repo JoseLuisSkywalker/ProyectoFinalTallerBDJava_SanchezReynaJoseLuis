@@ -6,6 +6,7 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.beans.PropertyVetoException;
 import javax.swing.*;
 
 /**
@@ -26,17 +27,30 @@ public class VentanaInicio extends javax.swing.JFrame {
         
         //Para que nimbus respete los colores de los botones. 
         prepararBoton(btnMedicos);
+        prepararBoton(btnCambiosMedico);
+        prepararBoton(btnAltasMedico);
+        prepararBoton(btnBajasMedico);
+        prepararBoton(btnConsultasMedico);
+        
         prepararBoton(btnPacientes);
-        prepararBoton(btnModificarMedicos);
-        prepararBoton(btnAgregarMedicos);
-        prepararBoton(btnEliminarMedicos);
-        prepararBoton(btnConsultarMedicos);
+        prepararBoton(btnModificarPacientes);
+        prepararBoton(btnAgregarPacientes);
+        prepararBoton(btnEliminarPacientes);
+        prepararBoton(btnConsultarPacientes);
         
+        //buttongroup para medicos
+        ButtonGroup group = new ButtonGroup();
+        group.add(jRadioButton1); 
+        group.add(jRadioButton2); 
+        group.add(jRadioButton3);
+        group.add(jRadioButton4); 
+        group.add(jRadioButton5);
+        group.add(jRadioButton6);
         
-        //para la tabla, problemas con nimbus
-        jScrollPane1.getViewport().setBackground(new Color(110, 46, 46));
-        jScrollPane1.setBackground(new Color(110, 46, 46));   
-
+        //end buttongroup para medicos
+        
+        //deshabilitación de
+       
          
         
         ImageIcon iconoOriginal = new ImageIcon(
@@ -71,12 +85,66 @@ public class VentanaInicio extends javax.swing.JFrame {
         panelFondoDerecho = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         internalMedicos = new javax.swing.JInternalFrame();
-        btnModificarMedicos = new javax.swing.JButton();
-        btnAgregarMedicos = new javax.swing.JButton();
-        btnEliminarMedicos = new javax.swing.JButton();
-        btnConsultarMedicos = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        btnCambiosMedico = new javax.swing.JButton();
+        btnAltasMedico = new javax.swing.JButton();
+        btnBajasMedico = new javax.swing.JButton();
+        btnConsultasMedico = new javax.swing.JButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
         tablaMedicos = new javax.swing.JTable();
+        internalPacientes = new javax.swing.JInternalFrame();
+        btnModificarPacientes = new javax.swing.JButton();
+        btnAgregarPacientes = new javax.swing.JButton();
+        btnEliminarPacientes = new javax.swing.JButton();
+        btnConsultarPacientes = new javax.swing.JButton();
+        jScrollPacientes = new javax.swing.JScrollPane();
+        tablaPacientes = new javax.swing.JTable();
+        internalAgregarMedicos = new javax.swing.JInternalFrame();
+        jLabel1 = new javax.swing.JLabel();
+        campoIdMedicoAltas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        campoNombreMedicoAltas = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        campoApellidoMedicoAltas = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        comboMedicoDepartamentoAtlas = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        campoDireccionMedicoAltas = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        campoDireccionMedicoAltas1 = new javax.swing.JTextField();
+        btnAgregarMedicoAltas = new javax.swing.JButton();
+        btnRestablecerMedicoAltas1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        internalEliminarMedicos = new javax.swing.JInternalFrame();
+        jLabel8 = new javax.swing.JLabel();
+        campoIdMedicoAltas1 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        campoNombreMedicoAltas1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        campoApellidoMedicoAltas1 = new javax.swing.JTextField();
+        btnElminarMedicoAltas = new javax.swing.JButton();
+        btnRestablecerMedicosBajas = new javax.swing.JButton();
+        btnBuscarMedicosBajas = new javax.swing.JButton();
+        internalConsultarMedicos = new javax.swing.JInternalFrame();
+        jLabel17 = new javax.swing.JLabel();
+        campoIdMedicoAltas3 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        campoNombreMedicoAltas3 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        campoApellidoMedicoAltas3 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        comboMedicoDepartamentoAtlas2 = new javax.swing.JComboBox<>();
+        jLabel21 = new javax.swing.JLabel();
+        campoDireccionMedicoAltas4 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        campoDireccionMedicoAltas5 = new javax.swing.JTextField();
+        btnAgregarMedicoAltas2 = new javax.swing.JButton();
+        btnRestablecerMedicoAltas3 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -126,60 +194,61 @@ public class VentanaInicio extends javax.swing.JFrame {
         internalMedicos.setBackground(new java.awt.Color(61, 4, 4));
         internalMedicos.setClosable(true);
         internalMedicos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalMedicos.setTitle("Médicos de Cabecera");
         internalMedicos.setPreferredSize(new java.awt.Dimension(40, 30));
         internalMedicos.setVisible(false);
         internalMedicos.getContentPane().setLayout(null);
 
-        btnModificarMedicos.setBackground(new java.awt.Color(110, 46, 46));
-        btnModificarMedicos.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificarMedicos.setText("Modificar");
-        btnModificarMedicos.setBorder(null);
-        btnModificarMedicos.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiosMedico.setBackground(new java.awt.Color(110, 46, 46));
+        btnCambiosMedico.setForeground(new java.awt.Color(255, 255, 255));
+        btnCambiosMedico.setText("Modificar");
+        btnCambiosMedico.setBorder(null);
+        btnCambiosMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarMedicosActionPerformed(evt);
+                btnCambiosMedicoActionPerformed(evt);
             }
         });
-        internalMedicos.getContentPane().add(btnModificarMedicos);
-        btnModificarMedicos.setBounds(20, 80, 240, 40);
+        internalMedicos.getContentPane().add(btnCambiosMedico);
+        btnCambiosMedico.setBounds(20, 80, 240, 40);
 
-        btnAgregarMedicos.setBackground(new java.awt.Color(110, 46, 46));
-        btnAgregarMedicos.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarMedicos.setText("Agregar");
-        btnAgregarMedicos.setBorder(null);
-        btnAgregarMedicos.addActionListener(new java.awt.event.ActionListener() {
+        btnAltasMedico.setBackground(new java.awt.Color(110, 46, 46));
+        btnAltasMedico.setForeground(new java.awt.Color(255, 255, 255));
+        btnAltasMedico.setText("Agregar");
+        btnAltasMedico.setBorder(null);
+        btnAltasMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarMedicosActionPerformed(evt);
+                btnAltasMedicoActionPerformed(evt);
             }
         });
-        internalMedicos.getContentPane().add(btnAgregarMedicos);
-        btnAgregarMedicos.setBounds(20, 20, 240, 40);
+        internalMedicos.getContentPane().add(btnAltasMedico);
+        btnAltasMedico.setBounds(20, 20, 240, 40);
 
-        btnEliminarMedicos.setBackground(new java.awt.Color(110, 46, 46));
-        btnEliminarMedicos.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminarMedicos.setText("Eliminar");
-        btnEliminarMedicos.setBorder(null);
-        btnEliminarMedicos.addActionListener(new java.awt.event.ActionListener() {
+        btnBajasMedico.setBackground(new java.awt.Color(110, 46, 46));
+        btnBajasMedico.setForeground(new java.awt.Color(255, 255, 255));
+        btnBajasMedico.setText("Eliminar");
+        btnBajasMedico.setBorder(null);
+        btnBajasMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarMedicosActionPerformed(evt);
+                btnBajasMedicoActionPerformed(evt);
             }
         });
-        internalMedicos.getContentPane().add(btnEliminarMedicos);
-        btnEliminarMedicos.setBounds(320, 20, 240, 40);
+        internalMedicos.getContentPane().add(btnBajasMedico);
+        btnBajasMedico.setBounds(320, 20, 240, 40);
 
-        btnConsultarMedicos.setBackground(new java.awt.Color(110, 46, 46));
-        btnConsultarMedicos.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarMedicos.setText("Consultar");
-        btnConsultarMedicos.setBorder(null);
-        btnConsultarMedicos.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultasMedico.setBackground(new java.awt.Color(110, 46, 46));
+        btnConsultasMedico.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultasMedico.setText("Consultar");
+        btnConsultasMedico.setBorder(null);
+        btnConsultasMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarMedicosActionPerformed(evt);
+                btnConsultasMedicoActionPerformed(evt);
             }
         });
-        internalMedicos.getContentPane().add(btnConsultarMedicos);
-        btnConsultarMedicos.setBounds(320, 80, 240, 40);
+        internalMedicos.getContentPane().add(btnConsultasMedico);
+        btnConsultasMedico.setBounds(320, 80, 240, 40);
 
-        jScrollPane1.setBackground(new java.awt.Color(140, 59, 59));
-        jScrollPane1.setBorder(null);
+        jScrollMedicos.setBackground(new java.awt.Color(140, 59, 59));
+        jScrollMedicos.setBorder(null);
 
         tablaMedicos.setBackground(new java.awt.Color(110, 46, 46));
         tablaMedicos.setModel(new javax.swing.table.DefaultTableModel(
@@ -207,16 +276,489 @@ public class VentanaInicio extends javax.swing.JFrame {
                 "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
             }
         ));
-        jScrollPane1.setViewportView(tablaMedicos);
+        jScrollMedicos.setViewportView(tablaMedicos);
 
-        internalMedicos.getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 270, 540, 310);
+        internalMedicos.getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(20, 270, 540, 310);
 
         jDesktopPane1.add(internalMedicos);
         internalMedicos.setBounds(0, 0, 600, 650);
 
+        internalPacientes.setBackground(new java.awt.Color(61, 4, 4));
+        internalPacientes.setClosable(true);
+        internalPacientes.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalPacientes.setTitle("Pacientes");
+        internalPacientes.setPreferredSize(new java.awt.Dimension(40, 30));
+        internalPacientes.setVisible(false);
+        internalPacientes.getContentPane().setLayout(null);
+
+        btnModificarPacientes.setBackground(new java.awt.Color(110, 46, 46));
+        btnModificarPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificarPacientes.setText("Modificar");
+        btnModificarPacientes.setBorder(null);
+        btnModificarPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarPacientesActionPerformed(evt);
+            }
+        });
+        internalPacientes.getContentPane().add(btnModificarPacientes);
+        btnModificarPacientes.setBounds(20, 80, 240, 40);
+
+        btnAgregarPacientes.setBackground(new java.awt.Color(110, 46, 46));
+        btnAgregarPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarPacientes.setText("Agregar");
+        btnAgregarPacientes.setBorder(null);
+        btnAgregarPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPacientesActionPerformed(evt);
+            }
+        });
+        internalPacientes.getContentPane().add(btnAgregarPacientes);
+        btnAgregarPacientes.setBounds(20, 20, 240, 40);
+
+        btnEliminarPacientes.setBackground(new java.awt.Color(110, 46, 46));
+        btnEliminarPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminarPacientes.setText("Eliminar");
+        btnEliminarPacientes.setBorder(null);
+        btnEliminarPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPacientesActionPerformed(evt);
+            }
+        });
+        internalPacientes.getContentPane().add(btnEliminarPacientes);
+        btnEliminarPacientes.setBounds(320, 20, 240, 40);
+
+        btnConsultarPacientes.setBackground(new java.awt.Color(110, 46, 46));
+        btnConsultarPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarPacientes.setText("Consultar");
+        btnConsultarPacientes.setBorder(null);
+        btnConsultarPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarPacientesActionPerformed(evt);
+            }
+        });
+        internalPacientes.getContentPane().add(btnConsultarPacientes);
+        btnConsultarPacientes.setBounds(320, 80, 240, 40);
+
+        jScrollPacientes.setBackground(new java.awt.Color(140, 59, 59));
+        jScrollPacientes.setBorder(null);
+
+        tablaPacientes.setBackground(new java.awt.Color(110, 46, 46));
+        tablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
+            }
+        ));
+        jScrollPacientes.setViewportView(tablaPacientes);
+
+        internalPacientes.getContentPane().add(jScrollPacientes);
+        jScrollPacientes.setBounds(20, 270, 540, 310);
+
+        jDesktopPane1.add(internalPacientes);
+        internalPacientes.setBounds(0, 0, 600, 650);
+
+        internalAgregarMedicos.setBackground(new java.awt.Color(61, 4, 4));
+        internalAgregarMedicos.setClosable(true);
+        internalAgregarMedicos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalAgregarMedicos.setTitle("Agregar Médico de Cabecera");
+        internalAgregarMedicos.setNormalBounds(new java.awt.Rectangle(0, 0, 600, 650));
+        internalAgregarMedicos.setVisible(false);
+        internalAgregarMedicos.getContentPane().setLayout(null);
+
+        jLabel1.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Id del Médico");
+        internalAgregarMedicos.getContentPane().add(jLabel1);
+        jLabel1.setBounds(50, 10, 90, 20);
+
+        campoIdMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoIdMedicoAltasActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(campoIdMedicoAltas);
+        campoIdMedicoAltas.setBounds(160, 10, 220, 20);
+
+        jLabel2.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Nombre");
+        internalAgregarMedicos.getContentPane().add(jLabel2);
+        jLabel2.setBounds(80, 50, 60, 20);
+
+        campoNombreMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNombreMedicoAltasActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(campoNombreMedicoAltas);
+        campoNombreMedicoAltas.setBounds(160, 50, 220, 20);
+
+        jLabel3.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Apellido");
+        internalAgregarMedicos.getContentPane().add(jLabel3);
+        jLabel3.setBounds(80, 90, 60, 20);
+
+        campoApellidoMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoApellidoMedicoAltasActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(campoApellidoMedicoAltas);
+        campoApellidoMedicoAltas.setBounds(160, 90, 220, 20);
+
+        jLabel4.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Número del Departamento");
+        internalAgregarMedicos.getContentPane().add(jLabel4);
+        jLabel4.setBounds(50, 130, 180, 20);
+
+        comboMedicoDepartamentoAtlas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
+        comboMedicoDepartamentoAtlas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboMedicoDepartamentoAtlasActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(comboMedicoDepartamentoAtlas);
+        comboMedicoDepartamentoAtlas.setBounds(240, 130, 72, 23);
+
+        jLabel5.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Dirección");
+        internalAgregarMedicos.getContentPane().add(jLabel5);
+        jLabel5.setBounds(70, 170, 70, 20);
+
+        campoDireccionMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDireccionMedicoAltasActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(campoDireccionMedicoAltas);
+        campoDireccionMedicoAltas.setBounds(160, 170, 370, 20);
+
+        jLabel6.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Telefóno");
+        internalAgregarMedicos.getContentPane().add(jLabel6);
+        jLabel6.setBounds(80, 210, 70, 20);
+
+        campoDireccionMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDireccionMedicoAltas1ActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(campoDireccionMedicoAltas1);
+        campoDireccionMedicoAltas1.setBounds(160, 210, 370, 20);
+
+        btnAgregarMedicoAltas.setBackground(new java.awt.Color(91, 4, 4));
+        btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/add.png")); // NOI18N
+        btnAgregarMedicoAltas.setToolTipText("Agregar");
+        btnAgregarMedicoAltas.setBorder(null);
+        btnAgregarMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMedicoAltasActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(btnAgregarMedicoAltas);
+        btnAgregarMedicoAltas.setBounds(470, 10, 50, 50);
+
+        btnRestablecerMedicoAltas1.setBackground(new java.awt.Color(91, 4, 4));
+        btnRestablecerMedicoAltas1.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
+        btnRestablecerMedicoAltas1.setToolTipText("Restablecer");
+        btnRestablecerMedicoAltas1.setBorder(null);
+        btnRestablecerMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerMedicoAltas1ActionPerformed(evt);
+            }
+        });
+        internalAgregarMedicos.getContentPane().add(btnRestablecerMedicoAltas1);
+        btnRestablecerMedicoAltas1.setBounds(470, 80, 50, 50);
+
+        jDesktopPane1.add(internalAgregarMedicos);
+        internalAgregarMedicos.setBounds(0, 0, 600, 300);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/WMlogo copy.png")); // NOI18N
+        jDesktopPane1.add(jLabel7);
+        jLabel7.setBounds(50, 40, 500, 500);
+
+        internalEliminarMedicos.setBackground(new java.awt.Color(61, 4, 4));
+        internalEliminarMedicos.setClosable(true);
+        internalEliminarMedicos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalEliminarMedicos.setTitle("Elminar Médico de Cabecera");
+        internalEliminarMedicos.setNormalBounds(new java.awt.Rectangle(0, 0, 600, 650));
+        internalEliminarMedicos.setVisible(false);
+        internalEliminarMedicos.getContentPane().setLayout(null);
+
+        jLabel8.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Id del Médico");
+        internalEliminarMedicos.getContentPane().add(jLabel8);
+        jLabel8.setBounds(50, 30, 90, 20);
+
+        campoIdMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoIdMedicoAltas1ActionPerformed(evt);
+            }
+        });
+        internalEliminarMedicos.getContentPane().add(campoIdMedicoAltas1);
+        campoIdMedicoAltas1.setBounds(160, 30, 360, 20);
+
+        jLabel9.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Nombre");
+        internalEliminarMedicos.getContentPane().add(jLabel9);
+        jLabel9.setBounds(80, 70, 60, 20);
+
+        campoNombreMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNombreMedicoAltas1ActionPerformed(evt);
+            }
+        });
+        internalEliminarMedicos.getContentPane().add(campoNombreMedicoAltas1);
+        campoNombreMedicoAltas1.setBounds(160, 70, 360, 20);
+
+        jLabel10.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Apellido");
+        internalEliminarMedicos.getContentPane().add(jLabel10);
+        jLabel10.setBounds(80, 110, 60, 20);
+
+        campoApellidoMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoApellidoMedicoAltas1ActionPerformed(evt);
+            }
+        });
+        internalEliminarMedicos.getContentPane().add(campoApellidoMedicoAltas1);
+        campoApellidoMedicoAltas1.setBounds(160, 110, 360, 20);
+
+        btnElminarMedicoAltas.setBackground(new java.awt.Color(91, 4, 4));
+        btnElminarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/delete.png")); // NOI18N
+        btnElminarMedicoAltas.setToolTipText("Eliminar");
+        btnElminarMedicoAltas.setBorder(null);
+        btnElminarMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElminarMedicoAltasActionPerformed(evt);
+            }
+        });
+        internalEliminarMedicos.getContentPane().add(btnElminarMedicoAltas);
+        btnElminarMedicoAltas.setBounds(410, 180, 40, 50);
+
+        btnRestablecerMedicosBajas.setBackground(new java.awt.Color(91, 4, 4));
+        btnRestablecerMedicosBajas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
+        btnRestablecerMedicosBajas.setToolTipText("Restablecer");
+        btnRestablecerMedicosBajas.setBorder(null);
+        btnRestablecerMedicosBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerMedicosBajasActionPerformed(evt);
+            }
+        });
+        internalEliminarMedicos.getContentPane().add(btnRestablecerMedicosBajas);
+        btnRestablecerMedicosBajas.setBounds(490, 180, 40, 50);
+
+        btnBuscarMedicosBajas.setBackground(new java.awt.Color(91, 4, 4));
+        btnBuscarMedicosBajas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/find.png")); // NOI18N
+        btnBuscarMedicosBajas.setBorder(null);
+        btnBuscarMedicosBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarMedicosBajasActionPerformed(evt);
+            }
+        });
+        internalEliminarMedicos.getContentPane().add(btnBuscarMedicosBajas);
+        btnBuscarMedicosBajas.setBounds(320, 180, 50, 50);
+
+        jDesktopPane1.add(internalEliminarMedicos);
+        internalEliminarMedicos.setBounds(0, 0, 600, 300);
+
+        internalConsultarMedicos.setBackground(new java.awt.Color(61, 4, 4));
+        internalConsultarMedicos.setClosable(true);
+        internalConsultarMedicos.setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        internalConsultarMedicos.setTitle("Agregar Médico de Cabecera");
+        internalConsultarMedicos.setNormalBounds(new java.awt.Rectangle(0, 0, 600, 650));
+        internalConsultarMedicos.setVisible(false);
+        internalConsultarMedicos.getContentPane().setLayout(null);
+
+        jLabel17.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Id del Médico");
+        internalConsultarMedicos.getContentPane().add(jLabel17);
+        jLabel17.setBounds(70, 10, 90, 20);
+
+        campoIdMedicoAltas3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoIdMedicoAltas3ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(campoIdMedicoAltas3);
+        campoIdMedicoAltas3.setBounds(190, 10, 220, 20);
+
+        jLabel18.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Nombre");
+        internalConsultarMedicos.getContentPane().add(jLabel18);
+        jLabel18.setBounds(70, 50, 60, 20);
+
+        campoNombreMedicoAltas3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNombreMedicoAltas3ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(campoNombreMedicoAltas3);
+        campoNombreMedicoAltas3.setBounds(150, 50, 260, 20);
+
+        jLabel19.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Apellido");
+        internalConsultarMedicos.getContentPane().add(jLabel19);
+        jLabel19.setBounds(70, 90, 60, 20);
+
+        campoApellidoMedicoAltas3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoApellidoMedicoAltas3ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(campoApellidoMedicoAltas3);
+        campoApellidoMedicoAltas3.setBounds(150, 90, 260, 20);
+
+        jLabel20.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Número del Departamento");
+        internalConsultarMedicos.getContentPane().add(jLabel20);
+        jLabel20.setBounds(70, 130, 180, 20);
+
+        comboMedicoDepartamentoAtlas2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
+        comboMedicoDepartamentoAtlas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboMedicoDepartamentoAtlas2ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(comboMedicoDepartamentoAtlas2);
+        comboMedicoDepartamentoAtlas2.setBounds(260, 130, 72, 23);
+
+        jLabel21.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Dirección");
+        internalConsultarMedicos.getContentPane().add(jLabel21);
+        jLabel21.setBounds(70, 170, 70, 20);
+
+        campoDireccionMedicoAltas4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDireccionMedicoAltas4ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(campoDireccionMedicoAltas4);
+        campoDireccionMedicoAltas4.setBounds(160, 170, 370, 20);
+
+        jLabel22.setBackground(new java.awt.Color(110, 46, 46));
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Telefóno");
+        internalConsultarMedicos.getContentPane().add(jLabel22);
+        jLabel22.setBounds(70, 210, 70, 20);
+
+        campoDireccionMedicoAltas5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDireccionMedicoAltas5ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(campoDireccionMedicoAltas5);
+        campoDireccionMedicoAltas5.setBounds(150, 210, 380, 20);
+
+        btnAgregarMedicoAltas2.setBackground(new java.awt.Color(91, 4, 4));
+        btnAgregarMedicoAltas2.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/add.png")); // NOI18N
+        btnAgregarMedicoAltas2.setToolTipText("Agregar");
+        btnAgregarMedicoAltas2.setBorder(null);
+        btnAgregarMedicoAltas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarMedicoAltas2ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(btnAgregarMedicoAltas2);
+        btnAgregarMedicoAltas2.setBounds(470, 10, 50, 50);
+
+        btnRestablecerMedicoAltas3.setBackground(new java.awt.Color(91, 4, 4));
+        btnRestablecerMedicoAltas3.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
+        btnRestablecerMedicoAltas3.setToolTipText("Restablecer");
+        btnRestablecerMedicoAltas3.setBorder(null);
+        btnRestablecerMedicoAltas3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerMedicoAltas3ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(btnRestablecerMedicoAltas3);
+        btnRestablecerMedicoAltas3.setBounds(470, 80, 50, 50);
+
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(jRadioButton1);
+        jRadioButton1.setBounds(30, 10, 30, 20);
+
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(jRadioButton2);
+        jRadioButton2.setBounds(30, 50, 30, 19);
+
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(jRadioButton3);
+        jRadioButton3.setBounds(30, 90, 30, 20);
+
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(jRadioButton4);
+        jRadioButton4.setBounds(30, 130, 30, 19);
+
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(jRadioButton5);
+        jRadioButton5.setBounds(30, 170, 30, 20);
+
+        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6ActionPerformed(evt);
+            }
+        });
+        internalConsultarMedicos.getContentPane().add(jRadioButton6);
+        jRadioButton6.setBounds(30, 210, 30, 20);
+
+        jDesktopPane1.add(internalConsultarMedicos);
+        internalConsultarMedicos.setBounds(0, 0, 600, 300);
+
         panelFondoDerecho.add(jDesktopPane1);
-        jDesktopPane1.setBounds(80, 40, 690, 680);
+        jDesktopPane1.setBounds(80, 60, 690, 680);
 
         getContentPane().add(panelFondoDerecho);
         panelFondoDerecho.setBounds(230, 0, 890, 770);
@@ -258,24 +800,196 @@ private void prepararBoton(JButton boton) {
     }//GEN-LAST:event_btnMedicosActionPerformed
 
     private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
+        internalPacientes.setVisible(true); 
         hacerClickOscuro(btnPacientes); 
     }//GEN-LAST:event_btnPacientesActionPerformed
 
-    private void btnModificarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMedicosActionPerformed
+    private void btnCambiosMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosMedicoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarMedicosActionPerformed
+    }//GEN-LAST:event_btnCambiosMedicoActionPerformed
 
-    private void btnAgregarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarMedicosActionPerformed
+    private void btnAltasMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasMedicoActionPerformed
+      
+        
+        internalAgregarMedicos.setVisible(true);
+        hacerClickOscuro(btnAltasMedico); 
+        
+        
+        //==codigo necesario para que la ventana se vaya para el frente
+        if(!internalAgregarMedicos.isVisible()){
+            jDesktopPane1.add(internalAgregarMedicos);
+            internalAgregarMedicos.setVisible(true);
+        }
+            internalAgregarMedicos.toFront();
+     
+        
+        //==fin codigo necesario para que la ventana se haga para en frente. 
+        
+        
+    }//GEN-LAST:event_btnAltasMedicoActionPerformed
 
-    private void btnEliminarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarMedicosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarMedicosActionPerformed
+    private void btnBajasMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajasMedicoActionPerformed
+        internalEliminarMedicos.setVisible(true);
+        hacerClickOscuro(btnBajasMedico); 
+        
+         if(!internalEliminarMedicos.isVisible()){
+            jDesktopPane1.add(internalEliminarMedicos);
+            internalEliminarMedicos.setVisible(true);
+        }
+        try{
+            internalEliminarMedicos.setIcon(false);
+            internalEliminarMedicos.setSelected(true);
+            internalEliminarMedicos.toFront();
+        }catch (PropertyVetoException ex){
+            
+        }
+        
+    }//GEN-LAST:event_btnBajasMedicoActionPerformed
 
-    private void btnConsultarMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarMedicosActionPerformed
+    private void btnConsultasMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasMedicoActionPerformed
+        hacerClickOscuro(btnConsultasMedico); 
+        internalConsultarMedicos.setVisible(true); 
+        
+         if(!internalConsultarMedicos.isVisible()){
+            jDesktopPane1.add(internalConsultarMedicos);
+            internalConsultarMedicos.setVisible(true);
+        }
+        try{
+            internalConsultarMedicos.setIcon(false);
+            internalConsultarMedicos.setSelected(true);
+            internalConsultarMedicos.toFront();
+        }catch (PropertyVetoException ex){
+            
+        }
+    }//GEN-LAST:event_btnConsultasMedicoActionPerformed
+
+    private void btnModificarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPacientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConsultarMedicosActionPerformed
+    }//GEN-LAST:event_btnModificarPacientesActionPerformed
+
+    private void btnAgregarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarPacientesActionPerformed
+
+    private void btnEliminarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPacientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarPacientesActionPerformed
+
+    private void btnConsultarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPacientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultarPacientesActionPerformed
+
+    private void campoIdMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoAltas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoIdMedicoAltas1ActionPerformed
+
+    private void campoNombreMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNombreMedicoAltas1ActionPerformed
+
+    private void campoApellidoMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoApellidoMedicoAltas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoApellidoMedicoAltas1ActionPerformed
+
+    private void btnElminarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarMedicoAltasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnElminarMedicoAltasActionPerformed
+
+    private void btnRestablecerMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosBajasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRestablecerMedicosBajasActionPerformed
+
+    private void btnBuscarMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicosBajasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarMedicosBajasActionPerformed
+
+    private void campoIdMedicoAltas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoAltas3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoIdMedicoAltas3ActionPerformed
+
+    private void campoNombreMedicoAltas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltas3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNombreMedicoAltas3ActionPerformed
+
+    private void campoApellidoMedicoAltas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoApellidoMedicoAltas3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoApellidoMedicoAltas3ActionPerformed
+
+    private void comboMedicoDepartamentoAtlas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMedicoDepartamentoAtlas2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboMedicoDepartamentoAtlas2ActionPerformed
+
+    private void campoDireccionMedicoAltas4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltas4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDireccionMedicoAltas4ActionPerformed
+
+    private void campoDireccionMedicoAltas5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltas5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDireccionMedicoAltas5ActionPerformed
+
+    private void btnAgregarMedicoAltas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicoAltas2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarMedicoAltas2ActionPerformed
+
+    private void btnRestablecerMedicoAltas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoAltas3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRestablecerMedicoAltas3ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton5ActionPerformed
+
+    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton6ActionPerformed
+
+    private void btnRestablecerMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoAltas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRestablecerMedicoAltas1ActionPerformed
+
+    private void btnAgregarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicoAltasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarMedicoAltasActionPerformed
+
+    private void campoDireccionMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltas1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDireccionMedicoAltas1ActionPerformed
+
+    private void campoDireccionMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDireccionMedicoAltasActionPerformed
+
+    private void comboMedicoDepartamentoAtlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMedicoDepartamentoAtlasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboMedicoDepartamentoAtlasActionPerformed
+
+    private void campoApellidoMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoApellidoMedicoAltasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoApellidoMedicoAltasActionPerformed
+
+    private void campoNombreMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNombreMedicoAltasActionPerformed
+
+    private void campoIdMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoAltasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoIdMedicoAltasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,17 +1018,71 @@ private void prepararBoton(JButton boton) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logotipo;
-    private javax.swing.JButton btnAgregarMedicos;
-    private javax.swing.JButton btnConsultarMedicos;
-    private javax.swing.JButton btnEliminarMedicos;
+    private javax.swing.JButton btnAgregarMedicoAltas;
+    private javax.swing.JButton btnAgregarMedicoAltas2;
+    private javax.swing.JButton btnAgregarPacientes;
+    private javax.swing.JButton btnAltasMedico;
+    private javax.swing.JButton btnBajasMedico;
+    private javax.swing.JButton btnBuscarMedicosBajas;
+    private javax.swing.JButton btnCambiosMedico;
+    private javax.swing.JButton btnConsultarPacientes;
+    private javax.swing.JButton btnConsultasMedico;
+    private javax.swing.JButton btnEliminarPacientes;
+    private javax.swing.JButton btnElminarMedicoAltas;
     private javax.swing.JButton btnMedicos;
-    private javax.swing.JButton btnModificarMedicos;
+    private javax.swing.JButton btnModificarPacientes;
     private javax.swing.JButton btnPacientes;
+    private javax.swing.JButton btnRestablecerMedicoAltas1;
+    private javax.swing.JButton btnRestablecerMedicoAltas3;
+    private javax.swing.JButton btnRestablecerMedicosBajas;
+    private javax.swing.JTextField campoApellidoMedicoAltas;
+    private javax.swing.JTextField campoApellidoMedicoAltas1;
+    private javax.swing.JTextField campoApellidoMedicoAltas3;
+    private javax.swing.JTextField campoDireccionMedicoAltas;
+    private javax.swing.JTextField campoDireccionMedicoAltas1;
+    private javax.swing.JTextField campoDireccionMedicoAltas4;
+    private javax.swing.JTextField campoDireccionMedicoAltas5;
+    private javax.swing.JTextField campoIdMedicoAltas;
+    private javax.swing.JTextField campoIdMedicoAltas1;
+    private javax.swing.JTextField campoIdMedicoAltas3;
+    private javax.swing.JTextField campoNombreMedicoAltas;
+    private javax.swing.JTextField campoNombreMedicoAltas1;
+    private javax.swing.JTextField campoNombreMedicoAltas3;
+    private javax.swing.JComboBox<String> comboMedicoDepartamentoAtlas;
+    private javax.swing.JComboBox<String> comboMedicoDepartamentoAtlas2;
+    private javax.swing.JInternalFrame internalAgregarMedicos;
+    private javax.swing.JInternalFrame internalConsultarMedicos;
+    private javax.swing.JInternalFrame internalEliminarMedicos;
     private javax.swing.JInternalFrame internalMedicos;
+    private javax.swing.JInternalFrame internalPacientes;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JScrollPane jScrollPacientes;
     private javax.swing.JPanel panelFondoDerecho;
     private javax.swing.JPanel panelFondoIzquierdo;
     private javax.swing.JTable tablaMedicos;
+    private javax.swing.JTable tablaPacientes;
     // End of variables declaration//GEN-END:variables
 }
