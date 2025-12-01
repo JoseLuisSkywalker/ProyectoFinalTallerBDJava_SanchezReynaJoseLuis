@@ -14,10 +14,13 @@ import javax.swing.Timer;
  */
 public class InternalPacientes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form internalMedicos
-     */
-    public InternalPacientes() {
+    private InternalAltasPacientes IFAltasPacientes; 
+    
+    
+    public InternalPacientes(InternalAltasPacientes altasPacientes) {
+        this.IFAltasPacientes = altasPacientes;
+        
+        
         initComponents();
         setSize(700, 700);        
         setResizable(false);
@@ -191,6 +194,7 @@ private void prepararBoton(JButton boton) {
 
     private void btnAltasPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasPacienteActionPerformed
         hacerClickOscuro(btnAltasPaciente);
+        IFAltasPacientes.isVisible(); 
 
     }//GEN-LAST:event_btnAltasPacienteActionPerformed
 

@@ -21,13 +21,16 @@ public class VentanaInicio extends javax.swing.JFrame {
      */
     //internal iniciales
     
-    InternalPacientes IFPacientes = new InternalPacientes(); 
+  
     InternalAltasMedicos IFAltasMedicos = new InternalAltasMedicos();
     InternalBajasMedicos IFBajasMedicos = new InternalBajasMedicos(); 
     InternalConsultasMedicos IFConsultasMedicos = new InternalConsultasMedicos();
     InternalCambiosMedicos IFCambiosMedicos = new InternalCambiosMedicos(); 
-    InternalMedicos IFMedicos = new InternalMedicos( IFAltasMedicos, IFBajasMedicos, IFConsultasMedicos, IFCambiosMedicos); 
+    InternalAltasPacientes IFAltasPacientes = new InternalAltasPacientes();
     
+    
+    InternalMedicos IFMedicos = new InternalMedicos( IFAltasMedicos, IFBajasMedicos, IFConsultasMedicos, IFCambiosMedicos); 
+    InternalPacientes IFPacientes = new InternalPacientes(IFAltasPacientes); 
     
     public VentanaInicio() {
         initComponents();
@@ -67,6 +70,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         jDesktopPane1.add(IFConsultasMedicos); 
         IFConsultasMedicos.setVisible(false);
         IFConsultasMedicos.setLocation(0, 0);
+        
+        jDesktopPane1.add(IFAltasPacientes);
+        IFAltasPacientes.setVisible(false);
+        IFAltasPacientes.setLocation(0, 0); 
         
         
         
