@@ -33,6 +33,28 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
 
         btnAgregarMedicoAltas = new javax.swing.JButton();
         btnRestablecerMedicoAltas1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jComboBox8 = new javax.swing.JComboBox<>();
+        jTextField6 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -44,7 +66,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         getContentPane().setLayout(null);
 
         btnAgregarMedicoAltas.setBackground(new java.awt.Color(120, 0, 0));
-        btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/add.png")); // NOI18N
+        btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/add.png")); // NOI18N
         btnAgregarMedicoAltas.setToolTipText("Agregar");
         btnAgregarMedicoAltas.setBorder(null);
         btnAgregarMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +75,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnAgregarMedicoAltas);
-        btnAgregarMedicoAltas.setBounds(460, 20, 50, 50);
+        btnAgregarMedicoAltas.setBounds(560, 150, 50, 50);
 
         btnRestablecerMedicoAltas1.setBackground(new java.awt.Color(120, 0, 0));
         btnRestablecerMedicoAltas1.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
@@ -65,7 +87,135 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnRestablecerMedicoAltas1);
-        btnRestablecerMedicoAltas1.setBounds(460, 90, 50, 50);
+        btnRestablecerMedicoAltas1.setBounds(560, 230, 50, 50);
+
+        jLabel1.setText("ID Paciente");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 20, 80, 17);
+
+        jLabel2.setText("Nombre");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(20, 50, 60, 17);
+
+        jLabel3.setText("Apellido");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(20, 80, 60, 17);
+
+        jLabel4.setText("Telefóno");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 110, 60, 17);
+
+        jLabel5.setText("Fecha de Nacimiento");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(20, 140, 140, 17);
+
+        jLabel6.setText("sexo");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(20, 170, 28, 17);
+
+        jLabel7.setText("Estado Civil");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(20, 200, 90, 17);
+
+        jLabel8.setText("Fecha Registro");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(20, 230, 100, 17);
+
+        jLabel9.setText("ID Medico");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(20, 260, 80, 17);
+
+        jTextField2.setToolTipText("");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField2);
+        jTextField2.setBounds(110, 20, 400, 23);
+
+        jTextField3.setToolTipText("");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField3);
+        jTextField3.setBounds(110, 50, 400, 23);
+
+        jTextField4.setToolTipText("");
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField4);
+        jTextField4.setBounds(110, 80, 400, 23);
+
+        jTextField5.setToolTipText("");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField5);
+        jTextField5.setBounds(110, 260, 400, 23);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(160, 140, 72, 23);
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        getContentPane().add(jComboBox2);
+        jComboBox2.setBounds(240, 140, 72, 23);
+
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034" }));
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox6);
+        jComboBox6.setBounds(280, 230, 72, 23);
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        getContentPane().add(jComboBox4);
+        jComboBox4.setBounds(70, 170, 72, 23);
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado", "Divorciado", "Viudo", "Separado", "Concubino" }));
+        getContentPane().add(jComboBox5);
+        jComboBox5.setBounds(110, 200, 97, 23);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox3);
+        jComboBox3.setBounds(320, 140, 72, 23);
+
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox7);
+        jComboBox7.setBounds(120, 230, 72, 23);
+
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        getContentPane().add(jComboBox8);
+        jComboBox8.setBounds(200, 230, 72, 23);
+
+        jTextField6.setToolTipText("");
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextField6);
+        jTextField6.setBounds(110, 110, 400, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,9 +228,63 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRestablecerMedicoAltas1ActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox6ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox7ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarMedicoAltas;
     private javax.swing.JButton btnRestablecerMedicoAltas1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JComboBox<String> jComboBox7;
+    private javax.swing.JComboBox<String> jComboBox8;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

@@ -141,7 +141,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         campoDireccionMedicoAltas1.setBounds(150, 220, 370, 20);
 
         btnAgregarMedicoAltas.setBackground(new java.awt.Color(120, 0, 0));
-        btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/add.png")); // NOI18N
+        btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/add.png")); // NOI18N
         btnAgregarMedicoAltas.setToolTipText("Agregar");
         btnAgregarMedicoAltas.setBorder(null);
         btnAgregarMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
