@@ -52,7 +52,6 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         campoDireccionMedicoConsultas = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         campoDireccionMedicoAltas5 = new javax.swing.JTextField();
-        btnBuscarMedicosConsultas = new javax.swing.JButton();
         btnRestablecerMedicosConsultas = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -155,18 +154,6 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(campoDireccionMedicoAltas5);
         campoDireccionMedicoAltas5.setBounds(150, 210, 380, 20);
 
-        btnBuscarMedicosConsultas.setBackground(new java.awt.Color(91, 4, 4));
-        btnBuscarMedicosConsultas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/find.png")); // NOI18N
-        btnBuscarMedicosConsultas.setToolTipText("Buscar");
-        btnBuscarMedicosConsultas.setBorder(null);
-        btnBuscarMedicosConsultas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarMedicosConsultasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscarMedicosConsultas);
-        btnBuscarMedicosConsultas.setBounds(470, 10, 50, 50);
-
         btnRestablecerMedicosConsultas.setBackground(new java.awt.Color(91, 4, 4));
         btnRestablecerMedicosConsultas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
         btnRestablecerMedicosConsultas.setToolTipText("Restablecer");
@@ -177,7 +164,7 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnRestablecerMedicosConsultas);
-        btnRestablecerMedicosConsultas.setBounds(470, 80, 50, 50);
+        btnRestablecerMedicosConsultas.setBounds(480, 20, 50, 50);
 
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,10 +241,6 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoDireccionMedicoAltas5ActionPerformed
 
-    private void btnBuscarMedicosConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicosConsultasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarMedicosConsultasActionPerformed
-
     private void btnRestablecerMedicosConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosConsultasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRestablecerMedicosConsultasActionPerformed
@@ -288,13 +271,10 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarMedicosConsultas;
     private javax.swing.JButton btnRestablecerMedicosConsultas;
     private javax.swing.JTextField campoApellidoMedicoConsultas;
     private javax.swing.JTextField campoDireccionMedicoAltas5;
     private javax.swing.JTextField campoDireccionMedicoConsultas;
-    private javax.swing.JTextField campoIdMedicoAltas3;
-    private javax.swing.JTextField campoIdMedicoAltas4;
     private javax.swing.JTextField campoIdMedicoConsultas;
     private javax.swing.JTextField campoNombreMedicoConsultas;
     private javax.swing.JComboBox<String> comboMedicoDepartamentoConsultas;

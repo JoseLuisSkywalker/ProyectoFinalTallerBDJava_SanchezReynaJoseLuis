@@ -6,6 +6,7 @@ package vista;
 
 import java.awt.Color;
 import javax.swing.JButton;
+
 import javax.swing.Timer;
 
 /**
@@ -194,7 +195,8 @@ private void prepararBoton(JButton boton) {
 
     private void btnAltasPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasPacienteActionPerformed
         hacerClickOscuro(btnAltasPaciente);
-        IFAltasPacientes.isVisible(); 
+        IFAltasPacientes.setVisible(true); 
+        IFAltasPacientes.toFront();
 
     }//GEN-LAST:event_btnAltasPacienteActionPerformed
 

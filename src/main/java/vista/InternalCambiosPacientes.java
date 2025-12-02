@@ -8,12 +8,12 @@ package vista;
  *
  * @author josesanchez
  */
-public class InternalAltasPacientes extends javax.swing.JInternalFrame {
+public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form InternalAltasPacientes
      */
-    public InternalAltasPacientes() {
+    public InternalCambiosPacientes() {
         initComponents();
         setSize(700, 350);        
         setResizable(false);

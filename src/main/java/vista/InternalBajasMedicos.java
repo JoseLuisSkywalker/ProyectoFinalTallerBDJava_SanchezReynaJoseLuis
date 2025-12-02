@@ -39,7 +39,6 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         campoApellidoMedicosBajas = new javax.swing.JTextField();
         btnElminarMedicoAltas = new javax.swing.JButton();
         btnRestablecerMedicosBajas = new javax.swing.JButton();
-        btnBuscarMedicosBajas = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -116,18 +115,6 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(btnRestablecerMedicosBajas);
         btnRestablecerMedicosBajas.setBounds(490, 180, 40, 50);
 
-        btnBuscarMedicosBajas.setBackground(new java.awt.Color(91, 4, 4));
-        btnBuscarMedicosBajas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/find.png")); // NOI18N
-        btnBuscarMedicosBajas.setToolTipText("Buscar");
-        btnBuscarMedicosBajas.setBorder(null);
-        btnBuscarMedicosBajas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarMedicosBajasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscarMedicosBajas);
-        btnBuscarMedicosBajas.setBounds(320, 180, 50, 50);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -151,13 +138,8 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRestablecerMedicosBajasActionPerformed
 
-    private void btnBuscarMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicosBajasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarMedicosBajasActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarMedicosBajas;
     private javax.swing.JButton btnElminarMedicoAltas;
     private javax.swing.JButton btnRestablecerMedicosBajas;
     private javax.swing.JTextField campoApellidoMedicosBajas;

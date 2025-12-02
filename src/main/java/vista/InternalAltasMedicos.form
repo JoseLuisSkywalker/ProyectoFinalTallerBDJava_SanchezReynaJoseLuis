@@ -7,6 +7,8 @@
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="defaultCloseOperation" type="int" value="1"/>
+    <Property name="title" type="java.lang.String" value="Agregar Medico"/>
+    <Property name="toolTipText" type="java.lang.String" value=""/>
     <Property name="bounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
       <Rectangle value="[0, 0, 700, 350]"/>
     </Property>

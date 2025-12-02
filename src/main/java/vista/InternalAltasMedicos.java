@@ -49,6 +49,8 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setTitle("Agregar Medico");
+        setToolTipText("");
         setBounds(new java.awt.Rectangle(0, 0, 700, 350));
         setMaximumSize(new java.awt.Dimension(700, 350));
         setMinimumSize(new java.awt.Dimension(700, 350));
