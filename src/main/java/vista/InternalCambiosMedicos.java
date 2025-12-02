@@ -45,7 +45,6 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         campoDireccionMedicoAltas1 = new javax.swing.JTextField();
         btnModificarMedicoCambios = new javax.swing.JButton();
         btnRestablecerMedicoCambios = new javax.swing.JButton();
-        btnBuscarMedicoCambios = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -68,7 +67,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoIdMedicoAltas);
-        campoIdMedicoAltas.setBounds(150, 20, 270, 20);
+        campoIdMedicoAltas.setBounds(150, 20, 360, 20);
 
         jLabel2.setBackground(new java.awt.Color(110, 46, 46));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -82,7 +81,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoNombreMedicoAltas);
-        campoNombreMedicoAltas.setBounds(150, 60, 270, 20);
+        campoNombreMedicoAltas.setBounds(150, 60, 360, 20);
 
         jLabel3.setBackground(new java.awt.Color(110, 46, 46));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,7 +95,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoApellidoMedicoAltas);
-        campoApellidoMedicoAltas.setBounds(150, 100, 270, 20);
+        campoApellidoMedicoAltas.setBounds(150, 100, 360, 20);
 
         jLabel4.setBackground(new java.awt.Color(110, 46, 46));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,18 +164,6 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(btnRestablecerMedicoCambios);
         btnRestablecerMedicoCambios.setBounds(560, 100, 50, 50);
 
-        btnBuscarMedicoCambios.setBackground(new java.awt.Color(120, 0, 0));
-        btnBuscarMedicoCambios.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/find.png")); // NOI18N
-        btnBuscarMedicoCambios.setToolTipText("Buscar");
-        btnBuscarMedicoCambios.setBorder(null);
-        btnBuscarMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarMedicoCambiosActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBuscarMedicoCambios);
-        btnBuscarMedicoCambios.setBounds(470, 20, 50, 50);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -212,13 +199,8 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRestablecerMedicoCambiosActionPerformed
 
-    private void btnBuscarMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMedicoCambiosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarMedicoCambiosActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarMedicoCambios;
     private javax.swing.JButton btnModificarMedicoCambios;
     private javax.swing.JButton btnRestablecerMedicoCambios;
     private javax.swing.JTextField campoApellidoMedicoAltas;

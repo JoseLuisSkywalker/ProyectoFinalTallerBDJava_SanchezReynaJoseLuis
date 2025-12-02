@@ -27,10 +27,13 @@ public class VentanaInicio extends javax.swing.JFrame {
     InternalConsultasMedicos IFConsultasMedicos = new InternalConsultasMedicos();
     InternalCambiosMedicos IFCambiosMedicos = new InternalCambiosMedicos(); 
     InternalAltasPacientes IFAltasPacientes = new InternalAltasPacientes();
+    InternalBajasPacientes IFBajasPacientes = new InternalBajasPacientes();
+    InternalCambiosPacientes IFCambiosPacientes = new InternalCambiosPacientes();
+    InternalConsultasPacientes IFConsultasPacientes = new InternalConsultasPacientes();
     
     
     InternalMedicos IFMedicos = new InternalMedicos( IFAltasMedicos, IFBajasMedicos, IFConsultasMedicos, IFCambiosMedicos); 
-    InternalPacientes IFPacientes = new InternalPacientes(IFAltasPacientes); 
+    InternalPacientes IFPacientes = new InternalPacientes(IFAltasPacientes, IFBajasPacientes, IFCambiosPacientes, IFConsultasPacientes); 
     
     public VentanaInicio() {
         initComponents();
@@ -73,7 +76,20 @@ public class VentanaInicio extends javax.swing.JFrame {
         
         jDesktopPane1.add(IFAltasPacientes);
         IFAltasPacientes.setVisible(false);
-        IFAltasPacientes.setLocation(0, 0); 
+        IFAltasPacientes.setLocation(0, 0);
+        
+        jDesktopPane1.add(IFBajasPacientes); 
+        IFBajasPacientes.setVisible(false);
+        IFBajasPacientes.setLocation(0, 0); 
+        
+        jDesktopPane1.add(IFCambiosPacientes); 
+        IFCambiosPacientes.setVisible(false);
+        IFCambiosPacientes.setLocation(0, 0);
+        
+        jDesktopPane1.add(IFConsultasPacientes); 
+        IFConsultasPacientes.setVisible(false); 
+        IFConsultasPacientes.setLocation(0, 0);
+        
         
         
         

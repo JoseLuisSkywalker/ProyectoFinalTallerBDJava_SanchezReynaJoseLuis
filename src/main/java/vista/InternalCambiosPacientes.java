@@ -32,29 +32,29 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        campoNombrePacientesAltas = new javax.swing.JTextField();
+        campoNombrePacientesCambios = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        campoIDPacienteAltas = new javax.swing.JTextField();
+        campoIDPacienteCambios = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        campoTelefonoPacientesAltas = new javax.swing.JTextField();
+        campoTelefonoPacientesCambios = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        campoApellidoPacientesAltas = new javax.swing.JTextField();
+        campoApellidoPacientesCambios = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        comboDiaRegistroAltas = new javax.swing.JComboBox<>();
-        comboMesRegistroAltas = new javax.swing.JComboBox<>();
-        comboAnoRegistroAltas = new javax.swing.JComboBox<>();
+        comboDiaRegistroCambios = new javax.swing.JComboBox<>();
+        comboMesRegistroCambios = new javax.swing.JComboBox<>();
+        comboAnoRegistroCambios = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        comboSexoAltas = new javax.swing.JComboBox<>();
+        comboSexoCambios = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
-        comboCivilAltas = new javax.swing.JComboBox<>();
+        comboCivilCambios = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        comboDiaNacAltas = new javax.swing.JComboBox<>();
-        comboMesNacAltas = new javax.swing.JComboBox<>();
-        comboAnoNacAltas = new javax.swing.JComboBox<>();
+        comboDiaNacCambios = new javax.swing.JComboBox<>();
+        comboMesNacCambios = new javax.swing.JComboBox<>();
+        comboAnoNacCambios = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        btnAgregarPacientesAltas = new javax.swing.JButton();
-        btnRestablecerPacientesAltas = new javax.swing.JButton();
+        campoIdMedicoPacienteCambios = new javax.swing.JTextField();
+        btnModificarPacientesCambios = new javax.swing.JButton();
+        btnRestablecerPacientesCambios = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
@@ -67,144 +67,145 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(20, 10, 90, 20);
 
-        campoNombrePacientesAltas.addActionListener(new java.awt.event.ActionListener() {
+        campoNombrePacientesCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombrePacientesAltasActionPerformed(evt);
+                campoNombrePacientesCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoNombrePacientesAltas);
-        campoNombrePacientesAltas.setBounds(100, 40, 440, 23);
+        getContentPane().add(campoNombrePacientesCambios);
+        campoNombrePacientesCambios.setBounds(100, 40, 440, 23);
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 40, 70, 20);
 
-        campoIDPacienteAltas.addActionListener(new java.awt.event.ActionListener() {
+        campoIDPacienteCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoIDPacienteAltasActionPerformed(evt);
+                campoIDPacienteCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoIDPacienteAltas);
-        campoIDPacienteAltas.setBounds(100, 10, 440, 23);
+        getContentPane().add(campoIDPacienteCambios);
+        campoIDPacienteCambios.setBounds(100, 10, 440, 23);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Apellido");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 70, 70, 17);
-        getContentPane().add(campoTelefonoPacientesAltas);
-        campoTelefonoPacientesAltas.setBounds(100, 100, 440, 23);
+        getContentPane().add(campoTelefonoPacientesCambios);
+        campoTelefonoPacientesCambios.setBounds(100, 100, 440, 23);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Telefóno");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(30, 100, 60, 20);
-        getContentPane().add(campoApellidoPacientesAltas);
-        campoApellidoPacientesAltas.setBounds(100, 70, 440, 23);
+        getContentPane().add(campoApellidoPacientesCambios);
+        campoApellidoPacientesCambios.setBounds(100, 70, 440, 23);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha de Nacimiento");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(30, 130, 160, 20);
 
-        comboDiaRegistroAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-        getContentPane().add(comboDiaRegistroAltas);
-        comboDiaRegistroAltas.setBounds(150, 200, 72, 23);
+        comboDiaRegistroCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        getContentPane().add(comboDiaRegistroCambios);
+        comboDiaRegistroCambios.setBounds(150, 200, 72, 23);
 
-        comboMesRegistroAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        getContentPane().add(comboMesRegistroAltas);
-        comboMesRegistroAltas.setBounds(240, 200, 72, 23);
+        comboMesRegistroCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        getContentPane().add(comboMesRegistroCambios);
+        comboMesRegistroCambios.setBounds(240, 200, 72, 23);
 
-        comboAnoRegistroAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
-        getContentPane().add(comboAnoRegistroAltas);
-        comboAnoRegistroAltas.setBounds(330, 200, 130, 23);
+        comboAnoRegistroCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        getContentPane().add(comboAnoRegistroCambios);
+        comboAnoRegistroCambios.setBounds(330, 200, 130, 23);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Sexo");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(30, 160, 40, 20);
 
-        comboSexoAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
-        getContentPane().add(comboSexoAltas);
-        comboSexoAltas.setBounds(80, 160, 72, 23);
+        comboSexoCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        getContentPane().add(comboSexoCambios);
+        comboSexoCambios.setBounds(80, 160, 72, 23);
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estado Civil");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(190, 160, 90, 20);
 
-        comboCivilAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado", "Divorciado", "Separado", "Viudo" }));
-        getContentPane().add(comboCivilAltas);
-        comboCivilAltas.setBounds(280, 160, 97, 23);
+        comboCivilCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado", "Divorciado", "Separado", "Viudo" }));
+        getContentPane().add(comboCivilCambios);
+        comboCivilCambios.setBounds(280, 160, 97, 23);
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Fecha de Registro");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(30, 200, 120, 20);
 
-        comboDiaNacAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
-        getContentPane().add(comboDiaNacAltas);
-        comboDiaNacAltas.setBounds(180, 130, 72, 23);
+        comboDiaNacCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        getContentPane().add(comboDiaNacCambios);
+        comboDiaNacCambios.setBounds(180, 130, 72, 23);
 
-        comboMesNacAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        getContentPane().add(comboMesNacAltas);
-        comboMesNacAltas.setBounds(270, 130, 72, 23);
+        comboMesNacCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        getContentPane().add(comboMesNacCambios);
+        comboMesNacCambios.setBounds(270, 130, 72, 23);
 
-        comboAnoNacAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
-        getContentPane().add(comboAnoNacAltas);
-        comboAnoNacAltas.setBounds(360, 130, 130, 23);
+        comboAnoNacCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        getContentPane().add(comboAnoNacCambios);
+        comboAnoNacCambios.setBounds(360, 130, 130, 23);
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("ID del Médico de Cabecera");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(30, 240, 180, 17);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(200, 240, 340, 23);
+        getContentPane().add(campoIdMedicoPacienteCambios);
+        campoIdMedicoPacienteCambios.setBounds(210, 240, 330, 23);
 
-        btnAgregarPacientesAltas.setText("Agregar");
-        btnAgregarPacientesAltas.addActionListener(new java.awt.event.ActionListener() {
+        btnModificarPacientesCambios.setText("Modificar");
+        btnModificarPacientesCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarPacientesAltasActionPerformed(evt);
+                btnModificarPacientesCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarPacientesAltas);
-        btnAgregarPacientesAltas.setBounds(570, 30, 100, 23);
+        getContentPane().add(btnModificarPacientesCambios);
+        btnModificarPacientesCambios.setBounds(570, 30, 100, 23);
 
-        btnRestablecerPacientesAltas.setText("Restablecer");
-        getContentPane().add(btnRestablecerPacientesAltas);
-        btnRestablecerPacientesAltas.setBounds(570, 70, 100, 23);
+        btnRestablecerPacientesCambios.setText("Restablecer");
+        getContentPane().add(btnRestablecerPacientesCambios);
+        btnRestablecerPacientesCambios.setBounds(570, 70, 100, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoNombrePacientesAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombrePacientesAltasActionPerformed
+    private void campoNombrePacientesCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombrePacientesCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombrePacientesAltasActionPerformed
+    }//GEN-LAST:event_campoNombrePacientesCambiosActionPerformed
 
-    private void campoIDPacienteAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIDPacienteAltasActionPerformed
+    private void campoIDPacienteCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIDPacienteCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoIDPacienteAltasActionPerformed
+    }//GEN-LAST:event_campoIDPacienteCambiosActionPerformed
 
-    private void btnAgregarPacientesAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacientesAltasActionPerformed
+    private void btnModificarPacientesCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPacientesCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarPacientesAltasActionPerformed
+    }//GEN-LAST:event_btnModificarPacientesCambiosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarPacientesAltas;
-    private javax.swing.JButton btnRestablecerPacientesAltas;
-    private javax.swing.JTextField campoApellidoPacientesAltas;
-    private javax.swing.JTextField campoIDPacienteAltas;
-    private javax.swing.JTextField campoNombrePacientesAltas;
-    private javax.swing.JTextField campoTelefonoPacientesAltas;
-    private javax.swing.JComboBox<String> comboAnoNacAltas;
-    private javax.swing.JComboBox<String> comboAnoRegistroAltas;
-    private javax.swing.JComboBox<String> comboCivilAltas;
-    private javax.swing.JComboBox<String> comboDiaNacAltas;
-    private javax.swing.JComboBox<String> comboDiaRegistroAltas;
-    private javax.swing.JComboBox<String> comboMesNacAltas;
-    private javax.swing.JComboBox<String> comboMesRegistroAltas;
-    private javax.swing.JComboBox<String> comboSexoAltas;
+    private javax.swing.JButton btnModificarPacientesCambios;
+    private javax.swing.JButton btnRestablecerPacientesCambios;
+    private javax.swing.JTextField campoApellidoPacientesCambios;
+    private javax.swing.JTextField campoIDPacienteCambios;
+    private javax.swing.JTextField campoIdMedicoPacienteCambios;
+    private javax.swing.JTextField campoNombrePacientesCambios;
+    private javax.swing.JTextField campoTelefonoPacientesCambios;
+    private javax.swing.JComboBox<String> comboAnoNacCambios;
+    private javax.swing.JComboBox<String> comboAnoRegistroCambios;
+    private javax.swing.JComboBox<String> comboCivilCambios;
+    private javax.swing.JComboBox<String> comboDiaNacCambios;
+    private javax.swing.JComboBox<String> comboDiaRegistroCambios;
+    private javax.swing.JComboBox<String> comboMesNacCambios;
+    private javax.swing.JComboBox<String> comboMesRegistroCambios;
+    private javax.swing.JComboBox<String> comboSexoCambios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -214,7 +215,6 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 
     

@@ -15,12 +15,17 @@ import javax.swing.Timer;
  */
 public class InternalPacientes extends javax.swing.JInternalFrame {
 
-    private InternalAltasPacientes IFAltasPacientes; 
+    private InternalAltasPacientes IFAltasPacientes;
+    private InternalBajasPacientes IFBajasPacientes;
+    private InternalCambiosPacientes IFCambiosPacientes;
+    private InternalConsultasPacientes IFConsultasPacientes;
     
     
-    public InternalPacientes(InternalAltasPacientes altasPacientes) {
+    public InternalPacientes(InternalAltasPacientes altasPacientes, InternalBajasPacientes bajasPacientes, InternalCambiosPacientes cambiosPacientes, InternalConsultasPacientes consultasPacientes) {
         this.IFAltasPacientes = altasPacientes;
-        
+        this.IFBajasPacientes = bajasPacientes;
+        this.IFCambiosPacientes = cambiosPacientes; 
+        this.IFConsultasPacientes = consultasPacientes; 
         
         initComponents();
         setSize(700, 700);        
@@ -191,6 +196,8 @@ private void prepararBoton(JButton boton) {
 
     private void btnCambiosPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosPacientesActionPerformed
         hacerClickOscuro(btnCambiosPacientes);
+        IFCambiosPacientes.setVisible(true);
+        IFCambiosPacientes.toFront(); 
     }//GEN-LAST:event_btnCambiosPacientesActionPerformed
 
     private void btnAltasPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasPacienteActionPerformed
@@ -202,13 +209,16 @@ private void prepararBoton(JButton boton) {
 
     private void btnBajasPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajasPacientesActionPerformed
         hacerClickOscuro(btnBajasPacientes);
+        IFBajasPacientes.setVisible(true);
+        IFBajasPacientes.toFront();
         
 
     }//GEN-LAST:event_btnBajasPacientesActionPerformed
 
     private void btnConsultasPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasPacientesActionPerformed
         hacerClickOscuro(btnConsultasPacientes);
-        
+        IFConsultasPacientes.setVisible(true); 
+        IFConsultasPacientes.toFront(); 
     }//GEN-LAST:event_btnConsultasPacientesActionPerformed
 
 
