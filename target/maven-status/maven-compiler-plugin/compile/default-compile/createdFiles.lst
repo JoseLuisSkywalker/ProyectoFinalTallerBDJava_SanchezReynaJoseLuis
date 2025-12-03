@@ -50,6 +50,8 @@ vista/InternalConsultasMedicos$4.class
 vista/InternalConsultasMedicos.class
 vista/InternalAltasMedicos$8.class
 modelo/WellmeadowsHospitalProyectoFinal.class
+modelo/Paciente.class
+controlador/MedicoDAO.class
 vista/InternalMedicos$2.class
 vista/InternalBajasPacientes.class
 vista/InternalBajasPacientes$3.class

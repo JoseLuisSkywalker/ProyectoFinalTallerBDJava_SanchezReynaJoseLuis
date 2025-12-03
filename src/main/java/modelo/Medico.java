@@ -16,6 +16,10 @@ public class Medico {
     private int numeroDepartamento;
     private String direccion;
     private String telefono;
+    
+    
+     public Medico() {
+    }
 
     public Medico(int idMedico, String nombre, String apellido, int numeroDepartamento, String direccion, String telefono) {
         this.idMedico = idMedico;
