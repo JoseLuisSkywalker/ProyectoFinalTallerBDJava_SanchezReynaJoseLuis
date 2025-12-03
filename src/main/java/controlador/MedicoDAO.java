@@ -90,7 +90,31 @@ public class MedicoDAO {
         }
     }
     
-    
+    public boolean modiifcarMedico(Medico medico){
+        if (medico == null){
+            return false; 
+        }
+        
+        conexionBD.abrirConexion(); 
+        try{
+            if(!existeMedico(medico.getIdMedico())){
+                return false; 
+            }
+            
+            String sql = "UPDATE medicos_cabecera SET nombre = ?, apellido = ?, numero_departamento = ?, direccion = ?, telefono = ?"
+                    + "WHERE id_medico = ?"; 
+            
+            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, medico.getNombre(), medico.getApellido(), medico.getNumeroDepartamento(),
+                    medico.getDireccion(), medico.getTelefono(), medico.getIdMedico()); 
+            
+            return resultado;
+            
+        }finally{
+            conexionBD.cerrarConexion();
+        }
+        
+        
+    }
     
     
     

@@ -1,5 +1,9 @@
 package vista;
 
+import controlador.MedicoDAO;
+import javax.swing.JOptionPane;
+import modelo.Medico;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
@@ -32,17 +36,17 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        campoIdMedicoAltas = new javax.swing.JTextField();
+        campoIdMedicoCambios = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        campoNombreMedicoAltas = new javax.swing.JTextField();
+        campoNombreMedicoCambios = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        campoApellidoMedicoAltas = new javax.swing.JTextField();
+        campoApellidoMedicoCambios = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        comboMedicoDepartamentoAtlas = new javax.swing.JComboBox<>();
+        comboMedicoDepartamentoCambios = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        campoDireccionMedicoAltas = new javax.swing.JTextField();
+        campoDireccionMedicoCambios = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        campoDireccionMedicoAltas1 = new javax.swing.JTextField();
+        campoTelefonoMedicoCambios = new javax.swing.JTextField();
         btnModificarMedicoCambios = new javax.swing.JButton();
         btnRestablecerMedicoCambios = new javax.swing.JButton();
 
@@ -61,13 +65,13 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(40, 20, 90, 20);
 
-        campoIdMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+        campoIdMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoIdMedicoAltasActionPerformed(evt);
+                campoIdMedicoCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoIdMedicoAltas);
-        campoIdMedicoAltas.setBounds(150, 20, 360, 20);
+        getContentPane().add(campoIdMedicoCambios);
+        campoIdMedicoCambios.setBounds(150, 20, 360, 20);
 
         jLabel2.setBackground(new java.awt.Color(110, 46, 46));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -75,13 +79,13 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(70, 60, 60, 20);
 
-        campoNombreMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+        campoNombreMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombreMedicoAltasActionPerformed(evt);
+                campoNombreMedicoCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoNombreMedicoAltas);
-        campoNombreMedicoAltas.setBounds(150, 60, 360, 20);
+        getContentPane().add(campoNombreMedicoCambios);
+        campoNombreMedicoCambios.setBounds(150, 60, 360, 20);
 
         jLabel3.setBackground(new java.awt.Color(110, 46, 46));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -89,13 +93,13 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(70, 100, 60, 20);
 
-        campoApellidoMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+        campoApellidoMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoApellidoMedicoAltasActionPerformed(evt);
+                campoApellidoMedicoCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoApellidoMedicoAltas);
-        campoApellidoMedicoAltas.setBounds(150, 100, 360, 20);
+        getContentPane().add(campoApellidoMedicoCambios);
+        campoApellidoMedicoCambios.setBounds(150, 100, 360, 20);
 
         jLabel4.setBackground(new java.awt.Color(110, 46, 46));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,14 +107,14 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(40, 140, 180, 20);
 
-        comboMedicoDepartamentoAtlas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
-        comboMedicoDepartamentoAtlas.addActionListener(new java.awt.event.ActionListener() {
+        comboMedicoDepartamentoCambios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
+        comboMedicoDepartamentoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboMedicoDepartamentoAtlasActionPerformed(evt);
+                comboMedicoDepartamentoCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(comboMedicoDepartamentoAtlas);
-        comboMedicoDepartamentoAtlas.setBounds(230, 140, 72, 23);
+        getContentPane().add(comboMedicoDepartamentoCambios);
+        comboMedicoDepartamentoCambios.setBounds(230, 140, 72, 23);
 
         jLabel5.setBackground(new java.awt.Color(110, 46, 46));
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,13 +122,13 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(60, 180, 70, 20);
 
-        campoDireccionMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
+        campoDireccionMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDireccionMedicoAltasActionPerformed(evt);
+                campoDireccionMedicoCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoDireccionMedicoAltas);
-        campoDireccionMedicoAltas.setBounds(150, 180, 460, 20);
+        getContentPane().add(campoDireccionMedicoCambios);
+        campoDireccionMedicoCambios.setBounds(150, 180, 460, 20);
 
         jLabel6.setBackground(new java.awt.Color(110, 46, 46));
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,13 +136,13 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(70, 220, 70, 20);
 
-        campoDireccionMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+        campoTelefonoMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDireccionMedicoAltas1ActionPerformed(evt);
+                campoTelefonoMedicoCambiosActionPerformed(evt);
             }
         });
-        getContentPane().add(campoDireccionMedicoAltas1);
-        campoDireccionMedicoAltas1.setBounds(150, 220, 460, 20);
+        getContentPane().add(campoTelefonoMedicoCambios);
+        campoTelefonoMedicoCambios.setBounds(150, 220, 460, 20);
 
         btnModificarMedicoCambios.setBackground(new java.awt.Color(120, 0, 0));
         btnModificarMedicoCambios.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/modify.png")); // NOI18N
@@ -167,32 +171,48 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoIdMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoAltasActionPerformed
+    private void campoIdMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoIdMedicoAltasActionPerformed
+    }//GEN-LAST:event_campoIdMedicoCambiosActionPerformed
 
-    private void campoNombreMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltasActionPerformed
+    private void campoNombreMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombreMedicoAltasActionPerformed
+    }//GEN-LAST:event_campoNombreMedicoCambiosActionPerformed
 
-    private void campoApellidoMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoApellidoMedicoAltasActionPerformed
+    private void campoApellidoMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoApellidoMedicoCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoApellidoMedicoAltasActionPerformed
+    }//GEN-LAST:event_campoApellidoMedicoCambiosActionPerformed
 
-    private void comboMedicoDepartamentoAtlasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMedicoDepartamentoAtlasActionPerformed
+    private void comboMedicoDepartamentoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboMedicoDepartamentoCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboMedicoDepartamentoAtlasActionPerformed
+    }//GEN-LAST:event_comboMedicoDepartamentoCambiosActionPerformed
 
-    private void campoDireccionMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltasActionPerformed
+    private void campoDireccionMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoDireccionMedicoAltasActionPerformed
+    }//GEN-LAST:event_campoDireccionMedicoCambiosActionPerformed
 
-    private void campoDireccionMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltas1ActionPerformed
+    private void campoTelefonoMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefonoMedicoCambiosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoDireccionMedicoAltas1ActionPerformed
+    }//GEN-LAST:event_campoTelefonoMedicoCambiosActionPerformed
 
     private void btnModificarMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMedicoCambiosActionPerformed
         // TODO add your handling code here:
+        
+        Medico m = new Medico(); 
+        
+        m.setIdMedico(Integer.parseInt(campoIdMedicoCambios.getText().trim()));
+        m.setNombre(campoNombreMedicoCambios.getText().trim()); 
+        m.setApellido(campoApellidoMedicoCambios.getText().trim()); 
+        m.setNumeroDepartamento(Integer.parseInt(comboMedicoDepartamentoCambios.getSelectedItem().toString()));
+        m.setDireccion(campoDireccionMedicoCambios.getText().trim()); 
+        m.setTelefono(campoTelefonoMedicoCambios.getText().trim());
+        
+        boolean actualizado = MedicoDAO.getInstancia().modiifcarMedico(m);
+        if(actualizado){
+            JOptionPane.showMessageDialog(this, "Datos del médico fueron modificados exitosamente");
+        }else{
+            JOptionPane.showMessageDialog(this, "Datos no se pudieron modificar, verifique que el ID sea válido.");
+        }
     }//GEN-LAST:event_btnModificarMedicoCambiosActionPerformed
 
     private void btnRestablecerMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoCambiosActionPerformed
@@ -203,12 +223,12 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModificarMedicoCambios;
     private javax.swing.JButton btnRestablecerMedicoCambios;
-    private javax.swing.JTextField campoApellidoMedicoAltas;
-    private javax.swing.JTextField campoDireccionMedicoAltas;
-    private javax.swing.JTextField campoDireccionMedicoAltas1;
-    private javax.swing.JTextField campoIdMedicoAltas;
-    private javax.swing.JTextField campoNombreMedicoAltas;
-    private javax.swing.JComboBox<String> comboMedicoDepartamentoAtlas;
+    private javax.swing.JTextField campoApellidoMedicoCambios;
+    private javax.swing.JTextField campoDireccionMedicoCambios;
+    private javax.swing.JTextField campoIdMedicoCambios;
+    private javax.swing.JTextField campoNombreMedicoCambios;
+    private javax.swing.JTextField campoTelefonoMedicoCambios;
+    private javax.swing.JComboBox<String> comboMedicoDepartamentoCambios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
