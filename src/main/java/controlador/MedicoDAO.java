@@ -5,6 +5,7 @@
 package controlador;
 
 import conexion.ConexionBD;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Medico;
@@ -67,5 +68,33 @@ public class MedicoDAO {
         }
         
     }
+    
+    public boolean eliminarMedico(int idMedico){
+        if(idMedico <= 0){
+            return false; 
+        }
+        
+        conexionBD.abrirConexion(); 
+        
+        try{
+            if(!existeMedico(idMedico)){
+                return false; 
+            }
+            
+            String sql = "DELETE FROM medicos_cabecera WHERE id_medico = ?"; 
+            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idMedico); 
+            
+            return resultado;
+        }finally{
+            conexionBD.cerrarConexion();
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }

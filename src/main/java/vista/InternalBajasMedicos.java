@@ -1,5 +1,8 @@
 package vista;
 
+import controlador.MedicoDAO;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
@@ -55,6 +58,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(50, 30, 90, 20);
 
+        campoIdMedicoBajas.setToolTipText("Campo para eliminar.");
         campoIdMedicoBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoIdMedicoBajasActionPerformed(evt);
@@ -65,10 +69,11 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
         jLabel9.setBackground(new java.awt.Color(110, 46, 46));
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Nombre");
+        jLabel9.setText("Nombre (Búsqueda)");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(80, 70, 60, 20);
+        jLabel9.setBounds(10, 70, 130, 20);
 
+        campoNombreMedicoBajas.setToolTipText("Campo para buscar.");
         campoNombreMedicoBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNombreMedicoBajasActionPerformed(evt);
@@ -79,10 +84,11 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
         jLabel10.setBackground(new java.awt.Color(110, 46, 46));
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Apellido");
+        jLabel10.setText("Apellido (Búsqueda)");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(80, 110, 60, 20);
+        jLabel10.setBounds(10, 110, 130, 20);
 
+        campoApellidoMedicosBajas.setToolTipText("Campo para buscar. ");
         campoApellidoMedicosBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoApellidoMedicosBajasActionPerformed(evt);
@@ -132,6 +138,16 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
     private void btnElminarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarMedicoAltasActionPerformed
         // TODO add your handling code here:
+        int id = Integer.parseInt(campoIdMedicoBajas.getText().trim()); 
+        
+        boolean eliminado = MedicoDAO.getInstancia().eliminarMedico(id); 
+        
+        if(eliminado){
+            JOptionPane.showMessageDialog(this, "Médico se eliminó exitosamente.");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar al doc. Favor de Verificar el ID!");
+        }
+        
     }//GEN-LAST:event_btnElminarMedicoAltasActionPerformed
 
     private void btnRestablecerMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosBajasActionPerformed
