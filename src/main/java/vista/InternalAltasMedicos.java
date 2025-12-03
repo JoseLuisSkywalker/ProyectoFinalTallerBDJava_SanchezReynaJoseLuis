@@ -1,5 +1,9 @@
 package vista;
 
+import controlador.MedicoDAO;
+import javax.swing.JOptionPane;
+import modelo.Medico;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
@@ -42,7 +46,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         campoDireccionMedicoAltas = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        campoDireccionMedicoAltas1 = new javax.swing.JTextField();
+        campoNumTelefonoMedicosAltas = new javax.swing.JTextField();
         btnAgregarMedicoAltas = new javax.swing.JButton();
         btnRestablecerMedicoAltas1 = new javax.swing.JButton();
 
@@ -134,13 +138,13 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6);
         jLabel6.setBounds(70, 220, 70, 20);
 
-        campoDireccionMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
+        campoNumTelefonoMedicosAltas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDireccionMedicoAltas1ActionPerformed(evt);
+                campoNumTelefonoMedicosAltasActionPerformed(evt);
             }
         });
-        getContentPane().add(campoDireccionMedicoAltas1);
-        campoDireccionMedicoAltas1.setBounds(150, 220, 370, 20);
+        getContentPane().add(campoNumTelefonoMedicosAltas);
+        campoNumTelefonoMedicosAltas.setBounds(150, 220, 370, 20);
 
         btnAgregarMedicoAltas.setBackground(new java.awt.Color(120, 0, 0));
         btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/add.png")); // NOI18N
@@ -170,7 +174,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoIdMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoAltasActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_campoIdMedicoAltasActionPerformed
 
     private void campoNombreMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltasActionPerformed
@@ -189,12 +193,42 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoDireccionMedicoAltasActionPerformed
 
-    private void campoDireccionMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltas1ActionPerformed
+    private void campoNumTelefonoMedicosAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumTelefonoMedicosAltasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoDireccionMedicoAltas1ActionPerformed
+    }//GEN-LAST:event_campoNumTelefonoMedicosAltasActionPerformed
 
     private void btnAgregarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicoAltasActionPerformed
         // TODO add your handling code here:
+        try{
+            int id = Integer.parseInt(campoIdMedicoAltas.getText().trim()); 
+            String nombre = campoNombreMedicoAltas.getText().trim(); 
+            String apellido = campoApellidoMedicoAltas.getText().trim(); 
+            int numDept = Integer.parseInt(comboMedicoDepartamentoAtlas.getSelectedItem().toString()); 
+            String direccion = campoDireccionMedicoAltas.getText().trim(); 
+            String telefono = campoNumTelefonoMedicosAltas.getText().trim(); 
+            
+            if(nombre.isEmpty() || apellido.isEmpty() || direccion.isEmpty() || telefono.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Porfavor acomplete todos los campos");
+                return; 
+            }
+            
+            Medico m = new Medico(); 
+            m.setIdMedico(id); 
+            m.setNombre(nombre); 
+            m.setApellido(apellido); 
+            m.setNumeroDepartamento(numDept); 
+            m.setDireccion(direccion); 
+            m.setTelefono(telefono);
+            
+            boolean ok = MedicoDAO.getInstancia().agregarMedico(m); 
+            if(ok){
+                JOptionPane.showMessageDialog(this, "Médico registrado exitosamente. RAAHH!!!");
+            }else{
+                JOptionPane.showMessageDialog(this, "No se puedo registrar el doc (ya existe)");
+            }
+        }catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "ID o Número de Departamento Inválido");
+        }
     }//GEN-LAST:event_btnAgregarMedicoAltasActionPerformed
 
     private void btnRestablecerMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoAltas1ActionPerformed
@@ -207,9 +241,9 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRestablecerMedicoAltas1;
     private javax.swing.JTextField campoApellidoMedicoAltas;
     private javax.swing.JTextField campoDireccionMedicoAltas;
-    private javax.swing.JTextField campoDireccionMedicoAltas1;
     private javax.swing.JTextField campoIdMedicoAltas;
     private javax.swing.JTextField campoNombreMedicoAltas;
+    private javax.swing.JTextField campoNumTelefonoMedicosAltas;
     private javax.swing.JComboBox<String> comboMedicoDepartamentoAtlas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

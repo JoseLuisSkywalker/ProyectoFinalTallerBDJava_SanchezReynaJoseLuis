@@ -34,7 +34,6 @@ public class MedicoDAO {
     public boolean existeMedico(int idMedico) {
         String sql = "SELECT id_medico FROM medicos_cabecera WHERE id_medico = ?";
         
-        conexionBD.abrirConexion();
         ResultSet rs = conexionBD.ejecutarConsultaSQL(sql, idMedico); 
         
         try{
@@ -42,8 +41,6 @@ public class MedicoDAO {
         }catch (SQLException e){
             e.printStackTrace();
             return false;
-        }finally{
-            conexionBD.cerrarConexion();
         }
     }
     
