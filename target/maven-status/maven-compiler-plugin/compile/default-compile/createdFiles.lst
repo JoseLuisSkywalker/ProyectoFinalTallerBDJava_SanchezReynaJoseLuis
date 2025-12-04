@@ -11,6 +11,7 @@ vista/VentanaInicio$4.class
 vista/InternalAltasMedicos$7.class
 modelo/WellmeadowsHospitalProyectoFinal$1.class
 vista/InternalPacientes.class
+controlador/PacienteDAO.class
 vista/InternalBajasMedicos.class
 vista/InternalAltasPacientes$3.class
 vista/InternalConsultasMedicos$11.class

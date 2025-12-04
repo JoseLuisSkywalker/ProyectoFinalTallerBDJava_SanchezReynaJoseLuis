@@ -1,6 +1,7 @@
 /Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/conexion/ConexionBD.java
 /Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/conexion/PruebaConexion.java
 /Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/controlador/MedicoDAO.java
+/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/controlador/PacienteDAO.java
 /Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/modelo/Medico.java
 /Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/modelo/Paciente.java
 /Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/java/modelo/WellmeadowsHospitalProyectoFinal.java
