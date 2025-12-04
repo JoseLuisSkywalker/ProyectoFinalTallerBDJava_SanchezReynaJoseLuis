@@ -5,6 +5,8 @@
 package controlador;
 
 import conexion.ConexionBD;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Paciente;
@@ -85,6 +87,36 @@ public class PacienteDAO {
         }
         
     }
+    //---------------------- fin de bajas ------------------------ 
+    
+    //======================= MODIFICACIONES =========================== 
+    
+    public boolean modificarPaciente(Paciente paciente) {
+        if (paciente == null) {
+            return false;
+        }
+
+        conexionBD.abrirConexion();
+        try {
+
+            if (!existePaciente(paciente.getIdPaciente())) {
+                return false;
+            }
+
+            String sql = "UPDATE pacientes SET nombre = ?, apellido = ?, telefono = ?, fecha_nacimiento = ?, "
+                + "sexo = ?, estado_civil = ?, fecha_registro = ?, id_medico = ? "
+                + "WHERE id_paciente = ?";
+
+            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql,paciente.getNombre(), paciente.getApellido(), paciente.getTelefono(), paciente.getFechaNacimiento(), paciente.getSexo(),
+                    paciente.getEstadoCivil(), paciente.getFechaRegistro(), paciente.getIdMedico(), paciente.getIdPaciente());
+
+            return resultado;
+
+        } finally {
+            conexionBD.cerrarConexion();
+        }
+    }   
+    //-------------------- fin de modificaciones -----------------------
     
     
     

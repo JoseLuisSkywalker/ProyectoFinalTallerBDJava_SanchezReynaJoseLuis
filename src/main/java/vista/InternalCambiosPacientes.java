@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.PacienteDAO;
+import javax.swing.JOptionPane;
+import modelo.Paciente;
+
 /**
  *
  * @author josesanchez
@@ -59,7 +63,7 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Agregar Pacientes");
+        setTitle("Modificar Pacientes");
         getContentPane().setLayout(null);
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,6 +191,37 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
 
     private void btnModificarPacientesCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPacientesCambiosActionPerformed
         // TODO add your handling code here:
+        int id = Integer.parseInt(campoIDPacienteCambios.getText().trim()); 
+        
+        
+        Paciente p = new Paciente(); 
+        
+        p.setIdPaciente(id);
+        p.setNombre(campoNombrePacientesCambios.getText().trim()); 
+        p.setApellido(campoApellidoPacientesCambios.getText().trim()); 
+        p.setTelefono(campoTelefonoPacientesCambios.getText().trim()); 
+        String dia = comboDiaNacCambios.getSelectedItem().toString(); 
+        String mes = comboMesNacCambios.getSelectedItem().toString(); 
+        String anio = comboAnoNacCambios.getSelectedItem().toString(); 
+        String fechaNacimiento = anio + "-" + mes + "-" + dia;
+        p.setFechaNacimiento(fechaNacimiento); 
+        p.setSexo(comboSexoCambios.getSelectedItem().toString()); 
+        p.setEstadoCivil(comboCivilCambios.getSelectedItem().toString());
+        String diaReg = comboDiaRegistroCambios.getSelectedItem().toString();
+        String mesReg = comboMesRegistroCambios.getSelectedItem().toString(); 
+        String anioReg = comboAnoRegistroCambios.getSelectedItem().toString(); 
+        String fechaRegistro = anioReg + "-" + mesReg + "-" + diaReg; 
+        p.setFechaRegistro(fechaRegistro);
+        p.setIdMedico(Integer.parseInt(campoIdMedicoPacienteCambios.getText().trim()));
+        
+        boolean ok = PacienteDAO.getInstancia().modificarPaciente(p); 
+        
+        if(ok){
+            JOptionPane.showMessageDialog(this, "El paciente se modificó con éxito");
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "No se puedo modificar el paciente, favor de verificar que el ID se el correcto");
+        }
     }//GEN-LAST:event_btnModificarPacientesCambiosActionPerformed
 
 

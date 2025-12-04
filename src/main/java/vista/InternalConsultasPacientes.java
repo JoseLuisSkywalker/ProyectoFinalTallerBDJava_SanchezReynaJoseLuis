@@ -76,7 +76,7 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Agregar Pacientes");
+        setTitle("Consultar Pacientes");
         getContentPane().setLayout(null);
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

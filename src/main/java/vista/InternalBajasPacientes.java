@@ -46,7 +46,8 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Agregar Pacientes");
+        setTitle("Eliminar Pacientes");
+        setToolTipText("");
         getContentPane().setLayout(null);
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,7 +119,7 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         if(ok){
             JOptionPane.showMessageDialog(this, "Paciente eliminado correctamente.");
         }else{
-            JOptionPane.showMessageDialog(this, "No se pudo eliminar el paciente");
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el paciente, verifique el ID");
         }
     }//GEN-LAST:event_btnEliminarPacientesBajasActionPerformed
 
