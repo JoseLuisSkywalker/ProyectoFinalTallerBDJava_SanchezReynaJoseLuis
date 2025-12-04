@@ -8,6 +8,7 @@ package modelo;
  *
  * @author josesanchez
  */
+
 public class Paciente {
     private int idPaciente; 
     private String nombre; 
@@ -19,6 +20,10 @@ public class Paciente {
     private String fechaRegistro;
     private int idMedico;
 
+    public Paciente(){
+        
+    }
+    
     public Paciente(int idPaciente, String nombre, String apellido, String telefono, String fechaNacimiento, String sexo, String estadoCivil, String fechaRegistro, int idMedico) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;

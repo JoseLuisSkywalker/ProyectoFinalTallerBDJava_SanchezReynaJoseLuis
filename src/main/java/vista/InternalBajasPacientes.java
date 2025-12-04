@@ -4,6 +4,9 @@
  */
 package vista;
 
+import controlador.PacienteDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author josesanchez
@@ -106,6 +109,17 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
 
     private void btnEliminarPacientesBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPacientesBajasActionPerformed
         // TODO add your handling code here:
+
+        int id = Integer.parseInt(campoIDPacienteBajas.getText().trim());
+    
+        
+        boolean ok = PacienteDAO.getInstancia().eliminarPaciente(id); 
+        
+        if(ok){
+            JOptionPane.showMessageDialog(this, "Paciente eliminado correctamente.");
+        }else{
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el paciente");
+        }
     }//GEN-LAST:event_btnEliminarPacientesBajasActionPerformed
 
 

@@ -4,6 +4,10 @@
  */
 package vista;
 
+import controlador.PacienteDAO;
+import javax.swing.JOptionPane;
+import modelo.Paciente;
+
 /**
  *
  * @author josesanchez
@@ -187,6 +191,37 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
 
     private void btnAgregarPacientesAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacientesAltasActionPerformed
         // TODO add your handling code here:
+        
+        Paciente p = new Paciente(); 
+        
+        p.setIdPaciente(Integer.parseInt(campoIDPacienteAltas.getText().trim()));
+        p.setNombre(campoNombrePacientesAltas.getText().trim());
+        p.setApellido(campoApellidoPacientesAltas.getText().trim());
+        p.setTelefono(campoTelefonoPacientesAltas.getText().trim()); 
+        String diaNac  = comboDiaNacAltas.getSelectedItem().toString();
+        String mesNac  = comboMesNacAltas.getSelectedItem().toString();
+        String anioNac = comboAnoNacAltas.getSelectedItem().toString();
+        String fechaNacimiento = anioNac + "-" + mesNac + "-" + diaNac;
+        p.setFechaNacimiento(fechaNacimiento); 
+        p.setSexo(comboSexoAltas.getSelectedItem().toString());
+        p.setEstadoCivil(comboCivilAltas.getSelectedItem().toString());
+        String diaReg  = comboDiaRegistroAltas.getSelectedItem().toString();
+        String mesReg  = comboMesRegistroAltas.getSelectedItem().toString();
+        String anioReg = comboAnoRegistroAltas.getSelectedItem().toString();
+        String fechaRegistro = anioReg + "-" + mesReg + "-" + diaReg;
+        p.setFechaRegistro(fechaRegistro);
+        int idMedicoCabecera = Integer.parseInt(jTextField5.getText().trim());
+        p.setIdMedico(idMedicoCabecera);
+        
+        
+        boolean ok = PacienteDAO.getInstancia().agregarPaciente(p); 
+        
+        if(ok){
+                JOptionPane.showMessageDialog(this, "Paciente registrado exitosamente.");
+            }else{
+                JOptionPane.showMessageDialog(this, "Paciente no se puedo registrar correctamente: verifique el ID.");
+            }
+        
     }//GEN-LAST:event_btnAgregarPacientesAltasActionPerformed
 
 
