@@ -1,8 +1,11 @@
 package vista;
 
 import controlador.MedicoDAO;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Medico;
+import modelo.ResultSetTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,7 +17,11 @@ import modelo.Medico;
  * @author josesanchez
  */
 public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
-
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
+    
+    
     /**
      * Creates new form InternalAltasMedicos
      */
@@ -23,8 +30,67 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         setSize(700, 700);        
         setResizable(false);
         
+        campoIdMedicoCambios.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent e){
+            actualizarEstadoCampos();
+        }
+    });
+        actualizarEstadoCampos();
+        cargarTodosLosMedicos(tablaCambiosMedicos);
         
     }
+    
+    
+    
+    private void cargarTodosLosMedicos(javax.swing.JTable tablaMedicos) {
+        try {
+            String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaMedicos.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+    
+    
+    
+    private void restablecerCampos() {
+        try {
+       
+            campoIdMedicoCambios.setText("");
+            campoNombreMedicoCambios.setText("");
+            campoApellidoMedicoCambios.setText("");
+            campoDireccionMedicoCambios.setText("");
+            campoTelefonoMedicoCambios.setText("");
+            comboMedicoDepartamentoCambios.setSelectedIndex(0);
+            cargarTodosLosMedicos(tablaCambiosMedicos);
+            actualizarEstadoCampos();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    private void actualizarEstadoCampos() {
+
+        boolean habilitar = !campoIdMedicoCambios.getText().trim().isEmpty();
+
+        campoNombreMedicoCambios.setEnabled(habilitar);
+        campoApellidoMedicoCambios.setEnabled(habilitar);
+        comboMedicoDepartamentoCambios.setEnabled(habilitar);
+        campoDireccionMedicoCambios.setEnabled(habilitar);
+        campoTelefonoMedicoCambios.setEnabled(habilitar);
+        btnModificarMedicoCambios.setEnabled(habilitar);
+    }
+    
+    
+    public void resfrescarTabla(){
+        cargarTodosLosMedicos(tablaCambiosMedicos);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,29 +212,25 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(campoTelefonoMedicoCambios);
         campoTelefonoMedicoCambios.setBounds(150, 220, 460, 20);
 
-        btnModificarMedicoCambios.setBackground(new java.awt.Color(120, 0, 0));
-        btnModificarMedicoCambios.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/modify.png")); // NOI18N
-        btnModificarMedicoCambios.setToolTipText("Modificar");
-        btnModificarMedicoCambios.setBorder(null);
+        btnModificarMedicoCambios.setText("Modificar");
+        btnModificarMedicoCambios.setToolTipText("Hace los cambios");
         btnModificarMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarMedicoCambiosActionPerformed(evt);
             }
         });
         getContentPane().add(btnModificarMedicoCambios);
-        btnModificarMedicoCambios.setBounds(560, 20, 50, 50);
+        btnModificarMedicoCambios.setBounds(550, 40, 120, 40);
 
-        btnRestablecerMedicoCambios.setBackground(new java.awt.Color(120, 0, 0));
-        btnRestablecerMedicoCambios.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
-        btnRestablecerMedicoCambios.setToolTipText("Restablecer");
-        btnRestablecerMedicoCambios.setBorder(null);
+        btnRestablecerMedicoCambios.setText("Restablecer");
+        btnRestablecerMedicoCambios.setToolTipText("Limpia los campos");
         btnRestablecerMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestablecerMedicoCambiosActionPerformed(evt);
             }
         });
         getContentPane().add(btnRestablecerMedicoCambios);
-        btnRestablecerMedicoCambios.setBounds(560, 100, 50, 50);
+        btnRestablecerMedicoCambios.setBounds(550, 100, 120, 40);
 
         jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
         jScrollMedicos.setBorder(null);
@@ -235,6 +297,48 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
 
     private void btnModificarMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMedicoCambiosActionPerformed
         // TODO add your handling code here:
+        if (campoIdMedicoCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo ID no puede estar vacío");
+            return;
+        }
+            if (campoNombreMedicoCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tiene que tener nombre.");
+            return;
+        }
+        if (campoApellidoMedicoCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tiene que tener apeido");
+            return;
+        }
+        if (comboMedicoDepartamentoCambios.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un departamento");
+            return;
+        }
+        if (campoDireccionMedicoCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese una dirección");
+            return;
+        }
+        if (campoTelefonoMedicoCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El telefono no puede dejarse vacío!");
+            
+            return;
+        }
+
+    // Valida que ID sea número
+    try {
+        Integer.parseInt(campoIdMedicoCambios.getText().trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El ID debe ser un número entero válido.");
+        return;
+    }
+
+    // Valida que número de departamento sea un número
+    try {
+        Integer.parseInt(comboMedicoDepartamentoCambios.getSelectedItem().toString());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El departamento debe ser un número válido.");
+        return;
+    }
+        
         
         Medico m = new Medico(); 
         
@@ -255,6 +359,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
 
     private void btnRestablecerMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoCambiosActionPerformed
         // TODO add your handling code here:
+        restablecerCampos();
     }//GEN-LAST:event_btnRestablecerMedicoCambiosActionPerformed
 
 

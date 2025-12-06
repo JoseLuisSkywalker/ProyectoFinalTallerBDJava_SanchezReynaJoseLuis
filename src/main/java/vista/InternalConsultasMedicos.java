@@ -264,7 +264,9 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         }
     }
     
-    
+    public void refrescarTabla(){
+        cargarTodosLosMedicos(tablaConsultasMedicos);
+    }
        
     //[[[[[[[[[[[[[[[[[ fin codigo nuevo en proceso (métodos) 
 

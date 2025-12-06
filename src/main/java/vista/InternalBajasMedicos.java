@@ -2,6 +2,7 @@ package vista;
 
 import controlador.MedicoDAO;
 import javax.swing.JOptionPane;
+import modelo.ResultSetTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -13,16 +14,76 @@ import javax.swing.JOptionPane;
  * @author josesanchez
  */
 public class InternalBajasMedicos extends javax.swing.JInternalFrame {
-
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
     /**
      * Creates new form InternalAltasMedicos
      */
     public InternalBajasMedicos() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
         
+        cargarTodosLosMedicos(tablaBajasMedicos);
         
+        campoIdMedicoBajas.addKeyListener(new java.awt.event.KeyAdapter(){
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e){
+                String texto = campoIdMedicoBajas.getText().trim(); 
+            
+                if(texto.isEmpty()){
+                    cargarTodosLosMedicos(tablaBajasMedicos); 
+                
+                }else{
+                    filtrar(tablaBajasMedicos, texto);
+                }
+            }   
+        }); 
+        
+       
+    }
+    
+    private void cargarTodosLosMedicos(javax.swing.JTable tablaMedicos) {
+        try {
+            String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaMedicos.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+    
+    
+    
+    private void restablecerCampos() {
+        try {
+       
+            campoIdMedicoBajas.setText("");
+            cargarTodosLosMedicos(tablaBajasMedicos);
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void filtrar(javax.swing.JTable tabla, String id){
+        try{
+            String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono "+
+                    "FROM medicos_cabecera " + "WHERE CAST(id_medico AS TEXT) ILIKE '%" + id + "%'"; 
+            modelo = new ResultSetTableModel(driver, url, sql); 
+            tabla.setModel(modelo);
+            
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void refrescarTabla(){
+        cargarTodosLosMedicos(tablaBajasMedicos);
     }
 
     /**
@@ -38,10 +99,8 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         campoIdMedicoBajas = new javax.swing.JTextField();
         btnElminarMedicoAltas = new javax.swing.JButton();
         btnRestablecerMedicosBajas = new javax.swing.JButton();
-        campoNombrePacientesBajas = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        campoApellidoPacienteBajas = new javax.swing.JTextField();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaBajasMedicos = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -56,7 +115,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Id del Médico");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(40, 40, 90, 20);
+        jLabel8.setBounds(60, 40, 90, 20);
 
         campoIdMedicoBajas.setToolTipText("Campo para eliminar.");
         campoIdMedicoBajas.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +124,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoIdMedicoBajas);
-        campoIdMedicoBajas.setBounds(150, 40, 360, 20);
+        campoIdMedicoBajas.setBounds(170, 40, 420, 20);
 
         btnElminarMedicoAltas.setText("Eliminar");
         btnElminarMedicoAltas.setToolTipText("Elimina el médico que se indicó en el campo del ID");
@@ -75,7 +134,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnElminarMedicoAltas);
-        btnElminarMedicoAltas.setBounds(230, 170, 120, 40);
+        btnElminarMedicoAltas.setBounds(340, 100, 250, 40);
 
         btnRestablecerMedicosBajas.setText("Restablecer");
         btnRestablecerMedicosBajas.setToolTipText("Restablece los campos a su forma original");
@@ -85,27 +144,43 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnRestablecerMedicosBajas);
-        btnRestablecerMedicosBajas.setBounds(380, 170, 120, 40);
+        btnRestablecerMedicosBajas.setBounds(60, 100, 260, 40);
 
-        campoNombrePacientesBajas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombrePacientesBajasActionPerformed(evt);
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaBajasMedicos.setBackground(new java.awt.Color(100, 0, 0));
+        tablaBajasMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaBajasMedicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
             }
-        });
-        getContentPane().add(campoNombrePacientesBajas);
-        campoNombrePacientesBajas.setBounds(150, 80, 360, 23);
+        ));
+        jScrollMedicos.setViewportView(tablaBajasMedicos);
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(70, 80, 70, 20);
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Apellido");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(70, 120, 70, 20);
-        getContentPane().add(campoApellidoPacienteBajas);
-        campoApellidoPacienteBajas.setBounds(150, 120, 360, 23);
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(30, 230, 610, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -116,6 +191,10 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
     private void btnElminarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarMedicoAltasActionPerformed
         // TODO add your handling code here:
+        if(campoIdMedicoBajas.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se puede eliminar sin un id.");
+        }
+        
         int id = Integer.parseInt(campoIdMedicoBajas.getText().trim()); 
         
         boolean eliminado = MedicoDAO.getInstancia().eliminarMedico(id); 
@@ -130,21 +209,16 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
     private void btnRestablecerMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosBajasActionPerformed
         // TODO add your handling code here:
+        restablecerCampos();
     }//GEN-LAST:event_btnRestablecerMedicosBajasActionPerformed
-
-    private void campoNombrePacientesBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombrePacientesBajasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombrePacientesBajasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnElminarMedicoAltas;
     private javax.swing.JButton btnRestablecerMedicosBajas;
-    private javax.swing.JTextField campoApellidoPacienteBajas;
     private javax.swing.JTextField campoIdMedicoBajas;
-    private javax.swing.JTextField campoNombrePacientesBajas;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JTable tablaBajasMedicos;
     // End of variables declaration//GEN-END:variables
 }

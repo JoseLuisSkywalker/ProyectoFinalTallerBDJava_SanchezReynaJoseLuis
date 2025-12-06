@@ -168,12 +168,15 @@ private void prepararBoton(JButton boton) {
         hacerClickOscuro(btnCambiosMedico);
         IFCambiosMedicos.setVisible(true);
         IFCambiosMedicos.toFront();
+        IFCambiosMedicos.resfrescarTabla(); 
+        
     }//GEN-LAST:event_btnCambiosMedicoActionPerformed
 
     private void btnAltasMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasMedicoActionPerformed
         hacerClickOscuro(btnAltasMedico);
         IFAltasMedicos.setVisible(true);
         IFAltasMedicos.toFront();
+        IFAltasMedicos.refrescarTabla();
 
     }//GEN-LAST:event_btnAltasMedicoActionPerformed
 
@@ -181,6 +184,7 @@ private void prepararBoton(JButton boton) {
         hacerClickOscuro(btnBajasMedico);
         IFBajasMedicos.setVisible(true);
         IFBajasMedicos.toFront();
+        IFBajasMedicos.refrescarTabla();
 
     }//GEN-LAST:event_btnBajasMedicoActionPerformed
 
@@ -188,6 +192,7 @@ private void prepararBoton(JButton boton) {
         hacerClickOscuro(btnConsultasMedico);
         IFConsultasMedicos.setVisible(true);
         IFConsultasMedicos.toFront();
+        IFConsultasMedicos.refrescarTabla();
         
         
     }//GEN-LAST:event_btnConsultasMedicoActionPerformed

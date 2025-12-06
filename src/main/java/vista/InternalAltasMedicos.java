@@ -62,6 +62,11 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         }
     }
     
+    public void refrescarTabla(){
+        cargarTodosLosMedicos(tablaAltasMedicos); 
+    }
+    
+    
     
 
     /**

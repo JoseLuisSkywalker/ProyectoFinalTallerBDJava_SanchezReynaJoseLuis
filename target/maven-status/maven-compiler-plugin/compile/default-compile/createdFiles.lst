@@ -12,6 +12,7 @@ vista/InternalBajasMedicos$4.class
 vista/InternalConsultasMedicos$21.class
 vista/InternalMedicos.class
 vista/InternalAltasPacientes$1.class
+vista/InternalCambiosMedicos$9.class
 vista/InternalCambiosMedicos.class
 vista/InternalConsultasMedicos$8.class
 vista/InternalCambiosPacientes$3.class
@@ -34,7 +35,6 @@ vista/InternalConsultasMedicos$4.class
 modelo/WellmeadowsHospitalProyectoFinal.class
 controlador/MedicoDAO.class
 vista/InternalBajasPacientes.class
-vista/InternalBajasPacientes$3.class
 vista/InternalConsultasMedicos$19.class
 vista/VentanaInicio$2.class
 vista/InternalConsultasMedicos$18.class
