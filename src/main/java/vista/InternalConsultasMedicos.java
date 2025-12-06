@@ -1,6 +1,13 @@
 package vista;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.Timer;
+import modelo.ResultSetTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,24 +19,254 @@ import javax.swing.ButtonGroup;
  * @author josesanchez
  */
 public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
+    
+    
+    
+    //[[[[[[[[[[[[[[[[[[[[ codigo nuevo (instancias) en proceso
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
+    
+    ButtonGroup group;
+   
+    private String campoSeleccionado = "id_medico"; //este es el campo para hacer la consulta segun el radio button
+    //[[[[[[[[[[[[[[[[[[[[ fin de codigo nuevo (instancias) fin
 
-    /**
-     * Creates new form InternalAltasMedicos
-     */
+    //constructor
     public InternalConsultasMedicos() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
+        agregarListenerDeBusqueda();
+        cargarTodosLosMedicos(tablaConsultasMedicos); 
+        habilitarCampos();
         
-        ButtonGroup group = new ButtonGroup();
-        group.add(jRadioButton1); 
-        group.add(jRadioButton2); 
-        group.add(jRadioButton3);
-        group.add(jRadioButton4); 
-        group.add(jRadioButton5);
-        group.add(jRadioButton6);
         
+        group = new ButtonGroup();
+        group.add(rbtnID); 
+        group.add(rbtnNombre); 
+        group.add(rbtnApellido);
+        group.add(rbtnDepartamento); 
+        group.add(rbtnDireccion);
+        group.add(rbtnTelefono);
+        
+        rbtnID.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        }); 
+        rbtnNombre.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnApellido.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnDireccion.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnTelefono.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnDepartamento.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        habilitarCampos();
     }
+    //fin del constructor 
+    
+    
+    //[[[[[[[[[[[[[[[[[[ codigo nuevo en proceso (métodos)
+    
+    private void cargarTodosLosMedicos(javax.swing.JTable tablaMedicos) {
+        try {
+            String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaMedicos.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+    
+    public void filtrarMedicos(String campo, String valor, javax.swing.JTable tablaMedicos) {
+        try {
+            String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera WHERE "
+                         + campo + " ILIKE '%" + valor + "%'";
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaMedicos.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void habilitarCampos() {
+
+        campoIdMedicoConsultas.setEnabled(false);
+        campoNombreMedicoConsultas.setEnabled(false);
+        campoApellidoMedicoConsultas.setEnabled(false);
+        campoTelefonoMedicoConsultas.setEnabled(false);
+        campoDireccionMedicoConsultas.setEnabled(false);
+        comboMedicoDepartamentoConsultas.setEnabled(false);
+
+    // Ahora se habilita SOLO el que corresponde
+        if (rbtnID.isSelected()){
+            campoIdMedicoConsultas.setEnabled(true);
+        } else if (rbtnNombre.isSelected()){
+            campoNombreMedicoConsultas.setEnabled(true);
+        } else if (rbtnApellido.isSelected()){
+            campoApellidoMedicoConsultas.setEnabled(true);
+        } else if (rbtnDireccion.isSelected()){
+            campoDireccionMedicoConsultas.setEnabled(true);
+        } else if (rbtnTelefono.isSelected()){
+            campoTelefonoMedicoConsultas.setEnabled(true);
+        } else if (rbtnDepartamento.isSelected()){
+            comboMedicoDepartamentoConsultas.setEnabled(true);
+        }
+    
+    }
+    
+    private void buscarMedicos(){
+        try{
+            String sqlBase = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
+            String where = "";
+            String valor = ""; 
+            
+            if(rbtnID.isSelected()){
+                valor = campoIdMedicoConsultas.getText().trim(); 
+                if(!valor.isEmpty()){
+                    where = " WHERE CAST(id_medico AS TEXT) LIKE '%" + valor + "%'";
+                    
+                }
+            }else if(rbtnNombre.isSelected()){
+                valor = campoNombreMedicoConsultas.getText().trim(); 
+                if(!valor.isEmpty()){
+                    where = " WHERE nombre ILIKE '%" + valor + "%'"; 
+                    
+                }
+            }else if(rbtnApellido.isSelected()){
+                valor = campoApellidoMedicoConsultas.getText().trim(); 
+                if(!valor.isEmpty()){
+                    where = " WHERE apellido ILIKE '%" + valor + "%'"; 
+                    
+                }
+            }else if(rbtnDepartamento.isSelected()){
+                valor = comboMedicoDepartamentoConsultas.getSelectedItem().toString(); 
+                if(!valor.equals("Seleccionar...")){
+                    where = " WHERE CAST(numero_departamento AS TEXT) LIKE '%" + valor + "%'"; 
+                }
+            }else if(rbtnDireccion.isSelected()){
+                valor = campoDireccionMedicoConsultas.getText().trim();
+                if(!valor.isEmpty()){
+                    where = " WHERE direccion ILIKE '%" + valor + "%'"; 
+                }
+            }else if(rbtnTelefono.isSelected()){
+                valor = campoTelefonoMedicoConsultas.getText().trim(); 
+                if(!valor.isEmpty()){
+                    where = "WHERE telefono LIKE '%" + valor + "%'"; 
+                }
+            }
+            
+            String sqlFinal = sqlBase + where; 
+            modelo = new ResultSetTableModel(driver, url, sqlFinal); 
+            tablaConsultasMedicos.setModel(modelo); 
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+        
+    
+    
+    private void agregarListenerDeBusqueda() {
+
+        campoIdMedicoConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarMedicos();
+            }
+        });
+
+        campoNombreMedicoConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarMedicos();
+            }   
+        });
+
+        campoApellidoMedicoConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarMedicos();
+            }
+        });
+
+        campoDireccionMedicoConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarMedicos();
+            }
+        });
+
+        campoTelefonoMedicoConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarMedicos();
+            }
+        });
+
+        comboMedicoDepartamentoConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarMedicos();
+            }
+        });
+    }
+    
+    
+    //metodo restablecer
+    
+    private void restablecerCampos() {
+        try {
+       
+            campoIdMedicoConsultas.setText("");
+            campoNombreMedicoConsultas.setText("");
+            campoApellidoMedicoConsultas.setText("");
+            campoDireccionMedicoConsultas.setText("");
+            campoTelefonoMedicoConsultas.setText("");
+            comboMedicoDepartamentoConsultas.setSelectedIndex(0);
+            group.clearSelection();
+            campoIdMedicoConsultas.setEnabled(false);
+            campoNombreMedicoConsultas.setEnabled(false);
+            campoApellidoMedicoConsultas.setEnabled(false);
+            campoDireccionMedicoConsultas.setEnabled(false);
+            campoTelefonoMedicoConsultas.setEnabled(false);
+            comboMedicoDepartamentoConsultas.setEnabled(false); 
+            cargarTodosLosMedicos(tablaConsultasMedicos);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+       
+    //[[[[[[[[[[[[[[[[[ fin codigo nuevo en proceso (métodos) 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,14 +288,16 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         campoDireccionMedicoConsultas = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
-        campoDireccionMedicoAltas5 = new javax.swing.JTextField();
+        campoTelefonoMedicoConsultas = new javax.swing.JTextField();
         btnRestablecerMedicosConsultas = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        rbtnID = new javax.swing.JRadioButton();
+        rbtnNombre = new javax.swing.JRadioButton();
+        rbtnApellido = new javax.swing.JRadioButton();
+        rbtnDepartamento = new javax.swing.JRadioButton();
+        rbtnDireccion = new javax.swing.JRadioButton();
+        rbtnTelefono = new javax.swing.JRadioButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaConsultasMedicos = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -81,7 +320,7 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoIdMedicoConsultas);
-        campoIdMedicoConsultas.setBounds(190, 10, 220, 20);
+        campoIdMedicoConsultas.setBounds(190, 10, 290, 20);
 
         jLabel18.setBackground(new java.awt.Color(110, 46, 46));
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
@@ -95,7 +334,7 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoNombreMedicoConsultas);
-        campoNombreMedicoConsultas.setBounds(150, 50, 260, 20);
+        campoNombreMedicoConsultas.setBounds(150, 50, 330, 20);
 
         jLabel19.setBackground(new java.awt.Color(110, 46, 46));
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -109,7 +348,7 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoApellidoMedicoConsultas);
-        campoApellidoMedicoConsultas.setBounds(150, 90, 260, 20);
+        campoApellidoMedicoConsultas.setBounds(150, 90, 330, 20);
 
         jLabel20.setBackground(new java.awt.Color(110, 46, 46));
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -117,14 +356,14 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel20);
         jLabel20.setBounds(70, 130, 180, 20);
 
-        comboMedicoDepartamentoConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
+        comboMedicoDepartamentoConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17" }));
         comboMedicoDepartamentoConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboMedicoDepartamentoConsultasActionPerformed(evt);
             }
         });
         getContentPane().add(comboMedicoDepartamentoConsultas);
-        comboMedicoDepartamentoConsultas.setBounds(260, 130, 72, 23);
+        comboMedicoDepartamentoConsultas.setBounds(260, 130, 120, 23);
 
         jLabel21.setBackground(new java.awt.Color(110, 46, 46));
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
@@ -146,73 +385,107 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel22);
         jLabel22.setBounds(70, 210, 70, 20);
 
-        campoDireccionMedicoAltas5.addActionListener(new java.awt.event.ActionListener() {
+        campoTelefonoMedicoConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDireccionMedicoAltas5ActionPerformed(evt);
+                campoTelefonoMedicoConsultasActionPerformed(evt);
             }
         });
-        getContentPane().add(campoDireccionMedicoAltas5);
-        campoDireccionMedicoAltas5.setBounds(150, 210, 380, 20);
+        getContentPane().add(campoTelefonoMedicoConsultas);
+        campoTelefonoMedicoConsultas.setBounds(150, 210, 380, 20);
 
-        btnRestablecerMedicosConsultas.setBackground(new java.awt.Color(91, 4, 4));
-        btnRestablecerMedicosConsultas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
+        btnRestablecerMedicosConsultas.setText("Restablecer");
         btnRestablecerMedicosConsultas.setToolTipText("Restablecer");
-        btnRestablecerMedicosConsultas.setBorder(null);
         btnRestablecerMedicosConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestablecerMedicosConsultasActionPerformed(evt);
             }
         });
         getContentPane().add(btnRestablecerMedicosConsultas);
-        btnRestablecerMedicosConsultas.setBounds(480, 20, 50, 50);
+        btnRestablecerMedicosConsultas.setBounds(550, 30, 110, 30);
 
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        rbtnID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rbtnIDActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(30, 10, 30, 20);
+        getContentPane().add(rbtnID);
+        rbtnID.setBounds(30, 10, 30, 20);
 
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        rbtnNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rbtnNombreActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(30, 50, 30, 19);
+        getContentPane().add(rbtnNombre);
+        rbtnNombre.setBounds(30, 50, 30, 19);
 
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        rbtnApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                rbtnApellidoActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(30, 90, 30, 20);
+        getContentPane().add(rbtnApellido);
+        rbtnApellido.setBounds(30, 90, 30, 20);
 
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        rbtnDepartamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                rbtnDepartamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton4);
-        jRadioButton4.setBounds(30, 130, 30, 19);
+        getContentPane().add(rbtnDepartamento);
+        rbtnDepartamento.setBounds(30, 130, 30, 19);
 
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        rbtnDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                rbtnDireccionActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton5);
-        jRadioButton5.setBounds(30, 170, 30, 20);
+        getContentPane().add(rbtnDireccion);
+        rbtnDireccion.setBounds(30, 170, 30, 20);
 
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        rbtnTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                rbtnTelefonoActionPerformed(evt);
             }
         });
-        getContentPane().add(jRadioButton6);
-        jRadioButton6.setBounds(30, 210, 30, 20);
+        getContentPane().add(rbtnTelefono);
+        rbtnTelefono.setBounds(30, 210, 30, 20);
+
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaConsultasMedicos.setBackground(new java.awt.Color(100, 0, 0));
+        tablaConsultasMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaConsultasMedicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaConsultasMedicos);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(30, 290, 610, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -237,46 +510,55 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoDireccionMedicoConsultasActionPerformed
 
-    private void campoDireccionMedicoAltas5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltas5ActionPerformed
+    private void campoTelefonoMedicoConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefonoMedicoConsultasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoDireccionMedicoAltas5ActionPerformed
+    }//GEN-LAST:event_campoTelefonoMedicoConsultasActionPerformed
 
     private void btnRestablecerMedicosConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosConsultasActionPerformed
         // TODO add your handling code here:
+       restablecerCampos();
     }//GEN-LAST:event_btnRestablecerMedicosConsultasActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rbtnIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+        campoSeleccionado = "id_medico"; 
+        
+        
+    }//GEN-LAST:event_rbtnIDActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rbtnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+        campoSeleccionado = "nombre";
+    }//GEN-LAST:event_rbtnNombreActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void rbtnApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnApellidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+        campoSeleccionado = "apellido"; 
+    }//GEN-LAST:event_rbtnApellidoActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    private void rbtnDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDepartamentoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
+        campoSeleccionado = "numero_departamento";
+    }//GEN-LAST:event_rbtnDepartamentoActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void rbtnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDireccionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+        campoSeleccionado = "direccion"; 
+    }//GEN-LAST:event_rbtnDireccionActionPerformed
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+    private void rbtnTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+        campoSeleccionado = "telefono"; 
+    }//GEN-LAST:event_rbtnTelefonoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRestablecerMedicosConsultas;
     private javax.swing.JTextField campoApellidoMedicoConsultas;
-    private javax.swing.JTextField campoDireccionMedicoAltas5;
     private javax.swing.JTextField campoDireccionMedicoConsultas;
     private javax.swing.JTextField campoIdMedicoConsultas;
     private javax.swing.JTextField campoNombreMedicoConsultas;
+    private javax.swing.JTextField campoTelefonoMedicoConsultas;
     private javax.swing.JComboBox<String> comboMedicoDepartamentoConsultas;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -284,11 +566,13 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JRadioButton rbtnApellido;
+    private javax.swing.JRadioButton rbtnDepartamento;
+    private javax.swing.JRadioButton rbtnDireccion;
+    private javax.swing.JRadioButton rbtnID;
+    private javax.swing.JRadioButton rbtnNombre;
+    private javax.swing.JRadioButton rbtnTelefono;
+    private javax.swing.JTable tablaConsultasMedicos;
     // End of variables declaration//GEN-END:variables
 }

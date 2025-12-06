@@ -3,6 +3,7 @@ package vista;
 import controlador.MedicoDAO;
 import javax.swing.JOptionPane;
 import modelo.Medico;
+import modelo.ResultSetTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,17 +15,54 @@ import modelo.Medico;
  * @author josesanchez
  */
 public class InternalAltasMedicos extends javax.swing.JInternalFrame {
-
+    
+    
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
     /**
      * Creates new form InternalAltasMedicos
      */
     public InternalAltasMedicos() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
+        cargarTodosLosMedicos(tablaAltasMedicos);
         
         
     }
+    
+    
+    private void cargarTodosLosMedicos(javax.swing.JTable tablaMedicos) {
+        try {
+            String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaMedicos.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+  
+    
+    
+    
+    private void restablecerCampos() {
+        try {
+       
+            campoIdMedicoAltas.setText("");
+            campoNombreMedicoAltas.setText("");
+            campoApellidoMedicoAltas.setText("");
+            campoDireccionMedicoAltas.setText("");
+            campoNumTelefonoMedicosAltas.setText("");
+            comboMedicoDepartamentoAtlas.setSelectedIndex(0);
+            cargarTodosLosMedicos(tablaAltasMedicos);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +87,8 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         campoNumTelefonoMedicosAltas = new javax.swing.JTextField();
         btnAgregarMedicoAltas = new javax.swing.JButton();
         btnRestablecerMedicoAltas1 = new javax.swing.JButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaAltasMedicos = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -73,7 +113,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoIdMedicoAltas);
-        campoIdMedicoAltas.setBounds(150, 20, 220, 20);
+        campoIdMedicoAltas.setBounds(150, 20, 250, 20);
 
         jLabel2.setBackground(new java.awt.Color(110, 46, 46));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -87,7 +127,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoNombreMedicoAltas);
-        campoNombreMedicoAltas.setBounds(150, 60, 220, 20);
+        campoNombreMedicoAltas.setBounds(150, 60, 250, 20);
 
         jLabel3.setBackground(new java.awt.Color(110, 46, 46));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,7 +141,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoApellidoMedicoAltas);
-        campoApellidoMedicoAltas.setBounds(150, 100, 220, 20);
+        campoApellidoMedicoAltas.setBounds(150, 100, 250, 20);
 
         jLabel4.setBackground(new java.awt.Color(110, 46, 46));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,7 +170,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoDireccionMedicoAltas);
-        campoDireccionMedicoAltas.setBounds(150, 180, 370, 20);
+        campoDireccionMedicoAltas.setBounds(150, 180, 420, 20);
 
         jLabel6.setBackground(new java.awt.Color(110, 46, 46));
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,31 +184,63 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoNumTelefonoMedicosAltas);
-        campoNumTelefonoMedicosAltas.setBounds(150, 220, 370, 20);
+        campoNumTelefonoMedicosAltas.setBounds(150, 220, 420, 20);
 
-        btnAgregarMedicoAltas.setBackground(new java.awt.Color(120, 0, 0));
-        btnAgregarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/add.png")); // NOI18N
-        btnAgregarMedicoAltas.setToolTipText("Agregar");
-        btnAgregarMedicoAltas.setBorder(null);
+        btnAgregarMedicoAltas.setText("Agregar");
+        btnAgregarMedicoAltas.setToolTipText("Agrega la información del médico");
         btnAgregarMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarMedicoAltasActionPerformed(evt);
             }
         });
         getContentPane().add(btnAgregarMedicoAltas);
-        btnAgregarMedicoAltas.setBounds(460, 20, 50, 50);
+        btnAgregarMedicoAltas.setBounds(470, 30, 110, 30);
 
-        btnRestablecerMedicoAltas1.setBackground(new java.awt.Color(120, 0, 0));
-        btnRestablecerMedicoAltas1.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
-        btnRestablecerMedicoAltas1.setToolTipText("Restablecer");
-        btnRestablecerMedicoAltas1.setBorder(null);
+        btnRestablecerMedicoAltas1.setText("Restablecer");
+        btnRestablecerMedicoAltas1.setToolTipText("Limpia los Campos");
         btnRestablecerMedicoAltas1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestablecerMedicoAltas1ActionPerformed(evt);
             }
         });
         getContentPane().add(btnRestablecerMedicoAltas1);
-        btnRestablecerMedicoAltas1.setBounds(460, 90, 50, 50);
+        btnRestablecerMedicoAltas1.setBounds(470, 70, 110, 30);
+
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaAltasMedicos.setBackground(new java.awt.Color(100, 0, 0));
+        tablaAltasMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaAltasMedicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaAltasMedicos);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(30, 290, 610, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -223,6 +295,9 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             boolean ok = MedicoDAO.getInstancia().agregarMedico(m); 
             if(ok){
                 JOptionPane.showMessageDialog(this, "Médico registrado exitosamente. RAAHH!!!");
+                
+                cargarTodosLosMedicos(tablaAltasMedicos);
+                restablecerCampos();
             }else{
                 JOptionPane.showMessageDialog(this, "No se puedo registrar el doc (ya existe)");
             }
@@ -230,9 +305,13 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "ID o Número de Departamento Inválido");
         }
     }//GEN-LAST:event_btnAgregarMedicoAltasActionPerformed
-
+    
+    
     private void btnRestablecerMedicoAltas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoAltas1ActionPerformed
         // TODO add your handling code here:
+        
+        
+        restablecerCampos();
     }//GEN-LAST:event_btnRestablecerMedicoAltas1ActionPerformed
 
 
@@ -251,5 +330,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JTable tablaAltasMedicos;
     // End of variables declaration//GEN-END:variables
 }

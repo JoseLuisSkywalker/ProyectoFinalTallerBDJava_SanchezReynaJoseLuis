@@ -36,12 +36,12 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
         jLabel8 = new javax.swing.JLabel();
         campoIdMedicoBajas = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        campoNombreMedicoBajas = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        campoApellidoMedicosBajas = new javax.swing.JTextField();
         btnElminarMedicoAltas = new javax.swing.JButton();
         btnRestablecerMedicosBajas = new javax.swing.JButton();
+        campoNombrePacientesBajas = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        campoApellidoPacienteBajas = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -56,7 +56,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Id del Médico");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(50, 30, 90, 20);
+        jLabel8.setBounds(40, 40, 90, 20);
 
         campoIdMedicoBajas.setToolTipText("Campo para eliminar.");
         campoIdMedicoBajas.addActionListener(new java.awt.event.ActionListener() {
@@ -65,61 +65,47 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoIdMedicoBajas);
-        campoIdMedicoBajas.setBounds(160, 30, 360, 20);
+        campoIdMedicoBajas.setBounds(150, 40, 360, 20);
 
-        jLabel9.setBackground(new java.awt.Color(110, 46, 46));
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Nombre (Búsqueda)");
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(10, 70, 130, 20);
-
-        campoNombreMedicoBajas.setToolTipText("Campo para buscar.");
-        campoNombreMedicoBajas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombreMedicoBajasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(campoNombreMedicoBajas);
-        campoNombreMedicoBajas.setBounds(160, 70, 360, 20);
-
-        jLabel10.setBackground(new java.awt.Color(110, 46, 46));
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Apellido (Búsqueda)");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(10, 110, 130, 20);
-
-        campoApellidoMedicosBajas.setToolTipText("Campo para buscar. ");
-        campoApellidoMedicosBajas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoApellidoMedicosBajasActionPerformed(evt);
-            }
-        });
-        getContentPane().add(campoApellidoMedicosBajas);
-        campoApellidoMedicosBajas.setBounds(160, 110, 360, 20);
-
-        btnElminarMedicoAltas.setBackground(new java.awt.Color(91, 4, 4));
-        btnElminarMedicoAltas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/delete.png")); // NOI18N
-        btnElminarMedicoAltas.setToolTipText("Eliminar");
-        btnElminarMedicoAltas.setBorder(null);
+        btnElminarMedicoAltas.setText("Eliminar");
+        btnElminarMedicoAltas.setToolTipText("Elimina el médico que se indicó en el campo del ID");
         btnElminarMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnElminarMedicoAltasActionPerformed(evt);
             }
         });
         getContentPane().add(btnElminarMedicoAltas);
-        btnElminarMedicoAltas.setBounds(410, 180, 40, 50);
+        btnElminarMedicoAltas.setBounds(230, 170, 120, 40);
 
-        btnRestablecerMedicosBajas.setBackground(new java.awt.Color(91, 4, 4));
-        btnRestablecerMedicosBajas.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/clean.png")); // NOI18N
-        btnRestablecerMedicosBajas.setToolTipText("Restablecer");
-        btnRestablecerMedicosBajas.setBorder(null);
+        btnRestablecerMedicosBajas.setText("Restablecer");
+        btnRestablecerMedicosBajas.setToolTipText("Restablece los campos a su forma original");
         btnRestablecerMedicosBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRestablecerMedicosBajasActionPerformed(evt);
             }
         });
         getContentPane().add(btnRestablecerMedicosBajas);
-        btnRestablecerMedicosBajas.setBounds(490, 180, 40, 50);
+        btnRestablecerMedicosBajas.setBounds(380, 170, 120, 40);
+
+        campoNombrePacientesBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNombrePacientesBajasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(campoNombrePacientesBajas);
+        campoNombrePacientesBajas.setBounds(150, 80, 360, 23);
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Nombre");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(70, 80, 70, 20);
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Apellido");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(70, 120, 70, 20);
+        getContentPane().add(campoApellidoPacienteBajas);
+        campoApellidoPacienteBajas.setBounds(150, 120, 360, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,14 +113,6 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
     private void campoIdMedicoBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoBajasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoIdMedicoBajasActionPerformed
-
-    private void campoNombreMedicoBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoBajasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoNombreMedicoBajasActionPerformed
-
-    private void campoApellidoMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoApellidoMedicosBajasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoApellidoMedicosBajasActionPerformed
 
     private void btnElminarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarMedicoAltasActionPerformed
         // TODO add your handling code here:
@@ -154,15 +132,19 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRestablecerMedicosBajasActionPerformed
 
+    private void campoNombrePacientesBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombrePacientesBajasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNombrePacientesBajasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnElminarMedicoAltas;
     private javax.swing.JButton btnRestablecerMedicosBajas;
-    private javax.swing.JTextField campoApellidoMedicosBajas;
+    private javax.swing.JTextField campoApellidoPacienteBajas;
     private javax.swing.JTextField campoIdMedicoBajas;
-    private javax.swing.JTextField campoNombreMedicoBajas;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JTextField campoNombrePacientesBajas;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

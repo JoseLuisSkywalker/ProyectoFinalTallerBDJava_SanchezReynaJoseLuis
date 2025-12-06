@@ -20,7 +20,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
      */
     public InternalCambiosMedicos() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
         
         
@@ -49,6 +49,8 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         campoTelefonoMedicoCambios = new javax.swing.JTextField();
         btnModificarMedicoCambios = new javax.swing.JButton();
         btnRestablecerMedicoCambios = new javax.swing.JButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaCambiosMedicos = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -168,6 +170,42 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         getContentPane().add(btnRestablecerMedicoCambios);
         btnRestablecerMedicoCambios.setBounds(560, 100, 50, 50);
 
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaCambiosMedicos.setBackground(new java.awt.Color(100, 0, 0));
+        tablaCambiosMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaCambiosMedicos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaCambiosMedicos);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(30, 290, 610, 310);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,5 +273,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JTable tablaCambiosMedicos;
     // End of variables declaration//GEN-END:variables
 }

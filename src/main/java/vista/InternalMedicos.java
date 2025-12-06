@@ -6,8 +6,10 @@ package vista;
 
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JTable;
 
 import javax.swing.Timer;
+import modelo.ResultSetTableModel;
 
 /**
  *
@@ -20,7 +22,7 @@ public class InternalMedicos extends javax.swing.JInternalFrame {
     private InternalConsultasMedicos IFConsultasMedicos;
     private InternalCambiosMedicos IFCambiosMedicos; 
     
-  
+ 
     /**
      * Creates new form internalMedicos
      */
@@ -92,8 +94,6 @@ private void prepararBoton(JButton boton) {
         btnAltasMedico = new javax.swing.JButton();
         btnBajasMedico = new javax.swing.JButton();
         btnConsultasMedico = new javax.swing.JButton();
-        jScrollMedicos = new javax.swing.JScrollPane();
-        tablaMedicos = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -138,6 +138,7 @@ private void prepararBoton(JButton boton) {
         btnBajasMedico.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btnBajasMedico.setForeground(new java.awt.Color(255, 255, 255));
         btnBajasMedico.setText("Eliminar");
+        btnBajasMedico.setToolTipText("");
         btnBajasMedico.setBorder(null);
         btnBajasMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,42 +160,6 @@ private void prepararBoton(JButton boton) {
         });
         getContentPane().add(btnConsultasMedico);
         btnConsultasMedico.setBounds(340, 40, 280, 100);
-
-        jScrollMedicos.setBackground(new java.awt.Color(140, 59, 59));
-        jScrollMedicos.setBorder(null);
-        jScrollMedicos.setForeground(new java.awt.Color(255, 255, 255));
-
-        tablaMedicos.setBackground(new java.awt.Color(100, 0, 0));
-        tablaMedicos.setForeground(new java.awt.Color(255, 255, 255));
-        tablaMedicos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
-            }
-        ));
-        jScrollMedicos.setViewportView(tablaMedicos);
-
-        getContentPane().add(jScrollMedicos);
-        jScrollMedicos.setBounds(30, 320, 610, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -233,7 +198,5 @@ private void prepararBoton(JButton boton) {
     private javax.swing.JButton btnBajasMedico;
     private javax.swing.JButton btnCambiosMedico;
     private javax.swing.JButton btnConsultasMedico;
-    private javax.swing.JScrollPane jScrollMedicos;
-    private javax.swing.JTable tablaMedicos;
     // End of variables declaration//GEN-END:variables
 }
