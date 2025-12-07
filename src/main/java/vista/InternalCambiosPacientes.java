@@ -5,26 +5,105 @@
 package vista;
 
 import controlador.PacienteDAO;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import modelo.Paciente;
+import modelo.ResultSetTableModel;
 
 /**
  *
  * @author josesanchez
  */
 public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
-
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
+    
+    
     /**
      * Creates new form InternalAltasPacientes
      */
     public InternalCambiosPacientes() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
         
         
+        campoIDPacienteCambios.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent e){
+            actualizarEstadoCampos();
+        }
+    });
+        actualizarEstadoCampos();
+        
+        cargarTodosLosPacientes(tablaCambiosPacientes);
         
     }
+    
+     private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes) {
+        try {
+            String sql = "SELECT * FROM pacientes";
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaPacientes.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     
+     
+     private void restablecerCampos() {
+        try {
+
+            campoIDPacienteCambios.setText("");
+            campoNombrePacientesCambios.setText("");
+            campoApellidoPacientesCambios.setText("");
+            campoTelefonoPacientesCambios.setText("");
+            comboDiaNacCambios.setSelectedIndex(0);
+            comboMesNacCambios.setSelectedIndex(0);
+            comboAnoNacCambios.setSelectedIndex(0);
+            comboSexoCambios.setSelectedIndex(0);
+            comboCivilCambios.setSelectedIndex(0);
+            comboDiaRegistroCambios.setSelectedIndex(0);
+            comboMesRegistroCambios.setSelectedIndex(0);
+            comboAnoRegistroCambios.setSelectedIndex(0);
+            campoIdMedicoPacienteCambios.setText(""); 
+
+            cargarTodosLosPacientes(tablaCambiosPacientes);
+            actualizarEstadoCampos();
+
+        } catch (Exception ex) {
+        ex.printStackTrace();
+        }
+    }
+     
+     private void actualizarEstadoCampos() {
+
+        boolean habilitar = !campoIDPacienteCambios.getText().trim().isEmpty();
+
+        campoNombrePacientesCambios.setEnabled(habilitar);
+        campoApellidoPacientesCambios.setEnabled(habilitar);
+        campoTelefonoPacientesCambios.setEnabled(habilitar);
+        comboDiaNacCambios.setEnabled(habilitar);
+        comboMesNacCambios.setEnabled(habilitar);
+        comboAnoNacCambios.setEnabled(habilitar);
+        comboSexoCambios.setEnabled(habilitar);
+        comboCivilCambios.setEnabled(habilitar);
+        comboDiaRegistroCambios.setEnabled(habilitar);
+        comboMesRegistroCambios.setEnabled(habilitar);
+        comboAnoRegistroCambios.setEnabled(habilitar);
+        campoIdMedicoPacienteCambios.setEnabled(habilitar);
+                
+      
+    }
+     
+      public void refrescarTabla(){
+        cargarTodosLosPacientes(tablaCambiosPacientes);
+    }
+     
+     
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +138,8 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         campoIdMedicoPacienteCambios = new javax.swing.JTextField();
         btnModificarPacientesCambios = new javax.swing.JButton();
         btnRestablecerPacientesCambios = new javax.swing.JButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaCambiosPacientes = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
@@ -175,8 +256,49 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         btnModificarPacientesCambios.setBounds(570, 30, 100, 23);
 
         btnRestablecerPacientesCambios.setText("Restablecer");
+        btnRestablecerPacientesCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerPacientesCambiosActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRestablecerPacientesCambios);
         btnRestablecerPacientesCambios.setBounds(570, 70, 100, 23);
+
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaCambiosPacientes.setBackground(new java.awt.Color(100, 0, 0));
+        tablaCambiosPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        tablaCambiosPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Paciente", "Nombre", "Apellido", "Teléfono", "Fecha de Nacimiento", "Sexo", "Estado Civil", "Fecha de Registro", "Médico de Cabecera"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaCambiosPacientes);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(0, 310, 680, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -222,7 +344,15 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(this, "No se puedo modificar el paciente, favor de verificar que el ID se el correcto");
         }
+        
+        cargarTodosLosPacientes(tablaCambiosPacientes);
     }//GEN-LAST:event_btnModificarPacientesCambiosActionPerformed
+
+    private void btnRestablecerPacientesCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerPacientesCambiosActionPerformed
+        // TODO add your handling code here:
+        restablecerCampos();
+        cargarTodosLosPacientes(tablaCambiosPacientes);
+    }//GEN-LAST:event_btnRestablecerPacientesCambiosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,6 +380,8 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JTable tablaCambiosPacientes;
     // End of variables declaration//GEN-END:variables
 
     

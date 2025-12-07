@@ -160,6 +160,7 @@ private void prepararBoton(JButton boton) {
         hacerClickOscuro(btnCambiosPacientes);
         IFCambiosPacientes.setVisible(true);
         IFCambiosPacientes.toFront(); 
+        IFCambiosPacientes.refrescarTabla();
     }//GEN-LAST:event_btnCambiosPacientesActionPerformed
 
     private void btnAltasPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltasPacienteActionPerformed
