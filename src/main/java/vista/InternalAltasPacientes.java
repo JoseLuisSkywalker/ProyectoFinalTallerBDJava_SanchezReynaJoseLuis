@@ -7,27 +7,66 @@ package vista;
 import controlador.PacienteDAO;
 import javax.swing.JOptionPane;
 import modelo.Paciente;
+import modelo.ResultSetTableModel;
 
 /**
  *
  * @author josesanchez
  */
 public class InternalAltasPacientes extends javax.swing.JInternalFrame {
-
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
     /**
      * Creates new form InternalAltasPacientes
      */
     public InternalAltasPacientes() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
-        
+        cargarTodosLosPacientes(tablaAltasPacientes);
         
         
     }
     
+    private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes){
+        try {
+            String sql = "SELECT * FROM pacientes"; 
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaPacientes.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    private void restablecerCampos() {
+        try {
+
+            campoIDPacienteAltas.setText("");
+            campoNombrePacientesAltas.setText("");
+            campoApellidoPacientesAltas.setText("");
+            campoTelefonoPacientesAltas.setText("");
+            comboDiaNacAltas.setSelectedIndex(0);
+            comboMesNacAltas.setSelectedIndex(0);
+            comboAnoNacAltas.setSelectedIndex(0);
+            comboSexoAltas.setSelectedIndex(0);
+            comboCivilAltas.setSelectedIndex(0);
+            comboDiaRegistroAltas.setSelectedIndex(0);
+            comboMesRegistroAltas.setSelectedIndex(0);
+            comboAnoRegistroAltas.setSelectedIndex(0);
+            campoIdMedicosAltas.setText(""); 
+
+            cargarTodosLosPacientes(tablaAltasPacientes);
+
+        } catch (Exception ex) {
+        ex.printStackTrace();
+        }
+    }
+    
+    
      public void refrescarTabla(){
-       // cargarTodosLosMedicos(tablaAltasPacientes); 
+       cargarTodosLosPacientes(tablaAltasPacientes); 
     }
 
     /**
@@ -60,9 +99,11 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         comboMesNacAltas = new javax.swing.JComboBox<>();
         comboAnoNacAltas = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        campoIdMedicosAltas = new javax.swing.JTextField();
         btnAgregarPacientesAltas = new javax.swing.JButton();
         btnRestablecerPacientesAltas = new javax.swing.JButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaAltasPacientes = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
@@ -123,7 +164,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         getContentPane().add(comboMesRegistroAltas);
         comboMesRegistroAltas.setBounds(240, 200, 72, 23);
 
-        comboAnoRegistroAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        comboAnoRegistroAltas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025", "2026", "2027", "2028", "2029", "2030", " " }));
         getContentPane().add(comboAnoRegistroAltas);
         comboAnoRegistroAltas.setBounds(330, 200, 130, 23);
 
@@ -166,8 +207,8 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         jLabel9.setText("ID del Médico de Cabecera");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(30, 240, 180, 17);
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(200, 240, 340, 23);
+        getContentPane().add(campoIdMedicosAltas);
+        campoIdMedicosAltas.setBounds(200, 240, 340, 23);
 
         btnAgregarPacientesAltas.setText("Agregar");
         btnAgregarPacientesAltas.addActionListener(new java.awt.event.ActionListener() {
@@ -179,8 +220,49 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         btnAgregarPacientesAltas.setBounds(570, 30, 100, 23);
 
         btnRestablecerPacientesAltas.setText("Restablecer");
+        btnRestablecerPacientesAltas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerPacientesAltasActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRestablecerPacientesAltas);
         btnRestablecerPacientesAltas.setBounds(570, 70, 100, 23);
+
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaAltasPacientes.setBackground(new java.awt.Color(100, 0, 0));
+        tablaAltasPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        tablaAltasPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Paciente", "Nombre", "Apellido", "Teléfono", "Fecha de Nacimiento", "Sexo", "Estado Civil", "Fecha de Registro", "Médico de Cabecera"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaAltasPacientes);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(0, 310, 680, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -214,7 +296,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         String anioReg = comboAnoRegistroAltas.getSelectedItem().toString();
         String fechaRegistro = anioReg + "-" + mesReg + "-" + diaReg;
         p.setFechaRegistro(fechaRegistro);
-        int idMedicoCabecera = Integer.parseInt(jTextField5.getText().trim());
+        int idMedicoCabecera = Integer.parseInt(campoIdMedicosAltas.getText().trim());
         p.setIdMedico(idMedicoCabecera);
         
         
@@ -226,7 +308,14 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Paciente no se puedo registrar correctamente: verifique el ID.");
             }
         
+        cargarTodosLosPacientes(tablaAltasPacientes);
+        
     }//GEN-LAST:event_btnAgregarPacientesAltasActionPerformed
+        
+    private void btnRestablecerPacientesAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerPacientesAltasActionPerformed
+        // TODO add your handling code here:
+        restablecerCampos();
+    }//GEN-LAST:event_btnRestablecerPacientesAltasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -234,6 +323,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRestablecerPacientesAltas;
     private javax.swing.JTextField campoApellidoPacientesAltas;
     private javax.swing.JTextField campoIDPacienteAltas;
+    private javax.swing.JTextField campoIdMedicosAltas;
     private javax.swing.JTextField campoNombrePacientesAltas;
     private javax.swing.JTextField campoTelefonoPacientesAltas;
     private javax.swing.JComboBox<String> comboAnoNacAltas;
@@ -253,7 +343,8 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JTable tablaAltasPacientes;
     // End of variables declaration//GEN-END:variables
 
     

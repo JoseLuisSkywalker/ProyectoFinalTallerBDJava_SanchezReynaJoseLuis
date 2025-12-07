@@ -166,6 +166,7 @@ private void prepararBoton(JButton boton) {
         hacerClickOscuro(btnAltasPaciente);
         IFAltasPacientes.setVisible(true); 
         IFAltasPacientes.toFront();
+        IFAltasPacientes.refrescarTabla();
 
     }//GEN-LAST:event_btnAltasPacienteActionPerformed
 
