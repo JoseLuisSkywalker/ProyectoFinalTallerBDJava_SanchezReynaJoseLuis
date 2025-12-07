@@ -205,6 +205,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No se pudo eliminar al doc. Favor de Verificar el ID!");
         }
         
+        cargarTodosLosMedicos(tablaBajasMedicos);
     }//GEN-LAST:event_btnElminarMedicoAltasActionPerformed
 
     private void btnRestablecerMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosBajasActionPerformed

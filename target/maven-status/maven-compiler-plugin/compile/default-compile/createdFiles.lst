@@ -46,6 +46,7 @@ vista/InternalConsultasPacientes$12.class
 controlador/MedicoDAO.class
 vista/InternalConsultasPacientes$7.class
 vista/InternalBajasPacientes.class
+vista/InternalBajasPacientes$3.class
 vista/InternalConsultasMedicos$19.class
 vista/VentanaInicio$2.class
 vista/InternalConsultasMedicos$18.class
@@ -86,6 +87,7 @@ vista/InternalConsultasPacientes$9.class
 vista/InternalPacientes$1.class
 vista/InternalConsultasMedicos$13.class
 vista/InternalConsultasPacientes$18.class
+vista/InternalBajasPacientes$4.class
 vista/InternalConsultasPacientes$23.class
 vista/InternalConsultasPacientes$29.class
 vista/InternalMedicos$1.class

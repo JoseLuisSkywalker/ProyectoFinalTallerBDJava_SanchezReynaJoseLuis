@@ -6,23 +6,78 @@ package vista;
 
 import controlador.PacienteDAO;
 import javax.swing.JOptionPane;
+import modelo.ResultSetTableModel;
 
 /**
  *
  * @author josesanchez
  */
 public class InternalBajasPacientes extends javax.swing.JInternalFrame {
-
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
     /**
      * Creates new form InternalAltasPacientes
      */
     public InternalBajasPacientes() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
+        cargarTodosLosPacientes(tablaBajasPacientes);
         
         
+        campoIDPacienteBajas.addKeyListener(new java.awt.event.KeyAdapter(){
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e){
+                String texto = campoIDPacienteBajas.getText().trim(); 
+            
+                if(texto.isEmpty()){
+                    cargarTodosLosPacientes(tablaBajasPacientes); 
+                
+                }else{
+                    filtrar(tablaBajasPacientes, texto);
+                }
+            }  
+        }); 
         
+    }
+    
+    
+    private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes) {
+        try {
+            String sql = "SELECT * FROM pacientes"; 
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaPacientes.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void restablecerCampos() {
+        try {
+       
+            campoIDPacienteBajas.setText("");
+            cargarTodosLosPacientes(tablaBajasPacientes);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void filtrar(javax.swing.JTable tabla, String id){
+        try{
+            String sql = "SELECT * FROM pacientes WHERE CAST(id_paciente AS TEXT) ILIKE '%" + id + "%'"; 
+            modelo = new ResultSetTableModel(driver, url, sql); 
+            tabla.setModel(modelo);
+            
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+     public void refrescarTabla(){
+        cargarTodosLosPacientes(tablaBajasPacientes);
     }
 
      /**
@@ -38,6 +93,8 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         campoIDPacienteBajas = new javax.swing.JTextField();
         btnEliminarPacientesBajas = new javax.swing.JButton();
         btnRestablecerPacientesBajas = new javax.swing.JButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaBajasPacientes = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
@@ -49,7 +106,7 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Id Paciente");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(100, 80, 90, 20);
+        jLabel1.setBounds(80, 80, 90, 20);
 
         campoIDPacienteBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,7 +114,7 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(campoIDPacienteBajas);
-        campoIDPacienteBajas.setBounds(180, 80, 440, 23);
+        campoIDPacienteBajas.setBounds(160, 80, 440, 23);
 
         btnEliminarPacientesBajas.setText("Eliminar");
         btnEliminarPacientesBajas.setToolTipText("");
@@ -67,11 +124,52 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnEliminarPacientesBajas);
-        btnEliminarPacientesBajas.setBounds(100, 130, 250, 50);
+        btnEliminarPacientesBajas.setBounds(80, 130, 250, 50);
 
         btnRestablecerPacientesBajas.setText("Restablecer");
+        btnRestablecerPacientesBajas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerPacientesBajasActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRestablecerPacientesBajas);
-        btnRestablecerPacientesBajas.setBounds(370, 130, 250, 50);
+        btnRestablecerPacientesBajas.setBounds(350, 130, 250, 50);
+
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaBajasPacientes.setBackground(new java.awt.Color(100, 0, 0));
+        tablaBajasPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        tablaBajasPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Paciente", "Nombre", "Apellido", "Teléfono", "Fecha de Nacimiento", "Sexo", "Estado Civil", "Fecha de Registro", "Médico de Cabecera"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaBajasPacientes);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(0, 310, 680, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -93,7 +191,14 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(this, "No se pudo eliminar el paciente, verifique el ID");
         }
+        restablecerCampos();
+        
     }//GEN-LAST:event_btnEliminarPacientesBajasActionPerformed
+
+    private void btnRestablecerPacientesBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerPacientesBajasActionPerformed
+        // TODO add your handling code here:
+        restablecerCampos();
+    }//GEN-LAST:event_btnRestablecerPacientesBajasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -101,6 +206,8 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRestablecerPacientesBajas;
     private javax.swing.JTextField campoIDPacienteBajas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JTable tablaBajasPacientes;
     // End of variables declaration//GEN-END:variables
 
     
