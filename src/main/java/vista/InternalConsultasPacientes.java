@@ -4,31 +4,377 @@
  */
 package vista;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import javax.swing.ButtonGroup;
+import modelo.ResultSetTableModel;
 
 /**
  *
  * @author josesanchez
  */
 public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
-
+    
+    private ResultSetTableModel modelo;
+    private String driver = "org.postgresql.Driver";
+    private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
+    
+    private String campoSeleccionado = "id_paceinte";
+    
+    ButtonGroup group;
     /**
      * Creates new form InternalAltasPacientes
      */
     public InternalConsultasPacientes() {
         initComponents();
-        setSize(700, 350);        
+        setSize(700, 700);        
         setResizable(false);
+        agregarListenerDeBusqueda();
+        cargarTodosLosPacientes(tablaConsultasPacientes);
+        habilitarCampos(); 
         
-        ButtonGroup group = new ButtonGroup();
-        group.add(jRadioButton1); 
-        group.add(jRadioButton2); 
-        group.add(jRadioButton3);
-        group.add(jRadioButton4); 
-        group.add(jRadioButton5);
-        group.add(jRadioButton6);
+        group = new ButtonGroup();
+        group.add(rbtnID); 
+        group.add(rbtnNombre); 
+        group.add(rbtnApellido);
+        group.add(rbtnTelefono); 
+        group.add(rbtnFechaNac);
+        group.add(rbtnSexo);
+        group.add(rbtnEstadoCivil);
+        group.add(rbtnFechaRegistro);
+        group.add(rbtnIdMedico);
+        
+        rbtnID.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnNombre.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnApellido.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnTelefono.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnFechaNac.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnSexo.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnEstadoCivil.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnFechaRegistro.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        rbtnIdMedico.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            habilitarCampos();
+            }  
+        });
+        
+    }
+    
+    
+    
+    private void buscarPacientes(){
         
         
+        try{
+            String sqlBase = "SELECT id_paciente, nombre, apellido, telefono, fecha_nacimiento, sexo, estado_civil, fecha_registro, id_medico FROM pacientes"; 
+            String where = ""; 
+            String valor = ""; 
+            
+            if(rbtnID.isSelected()){
+                valor = campoIDPacienteConsultas.getText().trim();
+                if(!valor.isEmpty()){
+                    where = " WHERE CAST(id_paciente AS TEXT) LIKE '%" + valor + "%'";
+                    
+            }
+        }else if(rbtnNombre.isSelected()){
+            valor = campoNombrePacientesConsultas.getText().trim(); 
+            if(!valor.isEmpty()){
+                where = " WHERE nombre ILIKE '%" + valor + "%'"; 
+                
+            }
+        }else if(rbtnApellido.isSelected()){
+            valor = campoApellidoPacientesConsultas.getText().trim(); 
+            if(!valor.isEmpty()){
+                where = " WHERE apellido ILIKE '%" + valor + "%'"; 
+            }
+        }else if(rbtnTelefono.isSelected()){
+            valor = campoTelefonoPacientesConsultas.getText().trim(); 
+            if(!valor.isEmpty()){
+                where = " WHERE TRIM(telefono) LIKE '%" + valor + "%'"; 
+            }
+        }else if(rbtnFechaNac.isSelected()){
+            String dia = comboDiaNacConsultas.getSelectedItem().toString(); 
+            String mes = comboMesNacConsultas.getSelectedItem().toString(); 
+            String anio = comboAnoNacConsultas.getSelectedItem().toString(); 
+            
+            if(!dia.equals("Día") && !mes.equals("Mes") && !anio.equals("Año")){
+                String fecha = anio + "-" + mes + "-" + dia; 
+                where = " WHERE fecha_nacimiento = '" + fecha + "'";
+            }
+        }else if(rbtnSexo.isSelected()){
+            valor = comboSexoConsultas.getSelectedItem().toString().trim(); 
+            if(!valor.equals("Seleccionar...")){
+                where = " WHERE sexo ILIKE '%" + valor + "%'"; 
+            }
+        }else if(rbtnEstadoCivil.isSelected()){
+            valor = comboCivilConsultas.getSelectedItem().toString().trim();
+            if(!valor.isEmpty()){
+                where = " WHERE fecha_registro LIKE '%" + valor + "%'"; 
+            }
+        }else if(rbtnFechaRegistro.isSelected()){
+            String dia = comboDiaRegistroConsultas.getSelectedItem().toString(); 
+            String mes = comboMesRegistroConsultas.getSelectedItem().toString(); 
+            String anio = comboAnoRegistroConsultas.getSelectedItem().toString();
+            if(!dia.equals("Día") && !mes.equals("Mes") && !anio.equals("Año")){
+                String fecha = anio + "-" + mes + "-" + dia; 
+                where = " WHERE fecha_registro = '" + fecha + "'"; 
+            }
+        }else if(rbtnIdMedico.isSelected()){
+            
+            valor = campoIdMedicoConsultas.getText().trim(); 
+            if(!valor.isEmpty()){
+                where = " WHERE CAST(id_medico AS TEXT) LIKE '%" + valor + "%'";
+            }
+        }
+            
+        String sqlFinal = sqlBase + where;
+        modelo = new ResultSetTableModel(driver, url, sqlFinal); 
+        tablaConsultasPacientes.setModel(modelo);
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        
+    }
+    
+    
+    private void habilitarCampos(){
+        
+        campoIDPacienteConsultas.setEnabled(false); 
+        campoNombrePacientesConsultas.setEnabled(false);
+        campoApellidoPacientesConsultas.setEnabled(false); 
+        campoTelefonoPacientesConsultas.setEnabled(false); 
+        comboDiaNacConsultas.setEnabled(false);
+        comboMesNacConsultas.setEnabled(false); 
+        comboAnoNacConsultas.setEnabled(false); 
+        comboSexoConsultas.setEnabled(false); 
+        comboCivilConsultas.setEnabled(false); 
+        comboDiaRegistroConsultas.setEnabled(false); 
+        comboMesRegistroConsultas.setEnabled(false); 
+        comboAnoRegistroConsultas.setEnabled(false); 
+        campoIdMedicoConsultas.setEnabled(false);
+        
+        
+        if(rbtnID.isSelected()){
+            campoIDPacienteConsultas.setEnabled(true); 
+        }else if(rbtnNombre.isSelected()){
+            campoNombrePacientesConsultas.setEnabled(true); 
+        }else if(rbtnApellido.isSelected()){
+            campoApellidoPacientesConsultas.setEnabled(true);
+        }else if(rbtnTelefono.isSelected()){
+            campoTelefonoPacientesConsultas.setEnabled(true);
+        }else if(rbtnFechaNac.isSelected()){
+            comboDiaNacConsultas.setEnabled(true);
+            comboMesNacConsultas.setEnabled(true);
+            comboAnoNacConsultas.setEnabled(true);
+        }else if(rbtnSexo.isSelected()){
+            comboSexoConsultas.setEnabled(true); 
+        }else if(rbtnEstadoCivil.isSelected()){
+            comboCivilConsultas.setEnabled(true);
+        }else if(rbtnFechaRegistro.isSelected()){
+            comboDiaRegistroConsultas.setEnabled(true); 
+            comboMesRegistroConsultas.setEnabled(true);
+            comboAnoRegistroConsultas.setEnabled(true);
+        }else if(rbtnIdMedico.isSelected()){
+            campoIdMedicoConsultas.setEnabled(true); 
+        }
+    }
+    
+    private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes){
+        try {
+            String sql = "SELECT * FROM pacientes"; 
+            modelo = new ResultSetTableModel(driver, url, sql);
+            tablaPacientes.setModel(modelo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void filtrarPacientes(String campo, String valor, javax.swing.JTable tablaPacientes){
+        try {
+            String sql = "SELECT * FROM pacientes WHERE " + campo + " ILIKE '%" + valor + "%'"; 
+            modelo = new ResultSetTableModel(driver, url, sql); 
+            tablaPacientes.setModel(modelo);
+            
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    
+    private void agregarListenerDeBusqueda(){
+         
+        campoIDPacienteConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarPacientes();
+            }
+        });
+
+         campoNombrePacientesConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarPacientes();
+            }
+        });
+
+        campoApellidoPacientesConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarPacientes();
+            }
+        });
+
+         campoTelefonoPacientesConsultas.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e) {
+                buscarPacientes();
+            }
+        });
+        
+        comboDiaNacConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+
+        comboMesNacConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+
+        comboAnoNacConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+
+        comboSexoConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+        
+        comboCivilConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+
+        comboDiaRegistroConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+        
+        comboMesRegistroConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        comboAnoRegistroConsultas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarPacientes();
+            }
+        });
+    }
+    
+    private void restablecerCampos() {
+        try {
+
+            campoIDPacienteConsultas.setText("");
+            campoNombrePacientesConsultas.setText("");
+            campoApellidoPacientesConsultas.setText("");
+            campoTelefonoPacientesConsultas.setText("");
+            comboDiaNacConsultas.setSelectedIndex(0);
+            comboMesNacConsultas.setSelectedIndex(0);
+            comboAnoNacConsultas.setSelectedIndex(0);
+            comboSexoConsultas.setSelectedIndex(0);
+            comboCivilConsultas.setSelectedIndex(0);
+            comboDiaRegistroConsultas.setSelectedIndex(0);
+            comboMesRegistroConsultas.setSelectedIndex(0);
+            comboAnoRegistroConsultas.setSelectedIndex(0);
+            campoIdMedicoConsultas.setText(""); 
+
+            if (group != null) {
+                group.clearSelection();
+            }
+            campoIDPacienteConsultas.setEnabled(false);
+            campoNombrePacientesConsultas.setEnabled(false);
+            campoApellidoPacientesConsultas.setEnabled(false);
+            campoTelefonoPacientesConsultas.setEnabled(false);
+            comboDiaNacConsultas.setEnabled(false);
+            comboMesNacConsultas.setEnabled(false);
+            comboAnoNacConsultas.setEnabled(false);
+            comboSexoConsultas.setEnabled(false);
+            comboCivilConsultas.setEnabled(false);
+            comboDiaRegistroConsultas.setEnabled(false);
+            comboMesRegistroConsultas.setEnabled(false);
+            comboAnoRegistroConsultas.setEnabled(false);
+            campoIdMedicoConsultas.setEnabled(false); 
+
+            cargarTodosLosPacientes(tablaConsultasPacientes);
+
+        } catch (Exception ex) {
+        ex.printStackTrace();
+        }
+    }
+    
+    public void refrescarTabla(){
+        cargarTodosLosPacientes(tablaConsultasPacientes);
     }
 
     /**
@@ -63,15 +409,17 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         campoIdMedicoConsultas = new javax.swing.JTextField();
         btnRestablecerPacientesConsultas = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        rbtnID = new javax.swing.JRadioButton();
+        rbtnNombre = new javax.swing.JRadioButton();
+        rbtnApellido = new javax.swing.JRadioButton();
+        rbtnTelefono = new javax.swing.JRadioButton();
+        rbtnFechaNac = new javax.swing.JRadioButton();
+        rbtnSexo = new javax.swing.JRadioButton();
+        rbtnEstadoCivil = new javax.swing.JRadioButton();
+        rbtnFechaRegistro = new javax.swing.JRadioButton();
+        rbtnIdMedico = new javax.swing.JRadioButton();
+        jScrollMedicos = new javax.swing.JScrollPane();
+        tablaConsultasPacientes = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
@@ -130,15 +478,20 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(90, 130, 160, 20);
 
-        comboDiaRegistroConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        comboDiaRegistroConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Día", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        comboDiaRegistroConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboDiaRegistroConsultasActionPerformed(evt);
+            }
+        });
         getContentPane().add(comboDiaRegistroConsultas);
         comboDiaRegistroConsultas.setBounds(210, 220, 72, 23);
 
-        comboMesRegistroConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        comboMesRegistroConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         getContentPane().add(comboMesRegistroConsultas);
         comboMesRegistroConsultas.setBounds(300, 220, 72, 23);
 
-        comboAnoRegistroConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        comboAnoRegistroConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
         getContentPane().add(comboAnoRegistroConsultas);
         comboAnoRegistroConsultas.setBounds(390, 220, 130, 23);
 
@@ -165,15 +518,15 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8);
         jLabel8.setBounds(90, 220, 120, 20);
 
-        comboDiaNacConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
+        comboDiaNacConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Día", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" }));
         getContentPane().add(comboDiaNacConsultas);
         comboDiaNacConsultas.setBounds(240, 130, 72, 23);
 
-        comboMesNacConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        comboMesNacConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mes", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         getContentPane().add(comboMesNacConsultas);
         comboMesNacConsultas.setBounds(330, 130, 72, 23);
 
-        comboAnoNacConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
+        comboAnoNacConsultas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Año", "1930", "1931", "1932", "1933", "1934", "1935", "1936", "1937", "1938", "1939", "1940", "1941", "1942", "1943", "1944", "1945", "1946", "1947", "1948", "1949", "1950", "1951", "1952", "1953", "1954", "1955", "1956", "1957", "1958", "1959", "1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025" }));
         getContentPane().add(comboAnoNacConsultas);
         comboAnoNacConsultas.setBounds(420, 130, 130, 23);
 
@@ -185,26 +538,121 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         campoIdMedicoConsultas.setBounds(260, 250, 290, 23);
 
         btnRestablecerPacientesConsultas.setText("Restablecer");
+        btnRestablecerPacientesConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestablecerPacientesConsultasActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRestablecerPacientesConsultas);
-        btnRestablecerPacientesConsultas.setBounds(580, 40, 100, 23);
-        getContentPane().add(jRadioButton1);
-        jRadioButton1.setBounds(40, 10, 30, 21);
-        getContentPane().add(jRadioButton2);
-        jRadioButton2.setBounds(40, 40, 30, 21);
-        getContentPane().add(jRadioButton3);
-        jRadioButton3.setBounds(40, 70, 30, 21);
-        getContentPane().add(jRadioButton4);
-        jRadioButton4.setBounds(40, 100, 30, 21);
-        getContentPane().add(jRadioButton5);
-        jRadioButton5.setBounds(40, 130, 30, 21);
-        getContentPane().add(jRadioButton6);
-        jRadioButton6.setBounds(40, 160, 30, 21);
-        getContentPane().add(jRadioButton7);
-        jRadioButton7.setBounds(40, 190, 30, 21);
-        getContentPane().add(jRadioButton8);
-        jRadioButton8.setBounds(40, 220, 30, 21);
-        getContentPane().add(jRadioButton9);
-        jRadioButton9.setBounds(40, 250, 30, 21);
+        btnRestablecerPacientesConsultas.setBounds(570, 40, 100, 23);
+
+        rbtnID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnIDActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnID);
+        rbtnID.setBounds(40, 10, 30, 21);
+
+        rbtnNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnNombre);
+        rbtnNombre.setBounds(40, 40, 30, 21);
+
+        rbtnApellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnApellidoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnApellido);
+        rbtnApellido.setBounds(40, 70, 30, 21);
+
+        rbtnTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnTelefonoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnTelefono);
+        rbtnTelefono.setBounds(40, 100, 30, 21);
+
+        rbtnFechaNac.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnFechaNacActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnFechaNac);
+        rbtnFechaNac.setBounds(40, 130, 30, 21);
+
+        rbtnSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnSexoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnSexo);
+        rbtnSexo.setBounds(40, 160, 30, 21);
+
+        rbtnEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnEstadoCivilActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnEstadoCivil);
+        rbtnEstadoCivil.setBounds(40, 190, 30, 21);
+
+        rbtnFechaRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnFechaRegistroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnFechaRegistro);
+        rbtnFechaRegistro.setBounds(40, 220, 30, 21);
+
+        rbtnIdMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnIdMedicoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(rbtnIdMedico);
+        rbtnIdMedico.setBounds(40, 250, 30, 21);
+
+        jScrollMedicos.setBackground(new java.awt.Color(51, 0, 0));
+        jScrollMedicos.setBorder(null);
+        jScrollMedicos.setForeground(new java.awt.Color(51, 51, 51));
+
+        tablaConsultasPacientes.setBackground(new java.awt.Color(100, 0, 0));
+        tablaConsultasPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        tablaConsultasPacientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Paciente", "Nombre", "Apellido", "Teléfono", "Fecha de Nacimiento", "Sexo", "Estado Civil", "Fecha de Registro", "Médico de Cabecera"
+            }
+        ));
+        jScrollMedicos.setViewportView(tablaConsultasPacientes);
+
+        getContentPane().add(jScrollMedicos);
+        jScrollMedicos.setBounds(0, 310, 680, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -220,6 +668,60 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
     private void campoTelefonoPacientesConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefonoPacientesConsultasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoTelefonoPacientesConsultasActionPerformed
+
+    private void rbtnApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnApellidoActionPerformed
+        campoSeleccionado = "apellido"; 
+    }//GEN-LAST:event_rbtnApellidoActionPerformed
+
+    private void comboDiaRegistroConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDiaRegistroConsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboDiaRegistroConsultasActionPerformed
+
+    private void btnRestablecerPacientesConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerPacientesConsultasActionPerformed
+        // TODO add your handling code here:
+        
+        restablecerCampos();
+    }//GEN-LAST:event_btnRestablecerPacientesConsultasActionPerformed
+
+    private void rbtnIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnIDActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "id_paciente";
+    }//GEN-LAST:event_rbtnIDActionPerformed
+
+    private void rbtnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNombreActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "nombre"; 
+    }//GEN-LAST:event_rbtnNombreActionPerformed
+
+    private void rbtnTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTelefonoActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "telefono"; 
+    }//GEN-LAST:event_rbtnTelefonoActionPerformed
+
+    private void rbtnFechaNacActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFechaNacActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "fecha_nacimiento";
+    }//GEN-LAST:event_rbtnFechaNacActionPerformed
+
+    private void rbtnSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSexoActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "sexo";
+    }//GEN-LAST:event_rbtnSexoActionPerformed
+
+    private void rbtnEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEstadoCivilActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "estado_civil"; 
+    }//GEN-LAST:event_rbtnEstadoCivilActionPerformed
+
+    private void rbtnFechaRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFechaRegistroActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "fecha_registro";
+    }//GEN-LAST:event_rbtnFechaRegistroActionPerformed
+
+    private void rbtnIdMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnIdMedicoActionPerformed
+        // TODO add your handling code here:
+        campoSeleccionado = "id_medico";
+    }//GEN-LAST:event_rbtnIdMedicoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -246,15 +748,17 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JRadioButton rbtnApellido;
+    private javax.swing.JRadioButton rbtnEstadoCivil;
+    private javax.swing.JRadioButton rbtnFechaNac;
+    private javax.swing.JRadioButton rbtnFechaRegistro;
+    private javax.swing.JRadioButton rbtnID;
+    private javax.swing.JRadioButton rbtnIdMedico;
+    private javax.swing.JRadioButton rbtnNombre;
+    private javax.swing.JRadioButton rbtnSexo;
+    private javax.swing.JRadioButton rbtnTelefono;
+    private javax.swing.JTable tablaConsultasPacientes;
     // End of variables declaration//GEN-END:variables
 
     

@@ -200,7 +200,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         boolean eliminado = MedicoDAO.getInstancia().eliminarMedico(id); 
         
         if(eliminado){
-            JOptionPane.showMessageDialog(this, "Médico se eliminó exitosamente.");
+            JOptionPane.showMessageDialog(this, "Médico se eliminó exitosamente junto a todos sus pacientes (CASCADE).");
         }else{
             JOptionPane.showMessageDialog(this, "No se pudo eliminar al doc. Favor de Verificar el ID!");
         }

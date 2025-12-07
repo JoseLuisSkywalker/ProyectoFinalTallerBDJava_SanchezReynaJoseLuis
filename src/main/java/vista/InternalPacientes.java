@@ -88,8 +88,6 @@ private void prepararBoton(JButton boton) {
         btnAltasPaciente = new javax.swing.JButton();
         btnBajasPacientes = new javax.swing.JButton();
         btnConsultasPacientes = new javax.swing.JButton();
-        jScrollMedicos = new javax.swing.JScrollPane();
-        tablaPacientes = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -155,42 +153,6 @@ private void prepararBoton(JButton boton) {
         getContentPane().add(btnConsultasPacientes);
         btnConsultasPacientes.setBounds(340, 40, 280, 100);
 
-        jScrollMedicos.setBackground(new java.awt.Color(140, 59, 59));
-        jScrollMedicos.setBorder(null);
-        jScrollMedicos.setForeground(new java.awt.Color(255, 255, 255));
-
-        tablaPacientes.setBackground(new java.awt.Color(100, 0, 0));
-        tablaPacientes.setForeground(new java.awt.Color(255, 255, 255));
-        tablaPacientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Médico", "Nombre", "Apellido", "Departamento", "Dirección", "Teléfono"
-            }
-        ));
-        jScrollMedicos.setViewportView(tablaPacientes);
-
-        getContentPane().add(jScrollMedicos);
-        jScrollMedicos.setBounds(30, 320, 610, 310);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -219,6 +181,7 @@ private void prepararBoton(JButton boton) {
         hacerClickOscuro(btnConsultasPacientes);
         IFConsultasPacientes.setVisible(true); 
         IFConsultasPacientes.toFront(); 
+        IFConsultasPacientes.refrescarTabla();
     }//GEN-LAST:event_btnConsultasPacientesActionPerformed
 
 
@@ -227,7 +190,5 @@ private void prepararBoton(JButton boton) {
     private javax.swing.JButton btnBajasPacientes;
     private javax.swing.JButton btnCambiosPacientes;
     private javax.swing.JButton btnConsultasPacientes;
-    private javax.swing.JScrollPane jScrollMedicos;
-    private javax.swing.JTable tablaPacientes;
     // End of variables declaration//GEN-END:variables
 }

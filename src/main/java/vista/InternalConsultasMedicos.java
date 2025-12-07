@@ -124,7 +124,6 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         campoDireccionMedicoConsultas.setEnabled(false);
         comboMedicoDepartamentoConsultas.setEnabled(false);
 
-    // Ahora se habilita SOLO el que corresponde
         if (rbtnID.isSelected()){
             campoIdMedicoConsultas.setEnabled(true);
         } else if (rbtnNombre.isSelected()){
@@ -140,7 +139,7 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
         }
     
     }
-    
+    //
     private void buscarMedicos(){
         try{
             String sqlBase = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
@@ -178,7 +177,7 @@ public class InternalConsultasMedicos extends javax.swing.JInternalFrame {
             }else if(rbtnTelefono.isSelected()){
                 valor = campoTelefonoMedicoConsultas.getText().trim(); 
                 if(!valor.isEmpty()){
-                    where = "WHERE telefono LIKE '%" + valor + "%'"; 
+                    where = " WHERE CAST(telefono AS TEXT) LIKE '%" + campoTelefonoMedicoConsultas.getText().trim() + "%'";
                 }
             }
             
