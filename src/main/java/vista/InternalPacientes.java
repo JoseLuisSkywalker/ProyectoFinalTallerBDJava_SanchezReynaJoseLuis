@@ -88,6 +88,7 @@ private void prepararBoton(JButton boton) {
         btnAltasPaciente = new javax.swing.JButton();
         btnBajasPacientes = new javax.swing.JButton();
         btnConsultasPacientes = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -112,7 +113,7 @@ private void prepararBoton(JButton boton) {
             }
         });
         getContentPane().add(btnCambiosPacientes);
-        btnCambiosPacientes.setBounds(50, 160, 270, 100);
+        btnCambiosPacientes.setBounds(50, 310, 270, 100);
 
         btnAltasPaciente.setBackground(new java.awt.Color(100, 0, 0));
         btnAltasPaciente.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -125,7 +126,7 @@ private void prepararBoton(JButton boton) {
             }
         });
         getContentPane().add(btnAltasPaciente);
-        btnAltasPaciente.setBounds(50, 40, 270, 100);
+        btnAltasPaciente.setBounds(50, 190, 270, 100);
 
         btnBajasPacientes.setBackground(new java.awt.Color(100, 0, 0));
         btnBajasPacientes.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -138,7 +139,7 @@ private void prepararBoton(JButton boton) {
             }
         });
         getContentPane().add(btnBajasPacientes);
-        btnBajasPacientes.setBounds(340, 160, 280, 100);
+        btnBajasPacientes.setBounds(340, 310, 280, 100);
 
         btnConsultasPacientes.setBackground(new java.awt.Color(100, 0, 0));
         btnConsultasPacientes.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
@@ -151,7 +152,13 @@ private void prepararBoton(JButton boton) {
             }
         });
         getContentPane().add(btnConsultasPacientes);
-        btnConsultasPacientes.setBounds(340, 40, 280, 100);
+        btnConsultasPacientes.setBounds(340, 190, 280, 100);
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("OPCIONES PARA PACIENTES: ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(160, 50, 360, 80);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,5 +199,6 @@ private void prepararBoton(JButton boton) {
     private javax.swing.JButton btnBajasPacientes;
     private javax.swing.JButton btnCambiosPacientes;
     private javax.swing.JButton btnConsultasPacientes;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
