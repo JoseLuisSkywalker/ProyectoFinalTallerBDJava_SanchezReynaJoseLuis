@@ -35,18 +35,24 @@ public class PacienteDAO {
 
     public boolean existePaciente(int idPaciente){
         String sql = "SELECT id_paciente FROM pacientes WHERE id_paciente = ?";
-        
+        ResultSet rs = null; 
         try{
-            ResultSet rs = conexionBD.ejecutarConsultaSQL(sql, idPaciente);
+            rs = conexionBD.ejecutarConsultaSQL(sql, idPaciente);
             return rs != null && rs.next(); 
         }catch(SQLException e){
             e.printStackTrace();
             return false;
+        } finally {
+            try {
+                if(rs != null) rs.close();
+            }catch(SQLException e){
+                
+            }
         }
     }
  
     //==================== ALTAS DE PACIENTES ======================================= 
-    public boolean agregarPaciente(Paciente paciente){
+    public boolean agregarPaciente(Paciente paciente) throws SQLException{
         if(paciente == null){
             return false;
         }
@@ -54,7 +60,9 @@ public class PacienteDAO {
         conexionBD.abrirConexion();
         
         try{
+            conexionBD.getConexion().setAutoCommit(false);  //parte de la transacción
             if(existePaciente(paciente.getIdPaciente())){
+                conexionBD.getConexion().rollback(); // 1 rollback de la transacción
                 return false;
             }
             
@@ -64,11 +72,45 @@ public class PacienteDAO {
             boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, paciente.getIdPaciente(), paciente.getNombre(), paciente.getApellido(), paciente.getTelefono(),
             paciente.getFechaNacimiento(), paciente.getSexo(), paciente.getEstadoCivil(), paciente.getFechaRegistro(), paciente.getIdMedico());
                    
-            return resultado;
+            if(!resultado){
+                conexionBD.getConexion().rollback(); // otro rollback de la transaccion
+                return false; 
+            }
             
-        }finally{
+            conexionBD.getConexion().commit(); //commit de la transaccion para el insert 
+            return true; 
+            
+        } catch(Exception ex){
+            try { conexionBD.getConexion().rollback(); } catch (Exception e){}
+            return false;
+        } finally {
+            try { conexionBD.getConexion().setAutoCommit(true); } catch (Exception e){} // autocommits a la normalidad
             conexionBD.cerrarConexion();
         }
+    }
+    
+    
+    public int obtenerTotalPacientes(){
+        conexionBD.abrirConexion(); 
+        ResultSet rs = null;
+        try{
+            String sql = "SELECT total_pacientes FROM estadisticas WHERE id = 1";
+            rs = conexionBD.ejecutarConsultaSQL(sql);
+            
+            if(rs != null && rs.next()){
+            return rs.getInt("total_pacientes"); 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                
+            } catch (SQLException e){}
+            conexionBD.cerrarConexion();
+        }
+        return 0; 
     }
     //--------------------------- fin de altas ------------------------- 
     

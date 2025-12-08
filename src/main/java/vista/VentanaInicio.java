@@ -30,10 +30,13 @@ public class VentanaInicio extends javax.swing.JFrame {
     InternalBajasPacientes IFBajasPacientes = new InternalBajasPacientes();
     InternalCambiosPacientes IFCambiosPacientes = new InternalCambiosPacientes();
     InternalConsultasPacientes IFConsultasPacientes = new InternalConsultasPacientes();
+    InternalVistas1 IFVistas1 = new InternalVistas1(); 
+    
     
     
     InternalMedicos IFMedicos = new InternalMedicos( IFAltasMedicos, IFBajasMedicos, IFConsultasMedicos, IFCambiosMedicos); 
     InternalPacientes IFPacientes = new InternalPacientes(IFAltasPacientes, IFBajasPacientes, IFCambiosPacientes, IFConsultasPacientes); 
+    InternalVistas IFVistas = new InternalVistas(IFVistas1); 
     
     public VentanaInicio() {
         initComponents();
@@ -45,8 +48,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         //componentes necesarios
         prepararBoton(btnMedicos);
         prepararBoton(btnPacientes);
-        prepararBoton(btnGenerarGrafica);
-        prepararBoton(btnGenerarPDF);
+        prepararBoton(btnGraficaReporte);
+        prepararBoton(btnVistas);
         
         //---- elementos JDesktopPane --------
         jDesktopPane1.add(IFMedicos);
@@ -89,6 +92,17 @@ public class VentanaInicio extends javax.swing.JFrame {
         jDesktopPane1.add(IFConsultasPacientes); 
         IFConsultasPacientes.setVisible(false); 
         IFConsultasPacientes.setLocation(0, 0);
+       
+        jDesktopPane1.add(IFVistas); 
+        IFVistas.setVisible(false); 
+        IFVistas.setLocation(100, 0);
+        
+        jDesktopPane1.add(IFVistas1); 
+        IFVistas1.setVisible(false);
+        IFVistas1.setLocation(0, 0);
+        
+        
+        
         
         
         
@@ -115,8 +129,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnMedicos = new javax.swing.JButton();
         btnPacientes = new javax.swing.JButton();
-        btnGenerarPDF = new javax.swing.JButton();
-        btnGenerarGrafica = new javax.swing.JButton();
+        btnVistas = new javax.swing.JButton();
+        btnGraficaReporte = new javax.swing.JButton();
         panelDerecho = new javax.swing.JPanel();
         logoGrande = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
@@ -142,7 +156,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         btnMedicos.setBackground(new java.awt.Color(90, 0, 0));
         btnMedicos.setForeground(new java.awt.Color(255, 255, 255));
-        btnMedicos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/medicoBtn.png"))); // NOI18N
+        btnMedicos.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/medicoBtn.png")); // NOI18N
         btnMedicos.setText("Médicos");
         btnMedicos.setActionCommand("Médicos ");
         btnMedicos.setBorder(null);
@@ -167,31 +181,31 @@ public class VentanaInicio extends javax.swing.JFrame {
         panelIzquierdo.add(btnPacientes);
         btnPacientes.setBounds(0, 350, 200, 80);
 
-        btnGenerarPDF.setBackground(new java.awt.Color(90, 0, 0));
-        btnGenerarPDF.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerarPDF.setText("Generar Reporte");
-        btnGenerarPDF.setActionCommand("GenerarPDF");
-        btnGenerarPDF.setBorder(null);
-        btnGenerarPDF.addActionListener(new java.awt.event.ActionListener() {
+        btnVistas.setBackground(new java.awt.Color(90, 0, 0));
+        btnVistas.setForeground(new java.awt.Color(255, 255, 255));
+        btnVistas.setText("Información");
+        btnVistas.setActionCommand("GenerarPDF");
+        btnVistas.setBorder(null);
+        btnVistas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarPDFActionPerformed(evt);
+                btnVistasActionPerformed(evt);
             }
         });
-        panelIzquierdo.add(btnGenerarPDF);
-        btnGenerarPDF.setBounds(0, 460, 200, 80);
+        panelIzquierdo.add(btnVistas);
+        btnVistas.setBounds(0, 460, 200, 80);
 
-        btnGenerarGrafica.setBackground(new java.awt.Color(90, 0, 0));
-        btnGenerarGrafica.setForeground(new java.awt.Color(255, 255, 255));
-        btnGenerarGrafica.setText("Generar Gráfica");
-        btnGenerarGrafica.setActionCommand("GenerarGrafica");
-        btnGenerarGrafica.setBorder(null);
-        btnGenerarGrafica.addActionListener(new java.awt.event.ActionListener() {
+        btnGraficaReporte.setBackground(new java.awt.Color(90, 0, 0));
+        btnGraficaReporte.setForeground(new java.awt.Color(255, 255, 255));
+        btnGraficaReporte.setText("Generar Gráfica / Reporte");
+        btnGraficaReporte.setActionCommand("GenerarGrafica");
+        btnGraficaReporte.setBorder(null);
+        btnGraficaReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGenerarGraficaActionPerformed(evt);
+                btnGraficaReporteActionPerformed(evt);
             }
         });
-        panelIzquierdo.add(btnGenerarGrafica);
-        btnGenerarGrafica.setBounds(0, 570, 200, 80);
+        panelIzquierdo.add(btnGraficaReporte);
+        btnGraficaReporte.setBounds(0, 570, 200, 80);
 
         getContentPane().add(panelIzquierdo);
         panelIzquierdo.setBounds(0, 0, 200, 800);
@@ -208,7 +222,6 @@ public class VentanaInicio extends javax.swing.JFrame {
         jDesktopPane1.setBackground(new java.awt.Color(110, 0, 0));
         jDesktopPane1.setMaximumSize(new java.awt.Dimension(700, 700));
         jDesktopPane1.setMinimumSize(new java.awt.Dimension(700, 700));
-        jDesktopPane1.setPreferredSize(new java.awt.Dimension(700, 700));
         jDesktopPane1.setRequestFocusEnabled(false);
         panelDerecho.add(jDesktopPane1);
         jDesktopPane1.setBounds(50, 50, 700, 700);
@@ -254,21 +267,25 @@ private void prepararBoton(JButton boton) {
     private void btnMedicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedicosActionPerformed
         hacerClickOscuro(btnMedicos);
         IFMedicos.setVisible(true);
+        IFMedicos.toFront();
         
     }//GEN-LAST:event_btnMedicosActionPerformed
 
     private void btnPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPacientesActionPerformed
         hacerClickOscuro(btnPacientes);
         IFPacientes.setVisible(true);
+        IFPacientes.toFront();
     }//GEN-LAST:event_btnPacientesActionPerformed
 
-    private void btnGenerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarPDFActionPerformed
-        hacerClickOscuro(btnGenerarPDF);
-    }//GEN-LAST:event_btnGenerarPDFActionPerformed
+    private void btnVistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVistasActionPerformed
+        hacerClickOscuro(btnVistas);
+        IFVistas.setVisible(true); 
+        IFVistas.toFront();
+    }//GEN-LAST:event_btnVistasActionPerformed
 
-    private void btnGenerarGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarGraficaActionPerformed
-        hacerClickOscuro(btnGenerarGrafica);
-    }//GEN-LAST:event_btnGenerarGraficaActionPerformed
+    private void btnGraficaReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaReporteActionPerformed
+        hacerClickOscuro(btnGraficaReporte);
+    }//GEN-LAST:event_btnGraficaReporteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,10 +313,10 @@ private void prepararBoton(JButton boton) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGenerarGrafica;
-    private javax.swing.JButton btnGenerarPDF;
+    private javax.swing.JButton btnGraficaReporte;
     private javax.swing.JButton btnMedicos;
     private javax.swing.JButton btnPacientes;
+    private javax.swing.JButton btnVistas;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel logoGrande;

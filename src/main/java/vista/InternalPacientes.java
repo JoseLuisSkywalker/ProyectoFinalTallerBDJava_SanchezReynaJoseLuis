@@ -4,6 +4,7 @@
  */
 package vista;
 
+import controlador.PacienteDAO;
 import java.awt.Color;
 import javax.swing.JButton;
 
@@ -37,6 +38,11 @@ public class InternalPacientes extends javax.swing.JInternalFrame {
         prepararBoton(btnBajasPacientes);
         prepararBoton(btnConsultasPacientes);
         prepararBoton(btnCambiosPacientes);
+        
+        PacienteDAO dao = new PacienteDAO(); 
+        int total = dao.obtenerTotalPacientes(); 
+        jLabel2.setText("Hemos tratado un total de " + total + " pacientes en Wellmeadows");
+        
         
         
         
@@ -89,6 +95,7 @@ private void prepararBoton(JButton boton) {
         btnBajasPacientes = new javax.swing.JButton();
         btnConsultasPacientes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
@@ -160,6 +167,10 @@ private void prepararBoton(JButton boton) {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(160, 50, 360, 80);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(60, 450, 0, 0);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -200,5 +211,6 @@ private void prepararBoton(JButton boton) {
     private javax.swing.JButton btnCambiosPacientes;
     private javax.swing.JButton btnConsultasPacientes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.PacienteDAO;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Paciente;
 import modelo.ResultSetTableModel;
@@ -300,7 +301,12 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         p.setIdMedico(idMedicoCabecera);
         
         
-        boolean ok = PacienteDAO.getInstancia().agregarPaciente(p); 
+        boolean ok = false; 
+        try {
+            ok = PacienteDAO.getInstancia().agregarPaciente(p);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         
         if(ok){
                 JOptionPane.showMessageDialog(this, "Paciente registrado exitosamente.");
