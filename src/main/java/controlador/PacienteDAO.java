@@ -117,7 +117,7 @@ public class PacienteDAO {
     
     //=================== BAJAS =================================== 
     public boolean eliminarPaciente(int idPaciente){
-        String sql = "DELETE FROM pacientes WHERE id_paciente = ?"; 
+        String sql = "CALL eliminar_paciente_proc(?)"; 
         conexionBD.abrirConexion(); 
         
         try{
