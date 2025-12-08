@@ -4,7 +4,12 @@
  */
 package vista;
 
+import conexion.ConexionBD;
 import controlador.PacienteDAO;
+import java.lang.classfile.Opcode;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Paciente;
@@ -18,6 +23,8 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
     private ResultSetTableModel modelo;
     private String driver = "org.postgresql.Driver";
     private String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
+    
+
     /**
      * Creates new form InternalAltasPacientes
      */
@@ -27,7 +34,14 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         setResizable(false);
         cargarTodosLosPacientes(tablaAltasPacientes);
         
+     
+        lblTotalPacientes.setBounds(30, 270, 630, 17);
         
+        actualizarLabelPacientes();
+        
+        
+        
+      
     }
     
     private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes){
@@ -69,6 +83,14 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
      public void refrescarTabla(){
        cargarTodosLosPacientes(tablaAltasPacientes); 
     }
+     
+    public void actualizarLabelPacientes(){
+        int total = PacienteDAO.getInstancia().obtenerTotalPacientes();
+        lblTotalPacientes.setText("Hemos tratado un total de " + total + " pacientes en Wellmeadows");
+     
+    }
+     
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,6 +127,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         btnRestablecerPacientesAltas = new javax.swing.JButton();
         jScrollMedicos = new javax.swing.JScrollPane();
         tablaAltasPacientes = new javax.swing.JTable();
+        lblTotalPacientes = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 0, 0));
         setClosable(true);
@@ -265,6 +288,10 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollMedicos);
         jScrollMedicos.setBounds(0, 310, 680, 310);
 
+        lblTotalPacientes.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(lblTotalPacientes);
+        lblTotalPacientes.setBounds(30, 270, 630, 0);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -310,11 +337,29 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         
         if(ok){
                 JOptionPane.showMessageDialog(this, "Paciente registrado exitosamente.");
+                
             }else{
                 JOptionPane.showMessageDialog(this, "Paciente no se puedo registrar correctamente: verifique el ID.");
             }
         
         cargarTodosLosPacientes(tablaAltasPacientes);
+        
+        ConexionBD con = new ConexionBD(); 
+        PreparedStatement ps2 = null;
+
+        try {
+            con.abrirConexion(); 
+            String sqlUpdate = "UPDATE estadisticas SET total_pacientes = total_pacientes + 1 WHERE id = 1";
+            ps2 = con.getConexion().prepareStatement(sqlUpdate);
+            ps2.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps2 != null) try { ps2.close(); } catch (Exception ex) {}
+            con.cerrarConexion();
+        }       
+        actualizarLabelPacientes();
         
     }//GEN-LAST:event_btnAgregarPacientesAltasActionPerformed
         
@@ -350,6 +395,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollMedicos;
+    private javax.swing.JLabel lblTotalPacientes;
     private javax.swing.JTable tablaAltasPacientes;
     // End of variables declaration//GEN-END:variables
 

@@ -191,69 +191,44 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
 
     private void btnElminarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElminarMedicoAltasActionPerformed
         // TODO add your handling code here:
-        if (campoIdMedicoBajas.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No se puede eliminar sin un ID.");
-        return;
-        }
-
-        int id = Integer.parseInt(campoIdMedicoBajas.getText().trim());
-
-       
-        Progreso dialogProgreso = new Progreso(null, true); 
-        dialogProgreso.setTitle("Eliminando médico y pacientes asociados...");
-    
-        Thread hilo = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-
-                    for (int i = 0; i <= 100; i += 10) {
-                    dialogProgreso.setProgreso(i);
-                    Thread.sleep(200);
-                    }
-                    boolean eliminado = MedicoDAO.getInstancia().eliminarMedico(id);
-
-                    if (eliminado) {
-                        JOptionPane.showMessageDialog(null, "El medico fue eliminado exitosamente junto con todos sus pacientes (CASCADE).");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo eliminar al médico. Verifique el ID.");
-                    }
-
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-                } finally {
-                    dialogProgreso.finalizar();   
-                }
-            }
-        });
-   
-
-    hilo.start();
-    dialogProgreso.iniciar(); 
-    
-
-    cargarTodosLosMedicos(tablaBajasMedicos);
-    restablecerCampos();
-        
-        
-        /*
         if(campoIdMedicoBajas.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "No se puede eliminar sin un id.");
         }
         
         int id = Integer.parseInt(campoIdMedicoBajas.getText().trim()); 
         
+        Progreso dialogProgreso = new Progreso(null, true);
+	dialogProgreso.setTitle("Procesando...");
+    
+    	Thread t = new Thread(() -> {
+        	try {
+            	for (int i = 0; i <= 100; i += 10) {
+                	dialogProgreso.setProgreso(i);
+                	Thread.sleep(150); // SOLO ANIMACIÓN
+            	}
+       	} catch (Exception e) {
+        	} finally {
+            dialogProgreso.finalizar(); // SE CIERRA SOLO
+        }
+    	});
+
+    	t.start();
+    	dialogProgreso.iniciar();
+        
+        
         boolean eliminado = MedicoDAO.getInstancia().eliminarMedico(id); 
         
-        if(eliminado){
+        if(!eliminado){
             JOptionPane.showMessageDialog(this, "Médico se eliminó exitosamente junto a todos sus pacientes (CASCADE).");
         }else{
             JOptionPane.showMessageDialog(this, "No se pudo eliminar al doc. Favor de Verificar el ID!");
         }
         
         cargarTodosLosMedicos(tablaBajasMedicos);
+        restablecerCampos();
 
-*/
+
+
     }//GEN-LAST:event_btnElminarMedicoAltasActionPerformed
 
     private void btnRestablecerMedicosBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicosBajasActionPerformed

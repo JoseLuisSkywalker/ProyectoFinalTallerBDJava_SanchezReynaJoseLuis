@@ -81,7 +81,7 @@ public class MedicoDAO {
                 return false; 
             }
             
-            String sql = "DELETE FROM medicos_cabecera WHERE id_medico = ?"; 
+            String sql = "CALL eliminar_medico_proc(?)"; 
             boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idMedico); 
             
             return resultado;

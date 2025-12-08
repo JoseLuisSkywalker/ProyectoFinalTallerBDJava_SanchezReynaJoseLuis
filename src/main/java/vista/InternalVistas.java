@@ -86,8 +86,9 @@ private void prepararBoton(JButton boton) {
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Medicos");
+        setTitle("Información");
         setToolTipText("");
+        setBounds(new java.awt.Rectangle(100, 0, 700, 700));
         setMaximumSize(new java.awt.Dimension(700, 700));
         setMinimumSize(new java.awt.Dimension(700, 700));
         setNormalBounds(new java.awt.Rectangle(0, 0, 700, 700));

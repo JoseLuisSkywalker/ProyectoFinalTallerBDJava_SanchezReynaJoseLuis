@@ -95,7 +95,7 @@ public class VentanaInicio extends javax.swing.JFrame {
        
         jDesktopPane1.add(IFVistas); 
         IFVistas.setVisible(false); 
-        IFVistas.setLocation(100, 0);
+        IFVistas.setLocation(0, 0);
         
         jDesktopPane1.add(IFVistas1); 
         IFVistas1.setVisible(false);
