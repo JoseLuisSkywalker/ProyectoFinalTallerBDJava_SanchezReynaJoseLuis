@@ -5,6 +5,7 @@
 package controlador;
 
 import conexion.ConexionBD;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -115,6 +116,41 @@ public class MedicoDAO {
         
         
     }
+    
+    
+    // ESTA ES LA FUNCION QUE HICE PARA QUE EN EL OPTIONPANE CUENTE LO S MEDICOS
+     public int obtenerTotalMedicos() {
+        int total = 0;
+
+        ConexionBD conexionBD = new ConexionBD();
+        Connection conn = conexionBD.abrirConexion();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = conn.prepareStatement("SELECT total_medicos()");
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al obtener total de médicos.");
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                conexionBD.cerrarConexion();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    return total;
+}
     
     
     

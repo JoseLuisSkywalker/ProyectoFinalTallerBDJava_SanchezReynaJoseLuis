@@ -1,6 +1,11 @@
 package vista;
 
+import conexion.ConexionBD;
 import controlador.MedicoDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Medico;
 import modelo.ResultSetTableModel;
@@ -65,6 +70,8 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     public void refrescarTabla(){
         cargarTodosLosMedicos(tablaAltasMedicos); 
     }
+    
+   
     
     
     
@@ -299,7 +306,8 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             
             boolean ok = MedicoDAO.getInstancia().agregarMedico(m); 
             if(ok){
-                JOptionPane.showMessageDialog(this, "Médico registrado exitosamente. RAAHH!!!");
+                JOptionPane.showMessageDialog(this, "Médico registrado exitosamente. "
+                        + "Ahora tenemos un total de " + MedicoDAO.getInstancia().obtenerTotalMedicos() + " medicos en servicio");
                 
                 cargarTodosLosMedicos(tablaAltasMedicos);
                 restablecerCampos();
