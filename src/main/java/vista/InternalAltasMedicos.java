@@ -306,9 +306,12 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             
             boolean ok = MedicoDAO.getInstancia().agregarMedico(m); 
             if(ok){
-                JOptionPane.showMessageDialog(this, "Médico registrado exitosamente. "
+                JOptionPane.showMessageDialog(this, "Médico de registrado exitosamente. "
                         + "Ahora tenemos un total de " + MedicoDAO.getInstancia().obtenerTotalMedicos() + " medicos en servicio");
-                
+                                                        /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                           |||||||||||||||||||||||||||||||
+                                                           AQUI ES DONDE PUSE LA TRANSACCION EN SWING   
+                */                                      
                 cargarTodosLosMedicos(tablaAltasMedicos);
                 restablecerCampos();
             }else{

@@ -60,31 +60,33 @@ public class PacienteDAO {
         conexionBD.abrirConexion();
         
         try{
-            conexionBD.getConexion().setAutoCommit(false);  //parte de la transacción
+            conexionBD.getConexion().setAutoCommit(false);  // TRANSACCION: aqui se apaga el autocommit ************** 
             if(existePaciente(paciente.getIdPaciente())){
-                conexionBD.getConexion().rollback(); // 1 rollback de la transacción
+                conexionBD.getConexion().rollback(); 
                 return false;
             }
             
             String sql = "INSERT INTO pacientes (id_paciente, nombre, apellido, telefono, fecha_nacimiento, sexo, estado_civil, fecha_registro, id_medico) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+           
+        
             
             boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, paciente.getIdPaciente(), paciente.getNombre(), paciente.getApellido(), paciente.getTelefono(),
             paciente.getFechaNacimiento(), paciente.getSexo(), paciente.getEstadoCivil(), paciente.getFechaRegistro(), paciente.getIdMedico());
                    
             if(!resultado){
-                conexionBD.getConexion().rollback(); // otro rollback de la transaccion
+                conexionBD.getConexion().rollback(); 
                 return false; 
             }
-            
-            conexionBD.getConexion().commit(); //commit de la transaccion para el insert 
-            return true; 
+                                                                        // -------------------------------------------------
+            conexionBD.getConexion().commit();                          // TRANSACCION ****:  aqui se hace el commit
+            return true;                                                // y en las condiciones estan los rollback para regresar
             
         } catch(Exception ex){
             try { conexionBD.getConexion().rollback(); } catch (Exception e){}
             return false;
         } finally {
-            try { conexionBD.getConexion().setAutoCommit(true); } catch (Exception e){} // autocommits a la normalidad
+            try { conexionBD.getConexion().setAutoCommit(true); } catch (Exception e){} // TRANSACCION: aqui se prende el autocommit ****** 
             conexionBD.cerrarConexion();
         }
     }
@@ -94,11 +96,11 @@ public class PacienteDAO {
         conexionBD.abrirConexion(); 
         ResultSet rs = null;
         try{
-            String sql = "SELECT total_pacientes FROM estadisticas WHERE id = 1";
-            rs = conexionBD.ejecutarConsultaSQL(sql);
-            
-            if(rs != null && rs.next()){
-            return rs.getInt("total_pacientes"); 
+            String sql = "SELECT total_pacientes FROM estadisticas WHERE id = 1";           //********************
+            rs = conexionBD.ejecutarConsultaSQL(sql);                                       // METODO QUE UTILIZO PARA LA TRANSACCION
+                                                                                            // lo que hace es agarra la consulta de sql
+            if(rs != null && rs.next()){                                                    //de la tabla estadisticas (la hice para esto)
+            return rs.getInt("total_pacientes");                                            // y retorna el numero de sql en un int en java.
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,14 +114,42 @@ public class PacienteDAO {
         }
         return 0; 
     }
+    
+    
+    public int obtenerEdadPaciente(int idPaciente){
+        conexionBD.abrirConexion();
+        ResultSet rs = null;
+        int edad = 0; 
+        try{                                                                //************** metodo para la segunda FUNCION
+            String sql = "SELECT edad_paciente(?) AS edad";                 //obtiene los daos de el nacimiento del paciente en sql
+            rs = conexionBD.ejecutarConsultaSQL(sql, idPaciente);           //y aqui el metodo en java convierte el valor 
+            if(rs != null && rs.next()){                                    //retornado de la funcion a un int de java
+            edad = rs.getInt("edad");                                       //para poder plasmarlo en cuando se agrega un paciente
+                                                                            //en altas.
+                                                                                
+        }
+        } catch(SQLException e){
+            e.printStackTrace();
+        } finally {
+            try { 
+                if(rs != null){
+                    rs.close();
+                }
+            } catch(SQLException e){
+                e.printStackTrace();
+            }
+            conexionBD.cerrarConexion();
+        }
+        return edad;
+    }
     //--------------------------- fin de altas ------------------------- 
     
     
     //=================== BAJAS =================================== 
     public boolean eliminarPaciente(int idPaciente){
-        String sql = "CALL eliminar_paciente_proc(?)"; 
-        conexionBD.abrirConexion(); 
-        
+        String sql = "CALL eliminar_paciente_proc(?)"; //PROCEDIMIENTO 2: en sql el proc tiene el comando DELETE *****************
+        conexionBD.abrirConexion();                    //nomas hacemos el CALL para el procedimento aqui en el DAO
+                                                       //
         try{
             boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idPaciente);
             return resultado; 

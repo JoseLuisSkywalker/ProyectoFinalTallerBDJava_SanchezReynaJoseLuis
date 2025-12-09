@@ -336,7 +336,10 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         }
         
         if(ok){
-                JOptionPane.showMessageDialog(this, "Paciente registrado exitosamente.");
+            //                                                      Aqui es donde plasmo el int edad_paciente del Funcion 2 
+            //                                                       ||||||||||||||||||||||
+            //                                                       vvvvvvvvvvvvvvvvvvvvvv
+                JOptionPane.showMessageDialog(this, "Paciente de " + PacienteDAO.getInstancia().obtenerEdadPaciente(p.getIdPaciente()) + " años de edad registrado exitosamente.");
                 
             }else{
                 JOptionPane.showMessageDialog(this, "Paciente no se puedo registrar correctamente: verifique el ID.");

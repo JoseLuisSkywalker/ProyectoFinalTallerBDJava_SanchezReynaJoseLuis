@@ -82,8 +82,8 @@ public class MedicoDAO {
                 return false; 
             }
             
-            String sql = "CALL eliminar_medico_proc(?)"; 
-            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idMedico); 
+            String sql = "CALL eliminar_medico_proc(?)";                                // PROCEMIENTO 1: el procedimiento en
+            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idMedico);       // sql contiene el DELETE, ya nomas se llama
             
             return resultado;
         }finally{
@@ -126,10 +126,10 @@ public class MedicoDAO {
         Connection conn = conexionBD.abrirConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-
-        try {
-            ps = conn.prepareStatement("SELECT total_medicos()");
-            rs = ps.executeQuery();
+                                                                           //
+        try {                                                              //
+            ps = conn.prepareStatement("SELECT total_medicos()");          //  FUNCION 1: en sql la funcion tiene                                                                        //
+            rs = ps.executeQuery();                                        //   un contador para contar los doctores
 
             if (rs.next()) {
                 total = rs.getInt(1);
