@@ -79,6 +79,14 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
      public void refrescarTabla(){
         cargarTodosLosPacientes(tablaBajasPacientes);
     }
+     
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+            if (!Character.isDigit(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten números!");
+        }
+    }
 
      /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +119,11 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         campoIDPacienteBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoIDPacienteBajasActionPerformed(evt);
+            }
+        });
+        campoIDPacienteBajas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIDPacienteBajasKeyTyped(evt);
             }
         });
         getContentPane().add(campoIDPacienteBajas);
@@ -180,6 +193,11 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
 
     private void btnEliminarPacientesBajasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPacientesBajasActionPerformed
         // TODO add your handling code here:
+        
+        if(campoIDPacienteBajas.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Porfavor ingrese un Id de paciente para eliminar");
+            return; 
+        }
 
         int id = Integer.parseInt(campoIDPacienteBajas.getText().trim());
     
@@ -199,6 +217,12 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         restablecerCampos();
     }//GEN-LAST:event_btnRestablecerPacientesBajasActionPerformed
+
+    private void campoIDPacienteBajasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIDPacienteBajasKeyTyped
+        // TODO add your handling code here:
+        
+        soloNumeros(evt);
+    }//GEN-LAST:event_campoIDPacienteBajasKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

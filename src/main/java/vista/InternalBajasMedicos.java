@@ -85,6 +85,15 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
     public void refrescarTabla(){
         cargarTodosLosMedicos(tablaBajasMedicos);
     }
+    
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+            if (!Character.isDigit(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten números!");
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +130,11 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         campoIdMedicoBajas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoIdMedicoBajasActionPerformed(evt);
+            }
+        });
+        campoIdMedicoBajas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIdMedicoBajasKeyTyped(evt);
             }
         });
         getContentPane().add(campoIdMedicoBajas);
@@ -193,7 +207,10 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(campoIdMedicoBajas.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "No se puede eliminar sin un id.");
+            return; 
         }
+        
+        
         
         int id = Integer.parseInt(campoIdMedicoBajas.getText().trim()); 
         
@@ -204,11 +221,11 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         	try {
             	for (int i = 0; i <= 100; i += 10) {
                 	dialogProgreso.setProgreso(i);
-                	Thread.sleep(150); // SOLO ANIMACIÓN
+                	Thread.sleep(150); 
             	}
        	} catch (Exception e) {
         	} finally {
-            dialogProgreso.finalizar(); // SE CIERRA SOLO
+            dialogProgreso.finalizar();
         }
     	});
 
@@ -218,7 +235,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         
         boolean eliminado = MedicoDAO.getInstancia().eliminarMedico(id); 
         
-        if(!eliminado){
+        if(eliminado){
             JOptionPane.showMessageDialog(this, "Médico se eliminó exitosamente junto a todos sus pacientes (CASCADE).");
         }else{
             JOptionPane.showMessageDialog(this, "No se pudo eliminar al doc. Favor de Verificar el ID!");
@@ -235,6 +252,11 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         restablecerCampos();
     }//GEN-LAST:event_btnRestablecerMedicosBajasActionPerformed
+
+    private void campoIdMedicoBajasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoBajasKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+    }//GEN-LAST:event_campoIdMedicoBajasKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

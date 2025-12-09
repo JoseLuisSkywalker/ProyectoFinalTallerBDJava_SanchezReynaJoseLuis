@@ -98,8 +98,39 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
       
     }
      
-      public void refrescarTabla(){
+    public void refrescarTabla(){
         cargarTodosLosPacientes(tablaCambiosPacientes);
+    }
+      
+      
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+            if (!Character.isDigit(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten números!");
+        }
+    }
+
+    public void soloLetras(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten letras.");
+        }
+    }
+    
+    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+        if (campo.getText().length() >= max) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");
+        }
+    }
+    
+    public void limitarSoloDiez(javax.swing.JTextField campo, java.awt.event.KeyEvent evt) {
+        if (campo.getText().length() >= 10) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "10 digitos para el telefono, no mas, no menos!");
+        }
     }
      
      
@@ -157,6 +188,11 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
                 campoNombrePacientesCambiosActionPerformed(evt);
             }
         });
+        campoNombrePacientesCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNombrePacientesCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoNombrePacientesCambios);
         campoNombrePacientesCambios.setBounds(100, 40, 440, 23);
 
@@ -170,6 +206,11 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
                 campoIDPacienteCambiosActionPerformed(evt);
             }
         });
+        campoIDPacienteCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIDPacienteCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoIDPacienteCambios);
         campoIDPacienteCambios.setBounds(100, 10, 440, 23);
 
@@ -177,6 +218,12 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         jLabel3.setText("Apellido");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 70, 70, 17);
+
+        campoTelefonoPacientesCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoTelefonoPacientesCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoTelefonoPacientesCambios);
         campoTelefonoPacientesCambios.setBounds(100, 100, 440, 23);
 
@@ -184,6 +231,12 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         jLabel4.setText("Telefóno");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(30, 100, 60, 20);
+
+        campoApellidoPacientesCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoApellidoPacientesCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoApellidoPacientesCambios);
         campoApellidoPacientesCambios.setBounds(100, 70, 440, 23);
 
@@ -243,6 +296,12 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         jLabel9.setText("ID del Médico de Cabecera");
         getContentPane().add(jLabel9);
         jLabel9.setBounds(30, 240, 180, 17);
+
+        campoIdMedicoPacienteCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIdMedicoPacienteCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoIdMedicoPacienteCambios);
         campoIdMedicoPacienteCambios.setBounds(210, 240, 330, 23);
 
@@ -340,7 +399,8 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         
         if(ok){
             JOptionPane.showMessageDialog(this, "El paciente se modificó con éxito");
-            
+            restablecerCampos();
+            cargarTodosLosPacientes(tablaCambiosPacientes);
         }else{
             JOptionPane.showMessageDialog(this, "No se puedo modificar el paciente, favor de verificar que el ID se el correcto");
         }
@@ -353,6 +413,34 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
         restablecerCampos();
         cargarTodosLosPacientes(tablaCambiosPacientes);
     }//GEN-LAST:event_btnRestablecerPacientesCambiosActionPerformed
+
+    private void campoIDPacienteCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIDPacienteCambiosKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+    }//GEN-LAST:event_campoIDPacienteCambiosKeyTyped
+
+    private void campoNombrePacientesCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombrePacientesCambiosKeyTyped
+        // TODO add your handling code here:
+        soloLetras(evt);
+        limitarCaracteres(evt, campoNombrePacientesCambios, 45);
+    }//GEN-LAST:event_campoNombrePacientesCambiosKeyTyped
+
+    private void campoApellidoPacientesCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoPacientesCambiosKeyTyped
+        // TODO add your handling code here:
+        soloLetras(evt);
+        limitarCaracteres(evt, campoApellidoPacientesCambios, 45);
+    }//GEN-LAST:event_campoApellidoPacientesCambiosKeyTyped
+
+    private void campoTelefonoPacientesCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoTelefonoPacientesCambiosKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+        limitarSoloDiez(campoTelefonoPacientesCambios, evt);
+    }//GEN-LAST:event_campoTelefonoPacientesCambiosKeyTyped
+
+    private void campoIdMedicoPacienteCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoPacienteCambiosKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+    }//GEN-LAST:event_campoIdMedicoPacienteCambiosKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,17 +5,21 @@
 package vista;
 
 import java.awt.Color;
-import java.sql.DriverManager;
 import javax.swing.JButton;
-import javax.swing.JTable;
 
 import javax.swing.Timer;
-import modelo.ResultSetTableModel;
+
 
 /**
  *
  * @author josesanchez
  */
+//[[[[[[[[[[[[[[[[[[[[[[[[[[[ SOLID ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+// CUMPLE CON SINGLE RESPONSABILITY PORQUE ESTA CLASE SOLO TIENE UNA RESPONSABILIDAD.
+// CIMPLE CON DEPENDENCY INVERSION porque no depende de implementaciones, depende solo de abstracciones
+// CUMPLE CON INTERFACE SEGREGATION porque su unico proposito es los botones y no se ve forzado ser
+//dependiente de una interfaz, ni interfazes tiene. 
+
 public class InternalVistas extends javax.swing.JInternalFrame {
     private InternalVistas1 IFVistas1; 
     private InternalTabla2 IFVistas2; 
@@ -31,7 +35,6 @@ public class InternalVistas extends javax.swing.JInternalFrame {
         initComponents();
         setSize(500, 700);        
         setResizable(false);
-        setBounds(100, 0, 500, 500);
 
         prepararBoton(btnVista1);
         prepararBoton(btnVista3);

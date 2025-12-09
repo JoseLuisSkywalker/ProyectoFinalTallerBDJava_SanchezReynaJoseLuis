@@ -91,7 +91,39 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         cargarTodosLosMedicos(tablaCambiosMedicos);
     }
     
+    
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+            if (!Character.isDigit(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten números!");
+        }
+    }
 
+    public void soloLetras(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten letras.");
+        }
+    }
+    
+    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+        if (campo.getText().length() >= max) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");
+        }
+    }
+    
+    public void limitarSoloDiez(javax.swing.JTextField campo, java.awt.event.KeyEvent evt) {
+        if (campo.getText().length() >= 10) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "10 digitos para el telefono, no mas, no menos!");
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,6 +153,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setTitle("Modificar Medicos");
         setBounds(new java.awt.Rectangle(0, 0, 700, 350));
         setMaximumSize(new java.awt.Dimension(700, 350));
         setMinimumSize(new java.awt.Dimension(700, 350));
@@ -138,6 +171,11 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
                 campoIdMedicoCambiosActionPerformed(evt);
             }
         });
+        campoIdMedicoCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIdMedicoCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoIdMedicoCambios);
         campoIdMedicoCambios.setBounds(150, 20, 360, 20);
 
@@ -152,6 +190,11 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
                 campoNombreMedicoCambiosActionPerformed(evt);
             }
         });
+        campoNombreMedicoCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNombreMedicoCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoNombreMedicoCambios);
         campoNombreMedicoCambios.setBounds(150, 60, 360, 20);
 
@@ -164,6 +207,11 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         campoApellidoMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoApellidoMedicoCambiosActionPerformed(evt);
+            }
+        });
+        campoApellidoMedicoCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoApellidoMedicoCambiosKeyTyped(evt);
             }
         });
         getContentPane().add(campoApellidoMedicoCambios);
@@ -195,6 +243,11 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
                 campoDireccionMedicoCambiosActionPerformed(evt);
             }
         });
+        campoDireccionMedicoCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDireccionMedicoCambiosKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoDireccionMedicoCambios);
         campoDireccionMedicoCambios.setBounds(150, 180, 460, 20);
 
@@ -207,6 +260,11 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         campoTelefonoMedicoCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoTelefonoMedicoCambiosActionPerformed(evt);
+            }
+        });
+        campoTelefonoMedicoCambios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoTelefonoMedicoCambiosKeyTyped(evt);
             }
         });
         getContentPane().add(campoTelefonoMedicoCambios);
@@ -273,6 +331,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
 
     private void campoIdMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoIdMedicoCambiosActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_campoIdMedicoCambiosActionPerformed
 
     private void campoNombreMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreMedicoCambiosActionPerformed
@@ -306,7 +365,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
             return;
         }
         if (campoApellidoMedicoCambios.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tiene que tener apeido");
+            JOptionPane.showMessageDialog(this, "Tiene que tener apellido");
             return;
         }
         if (comboMedicoDepartamentoCambios.getSelectedIndex() == -1) {
@@ -318,7 +377,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
             return;
         }
         if (campoTelefonoMedicoCambios.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "El telefono no puede dejarse vacío!");
+            JOptionPane.showMessageDialog(this, "El telefono no puede dejarse vacio!");
             
             return;
         }
@@ -352,6 +411,8 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         boolean actualizado = MedicoDAO.getInstancia().modiifcarMedico(m);
         if(actualizado){
             JOptionPane.showMessageDialog(this, "Datos del médico fueron modificados exitosamente");
+            restablecerCampos();
+            cargarTodosLosMedicos(tablaCambiosMedicos);
         }else{
             JOptionPane.showMessageDialog(this, "Datos no se pudieron modificar, verifique que el ID sea válido.");
         }
@@ -360,7 +421,38 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     private void btnRestablecerMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerMedicoCambiosActionPerformed
         // TODO add your handling code here:
         restablecerCampos();
+        
     }//GEN-LAST:event_btnRestablecerMedicoCambiosActionPerformed
+
+    private void campoIdMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoCambiosKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+    }//GEN-LAST:event_campoIdMedicoCambiosKeyTyped
+
+    private void campoNombreMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreMedicoCambiosKeyTyped
+        // TODO add your handling code here:
+        soloLetras(evt);
+        limitarCaracteres(evt, campoNombreMedicoCambios, 45);
+        
+    }//GEN-LAST:event_campoNombreMedicoCambiosKeyTyped
+
+    private void campoApellidoMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoMedicoCambiosKeyTyped
+        // TODO add your handling code here:
+        soloLetras(evt);
+        limitarCaracteres(evt, campoApellidoMedicoCambios, 45);
+    }//GEN-LAST:event_campoApellidoMedicoCambiosKeyTyped
+
+    private void campoDireccionMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDireccionMedicoCambiosKeyTyped
+        // TODO add your handling code here:
+        limitarCaracteres(evt, campoDireccionMedicoCambios, 45);
+    }//GEN-LAST:event_campoDireccionMedicoCambiosKeyTyped
+
+    private void campoTelefonoMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoTelefonoMedicoCambiosKeyTyped
+        // TODO add your handling code here:
+        
+        soloNumeros(evt);
+        limitarSoloDiez(campoTelefonoMedicoCambios, evt);
+    }//GEN-LAST:event_campoTelefonoMedicoCambiosKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

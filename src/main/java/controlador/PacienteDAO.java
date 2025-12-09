@@ -57,6 +57,10 @@ public class PacienteDAO {
             return false;
         }
         
+        if(!hayMedicos()){
+            return false; 
+        }
+        
         conexionBD.abrirConexion();
         
         try{
@@ -147,17 +151,24 @@ public class PacienteDAO {
     
     //=================== BAJAS =================================== 
     public boolean eliminarPaciente(int idPaciente){
-        String sql = "CALL eliminar_paciente_proc(?)"; //PROCEDIMIENTO 2: en sql el proc tiene el comando DELETE *****************
-        conexionBD.abrirConexion();                    //nomas hacemos el CALL para el procedimento aqui en el DAO
-                                                       //
-        try{
-            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idPaciente);
-            return resultado; 
-            
-        }finally{
-            conexionBD.cerrarConexion();
+        if(idPaciente <= 0){
+            return false;
         }
         
+        conexionBD.abrirConexion();
+        try {
+            if(!existePaciente(idPaciente)){
+                return false; 
+            }
+        
+            String sql = "CALL eliminar_paciente_proc(?)";                         //PROCEDIMIENTO 2: en sql el proc tiene el comando DELETE *****************
+            boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idPaciente); //nomas hacemos el CALL para el procedimento
+                                                                                   //aqui en el DAO
+                                                                                   
+            return resultado;
+        } finally {  
+            conexionBD.cerrarConexion();
+        }
     }
     //---------------------- fin de bajas ------------------------ 
     
@@ -189,6 +200,28 @@ public class PacienteDAO {
         }
     }   
     //-------------------- fin de modificaciones -----------------------
+    
+    
+    public boolean hayMedicos() {
+        conexionBD.abrirConexion();
+        try {
+            String sql = "SELECT COUNT(*) FROM medicos_cabecera";
+            ResultSet rs = conexionBD.ejecutarConsultaSQL(sql);
+
+            if(rs.next()){
+                int total = rs.getInt(1);
+                return total > 0;
+            }
+            return false;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        } finally {
+            conexionBD.cerrarConexion();
+        }
+    }
+    
+    
     
     
     

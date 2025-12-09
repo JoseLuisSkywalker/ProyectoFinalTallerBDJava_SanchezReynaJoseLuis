@@ -71,11 +71,33 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         cargarTodosLosMedicos(tablaAltasMedicos); 
     }
     
-   
+    //SERIE DE VALIDACIONES 
     
-    
-    
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+            if (!Character.isDigit(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten números!");
+        }
+    }
 
+    public void soloLetras(java.awt.event.KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Solo se permiten letras.");
+        }
+    }
+    
+    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+        if (campo.getText().length() >= max) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");
+        }
+    }
+    
+    
+    //FIN SERIE DE VALIDACIONES
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -124,6 +146,14 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
                 campoIdMedicoAltasActionPerformed(evt);
             }
         });
+        campoIdMedicoAltas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoIdMedicoAltasKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoIdMedicoAltasKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoIdMedicoAltas);
         campoIdMedicoAltas.setBounds(150, 20, 250, 20);
 
@@ -138,6 +168,14 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
                 campoNombreMedicoAltasActionPerformed(evt);
             }
         });
+        campoNombreMedicoAltas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoNombreMedicoAltasKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNombreMedicoAltasKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoNombreMedicoAltas);
         campoNombreMedicoAltas.setBounds(150, 60, 250, 20);
 
@@ -150,6 +188,14 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         campoApellidoMedicoAltas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoApellidoMedicoAltasActionPerformed(evt);
+            }
+        });
+        campoApellidoMedicoAltas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoApellidoMedicoAltasKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoApellidoMedicoAltasKeyTyped(evt);
             }
         });
         getContentPane().add(campoApellidoMedicoAltas);
@@ -181,6 +227,11 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
                 campoDireccionMedicoAltasActionPerformed(evt);
             }
         });
+        campoDireccionMedicoAltas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoDireccionMedicoAltasKeyTyped(evt);
+            }
+        });
         getContentPane().add(campoDireccionMedicoAltas);
         campoDireccionMedicoAltas.setBounds(150, 180, 420, 20);
 
@@ -193,6 +244,14 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         campoNumTelefonoMedicosAltas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNumTelefonoMedicosAltasActionPerformed(evt);
+            }
+        });
+        campoNumTelefonoMedicosAltas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoNumTelefonoMedicosAltasKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                campoNumTelefonoMedicosAltasKeyTyped(evt);
             }
         });
         getContentPane().add(campoNumTelefonoMedicosAltas);
@@ -283,6 +342,13 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
 
     private void btnAgregarMedicoAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarMedicoAltasActionPerformed
         // TODO add your handling code here:
+        if (campoNumTelefonoMedicosAltas.getText().length() != 10) {
+        JOptionPane.showMessageDialog(this, "El número dene ser de 10 digitos ");
+        
+        campoNumTelefonoMedicosAltas.requestFocus(); //este metodo hace que no se vaya el resultado erroneo para el tel.
+        return; 
+    }
+        
         try{
             int id = Integer.parseInt(campoIdMedicoAltas.getText().trim()); 
             String nombre = campoNombreMedicoAltas.getText().trim(); 
@@ -329,6 +395,69 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         
         restablecerCampos();
     }//GEN-LAST:event_btnRestablecerMedicoAltas1ActionPerformed
+
+    private void campoIdMedicoAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoAltasKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+    }//GEN-LAST:event_campoIdMedicoAltasKeyTyped
+
+    private void campoNombreMedicoAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltasKeyTyped
+        // TODO add your handling code here:
+         soloLetras(evt);
+
+        if (campoNombreMedicoAltas.getText().length() >= 45) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "La base de datos solo soporta un limite de 45 por campo");
+        }
+    }//GEN-LAST:event_campoNombreMedicoAltasKeyTyped
+
+    private void campoApellidoMedicoAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoMedicoAltasKeyTyped
+        // TODO add your handling code here:
+        soloLetras(evt);
+
+        if (campoApellidoMedicoAltas.getText().length() >= 45) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "la base solo sostiene 45 caracters en un campo");
+        }
+    }//GEN-LAST:event_campoApellidoMedicoAltasKeyTyped
+
+    private void campoNumTelefonoMedicosAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumTelefonoMedicosAltasKeyTyped
+        // TODO add your handling code here:
+        soloNumeros(evt);
+
+        if (campoNumTelefonoMedicosAltas.getText().length() == 10) {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Un número de telefono debe tener 10 digitos.");
+        }
+    }//GEN-LAST:event_campoNumTelefonoMedicosAltasKeyTyped
+
+    private void campoIdMedicoAltasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoAltasKeyReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_campoIdMedicoAltasKeyReleased
+
+    private void campoNombreMedicoAltasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltasKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_campoNombreMedicoAltasKeyReleased
+
+    private void campoApellidoMedicoAltasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoApellidoMedicoAltasKeyReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_campoApellidoMedicoAltasKeyReleased
+
+    private void campoNumTelefonoMedicosAltasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumTelefonoMedicosAltasKeyReleased
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_campoNumTelefonoMedicosAltasKeyReleased
+
+    private void campoDireccionMedicoAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDireccionMedicoAltasKeyTyped
+        // TODO add your handling code here:
+        limitarCaracteres(evt, campoDireccionMedicoAltas, 45);
+    }//GEN-LAST:event_campoDireccionMedicoAltasKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -85,7 +85,13 @@ public class MedicoDAO {
             String sql = "CALL eliminar_medico_proc(?)";                                // PROCEMIENTO 1: el procedimiento en
             boolean resultado = conexionBD.ejecutarInstruccionLMD(sql, idMedico);       // sql contiene el DELETE, ya nomas se llama
             
-            return resultado;
+            
+            if(!resultado){
+                boolean sigueExistiendo = existeMedico(idMedico); 
+                return !sigueExistiendo;
+            }
+            return true;
+           
         }finally{
             conexionBD.cerrarConexion();
         }
