@@ -7,7 +7,7 @@
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="defaultCloseOperation" type="int" value="1"/>
-    <Property name="title" type="java.lang.String" value="Vista 1"/>
+    <Property name="title" type="java.lang.String" value="Vista 2"/>
     <Property name="toolTipText" type="java.lang.String" value=""/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[700, 700]"/>
@@ -98,11 +98,11 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Vista: Cada Paciente que tiene un m&#xe9;dico de cabecera"/>
+        <Property name="text" type="java.lang.String" value="Historial de M&#xe9;dicos Eliminados"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="30" width="630" height="40"/>
+          <AbsoluteConstraints x="30" y="17" width="630" height="40"/>
         </Constraint>
       </Constraints>
     </Component>

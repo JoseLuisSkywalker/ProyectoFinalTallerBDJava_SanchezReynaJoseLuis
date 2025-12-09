@@ -18,15 +18,20 @@ import modelo.ResultSetTableModel;
  */
 public class InternalVistas extends javax.swing.JInternalFrame {
     private InternalVistas1 IFVistas1; 
+    private InternalTabla2 IFVistas2; 
+    private InternalTabla3 IFVistas3; 
     /**
      * Creates new form internalMedicos
      */
-    public InternalVistas(InternalVistas1 IFVistas1) {
-         this.IFVistas1 = IFVistas1; 
-        
+    public InternalVistas(InternalVistas1 IFVistas, InternalTabla2 IFVistas2, InternalTabla3 IFVistas3) {
+         this.IFVistas1 = IFVistas; 
+         this.IFVistas2 = IFVistas2; 
+         this.IFVistas3 = IFVistas3;
+         
         initComponents();
         setSize(500, 700);        
         setResizable(false);
+        setBounds(100, 0, 500, 500);
 
         prepararBoton(btnVista1);
         prepararBoton(btnVista3);
@@ -93,14 +98,13 @@ private void prepararBoton(JButton boton) {
         setMinimumSize(new java.awt.Dimension(700, 700));
         setNormalBounds(new java.awt.Rectangle(0, 0, 700, 700));
         setPreferredSize(new java.awt.Dimension(700, 700));
-        setSize(new java.awt.Dimension(700, 700));
         setVisible(true);
         getContentPane().setLayout(null);
 
         btnVista2.setBackground(new java.awt.Color(100, 0, 0));
         btnVista2.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btnVista2.setForeground(new java.awt.Color(255, 255, 255));
-        btnVista2.setText("-");
+        btnVista2.setText("Historial Médicos");
         btnVista2.setToolTipText("");
         btnVista2.setBorder(null);
         btnVista2.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +131,7 @@ private void prepararBoton(JButton boton) {
         btnVista3.setBackground(new java.awt.Color(100, 0, 0));
         btnVista3.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         btnVista3.setForeground(new java.awt.Color(255, 255, 255));
-        btnVista3.setText("-");
+        btnVista3.setText("Historial Pacientes");
         btnVista3.setToolTipText("");
         btnVista3.setBorder(null);
         btnVista3.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +153,9 @@ private void prepararBoton(JButton boton) {
 
     private void btnVista2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVista2ActionPerformed
         hacerClickOscuro(btnVista2);
-        
+        IFVistas2.setVisible(true); 
+        IFVistas2.toFront();
+        IFVistas2.cargarVista();
      
         
     }//GEN-LAST:event_btnVista2ActionPerformed
@@ -166,7 +172,9 @@ private void prepararBoton(JButton boton) {
 
     private void btnVista3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVista3ActionPerformed
         hacerClickOscuro(btnVista3);
-   
+        IFVistas3.setVisible(true); 
+        IFVistas3.toFront();
+        IFVistas3.cargarVista();
 
     }//GEN-LAST:event_btnVista3ActionPerformed
 

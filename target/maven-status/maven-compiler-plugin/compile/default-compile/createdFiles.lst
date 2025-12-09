@@ -31,6 +31,7 @@ vista/VentanaInicio$3.class
 vista/InternalConsultasPacientes$11.class
 vista/InternalCambiosMedicos$6.class
 vista/InternalConsultasMedicos$2.class
+vista/InternalTabla2.class
 vista/InternalConsultasPacientes$31.class
 conexion/ConexionBD.class
 vista/InternalConsultasPacientes$35.class
@@ -72,6 +73,7 @@ conexion/PruebaConexion.class
 vista/InternalVistas.class
 vista/InternalConsultasMedicos$9.class
 vista/InternalConsultasPacientes$10.class
+vista/InternalTabla3.class
 vista/InternalCambiosMedicos$5.class
 vista/InternalConsultasPacientes$30.class
 vista/InternalConsultasPacientes$20.class
@@ -119,6 +121,7 @@ vista/InternalConsultasMedicos$1.class
 vista/InternalCambiosPacientes$1.class
 vista/InternalConsultasPacientes$16.class
 vista/InternalPacientes$3.class
+vista/VentanaInicio$5.class
 modelo/ResultSetTableModel.class
 vista/VentanaInicio.class
 vista/InternalConsultasPacientes$28.class

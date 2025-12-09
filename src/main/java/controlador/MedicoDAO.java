@@ -118,7 +118,7 @@ public class MedicoDAO {
     }
     
     
-    // ESTA ES LA FUNCION QUE HICE PARA QUE EN EL OPTIONPANE CUENTE LO S MEDICOS
+    // ESTA ES LA FUNCION QUE HICE PARA QUE EN EL jOPTIONPANE CONTAR MEDICOS
      public int obtenerTotalMedicos() {
         int total = 0;
 
@@ -126,12 +126,12 @@ public class MedicoDAO {
         Connection conn = conexionBD.abrirConexion();
         PreparedStatement ps = null;
         ResultSet rs = null;
-                                                                           //
-        try {                                                              //
+                                                                           //********************************** 
+        try {                                                              //----------------------------------
             ps = conn.prepareStatement("SELECT total_medicos()");          //  FUNCION 1: en sql la funcion tiene                                                                        //
             rs = ps.executeQuery();                                        //   un contador para contar los doctores
-
-            if (rs.next()) {
+                                                                           //   cuenta los docs con COUNT(*) en sql
+            if (rs.next()) {                                               //
                 total = rs.getInt(1);
             }
 

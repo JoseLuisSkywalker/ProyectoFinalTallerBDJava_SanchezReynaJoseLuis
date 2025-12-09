@@ -16,13 +16,13 @@ import modelo.ResultSetTableModel;
  *
  * @author josesanchez
  */
-public class InternalVistas1 extends javax.swing.JInternalFrame {
+public class InternalTabla3 extends javax.swing.JInternalFrame {
     private final String driver = "org.postgresql.Driver";
     private final String url = "jdbc:postgresql://localhost:5432/wellmeadows_hospital";
     /**
      * Creates new form internalMedicos
      */
-    public InternalVistas1() {
+    public InternalTabla3() {
    
         
         initComponents();
@@ -33,19 +33,17 @@ public class InternalVistas1 extends javax.swing.JInternalFrame {
         
         
     }
-    
-    
     public void cargarVista(){
         try { 
-            String consulta = "Select * FROM vista_medico_pacientes"; 
+            String consulta = "SELECT * FROM pacientes_historial"; 
             ResultSetTableModel modelo = new ResultSetTableModel(driver, url, consulta);
             tablaVista.setModel(modelo);
-            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error, no se cargo la vista correctamente");
+            JOptionPane.showMessageDialog(this, "Error, no se cargó la vista correctamente");
             e.printStackTrace();
         }
     }
+    
     
    
 
@@ -65,7 +63,7 @@ public class InternalVistas1 extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(120, 0, 0));
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setTitle("Vista 1");
+        setTitle("Vista 3");
         setToolTipText("");
         setMaximumSize(new java.awt.Dimension(700, 700));
         setMinimumSize(new java.awt.Dimension(700, 700));
@@ -113,9 +111,9 @@ public class InternalVistas1 extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Vista: Cada Paciente que tiene un médico de cabecera");
+        jLabel1.setText("Historial de Pacientes Eliminados");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 30, 630, 40);
+        jLabel1.setBounds(30, 17, 630, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
