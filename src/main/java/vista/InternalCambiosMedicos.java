@@ -4,6 +4,7 @@ import controlador.MedicoDAO;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import modelo.Medico;
 import modelo.ResultSetTableModel;
 
@@ -92,7 +93,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     }
     
     
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
+    public void soloNumeros(KeyEvent evt) {
         char c = evt.getKeyChar();
             if (!Character.isDigit(c) && c != '\b') {
             evt.consume();
@@ -100,7 +101,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         }
     }
 
-    public void soloLetras(java.awt.event.KeyEvent evt) {
+    public void soloLetras(KeyEvent evt) {
         char c = evt.getKeyChar();
         if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
             evt.consume();
@@ -108,19 +109,22 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         }
     }
     
-    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+    public void limitarCaracteres(KeyEvent evt, JTextField campo, int max) {
         if (campo.getText().length() >= max) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");
         }
     }
     
-    public void limitarSoloDiez(javax.swing.JTextField campo, java.awt.event.KeyEvent evt) {
+    public void limitarSoloDiez(JTextField campo, KeyEvent evt) {
         if (campo.getText().length() >= 10) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "10 digitos para el telefono, no mas, no menos!");
+            campo.requestFocus(); 
         }
     }
+    
+   
     
     
     
@@ -356,7 +360,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
 
     private void btnModificarMedicoCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarMedicoCambiosActionPerformed
         // TODO add your handling code here:
-        if (campoIdMedicoCambios.getText().trim().isEmpty()) {
+        if(campoIdMedicoCambios.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El campo ID no puede estar vacío");
             return;
         }
@@ -364,33 +368,37 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Tiene que tener nombre.");
             return;
         }
-        if (campoApellidoMedicoCambios.getText().trim().isEmpty()) {
+        if(campoApellidoMedicoCambios.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tiene que tener apellido");
             return;
         }
-        if (comboMedicoDepartamentoCambios.getSelectedIndex() == -1) {
+        if(comboMedicoDepartamentoCambios.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un departamento");
             return;
         }
-        if (campoDireccionMedicoCambios.getText().trim().isEmpty()) {
+        if(campoDireccionMedicoCambios.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingrese una dirección");
             return;
         }
-        if (campoTelefonoMedicoCambios.getText().trim().isEmpty()) {
+        if(campoTelefonoMedicoCambios.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "El telefono no puede dejarse vacio!");
             
             return;
         }
-
-    // Valida que ID sea número
+        String telefono = campoTelefonoMedicoCambios.getText().trim(); 
+        if(telefono.length() !=10){
+            JOptionPane.showMessageDialog(this, "El número debe tener exactamente 10 digitos");
+            campoTelefonoMedicoCambios.requestFocus();
+            return;
+        }
+   
     try {
         Integer.parseInt(campoIdMedicoCambios.getText().trim());
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "El ID debe ser un número entero válido.");
         return;
     }
-
-    // Valida que número de departamento sea un número
+    
     try {
         Integer.parseInt(comboMedicoDepartamentoCambios.getSelectedItem().toString());
     } catch (NumberFormatException e) {
@@ -411,7 +419,6 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
         boolean actualizado = MedicoDAO.getInstancia().modiifcarMedico(m);
         if(actualizado){
             JOptionPane.showMessageDialog(this, "Datos del médico fueron modificados exitosamente");
-            restablecerCampos();
             cargarTodosLosMedicos(tablaCambiosMedicos);
         }else{
             JOptionPane.showMessageDialog(this, "Datos no se pudieron modificar, verifique que el ID sea válido.");

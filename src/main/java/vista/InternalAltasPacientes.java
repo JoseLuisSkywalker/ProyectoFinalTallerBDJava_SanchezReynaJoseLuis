@@ -355,6 +355,12 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
 
     private void btnAgregarPacientesAltasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPacientesAltasActionPerformed
         // TODO add your handling code here:
+       if (campoTelefonoPacientesAltas.getText().length() != 10) {
+        JOptionPane.showMessageDialog(this, "El número dene ser de 10 digitos ");
+        
+        campoTelefonoPacientesAltas.requestFocus(); //este metodo hace que no se vaya el resultado erroneo para el tel.
+        return; 
+    } 
         
         Paciente p = new Paciente(); 
         

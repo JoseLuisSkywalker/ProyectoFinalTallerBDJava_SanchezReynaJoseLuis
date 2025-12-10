@@ -372,6 +372,34 @@ public class InternalCambiosPacientes extends javax.swing.JInternalFrame {
 
     private void btnModificarPacientesCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarPacientesCambiosActionPerformed
         // TODO add your handling code here:
+        if(campoIDPacienteCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El id no se puede dejar vacio");
+            return;
+        }
+
+        if(campoNombrePacientesCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un nombre.");
+            return;
+        }   
+
+        if(campoApellidoPacientesCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un apellido.");
+            return;
+        }
+
+        if(campoTelefonoPacientesCambios.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El telefono no puede estar vacio.");
+            return;
+        }
+
+        String telefono = campoTelefonoPacientesCambios.getText().trim();
+            if(telefono.length() != 10){
+            JOptionPane.showMessageDialog(this, "El teléfono debe tener exactamente 10 digitos, no mas, no menos!");
+            campoTelefonoPacientesCambios.requestFocus();
+            return;
+        }
+        
+        
         int id = Integer.parseInt(campoIDPacienteCambios.getText().trim()); 
         
         

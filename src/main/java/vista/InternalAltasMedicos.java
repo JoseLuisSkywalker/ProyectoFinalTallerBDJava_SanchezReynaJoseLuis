@@ -425,7 +425,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         soloNumeros(evt);
 
-        if (campoNumTelefonoMedicosAltas.getText().length() == 10) {
+        if (campoNumTelefonoMedicosAltas.getText().length() >= 10) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Un número de telefono debe tener 10 digitos.");
         }
