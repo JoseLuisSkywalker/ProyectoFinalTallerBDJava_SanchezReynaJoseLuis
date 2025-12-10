@@ -6,6 +6,7 @@ package modelo;
 
 import javax.swing.SwingUtilities;
 import vista.VentanaInicio;
+import vista.VentanaLogin;
 
 
 /**
@@ -20,7 +21,7 @@ public class WellmeadowsHospitalProyectoFinal {
             @Override
             public void run() {
 
-                new VentanaInicio();
+                new VentanaLogin(); 
 
             }
         });

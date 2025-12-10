@@ -2,11 +2,15 @@ package vista;
 
 import conexion.ConexionBD;
 import controlador.MedicoDAO;
+import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import modelo.Medico;
 import modelo.ResultSetTableModel;
 
@@ -38,7 +42,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     }
     
     
-    private void cargarTodosLosMedicos(javax.swing.JTable tablaMedicos) {
+    private void cargarTodosLosMedicos(JTable tablaMedicos) {
         try {
             String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
             modelo = new ResultSetTableModel(driver, url, sql);
@@ -47,18 +51,19 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-  
-    
     
     
     private void restablecerCampos() {
+        /*
+        **********************************************
+        PATRON DE DISENIO ESTRUCTURAL
+        fachada de vista helper facade
+        *******************************************
+        */
+        VistaHelperFacade fachada = new VistaHelperFacade(); 
+        fachada.limpiarCampos(campoIdMedicoAltas, campoNombreMedicoAltas,
+                campoApellidoMedicoAltas, campoDireccionMedicoAltas, campoNumTelefonoMedicosAltas);
         try {
-       
-            campoIdMedicoAltas.setText("");
-            campoNombreMedicoAltas.setText("");
-            campoApellidoMedicoAltas.setText("");
-            campoDireccionMedicoAltas.setText("");
-            campoNumTelefonoMedicosAltas.setText("");
             comboMedicoDepartamentoAtlas.setSelectedIndex(0);
             cargarTodosLosMedicos(tablaAltasMedicos);
 
@@ -73,7 +78,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     
     //SERIE DE VALIDACIONES 
     
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
+    public void soloNumeros(KeyEvent evt) {
         char c = evt.getKeyChar();
             if (!Character.isDigit(c) && c != '\b') {
             evt.consume();
@@ -81,7 +86,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         }
     }
 
-    public void soloLetras(java.awt.event.KeyEvent evt) {
+    public void soloLetras(KeyEvent evt) {
         char c = evt.getKeyChar();
         if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
             evt.consume();
@@ -89,7 +94,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         }
     }
     
-    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+    public void limitarCaracteres(KeyEvent evt, JTextField campo, int max) {
         if (campo.getText().length() >= max) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");
@@ -98,6 +103,8 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
     
     
     //FIN SERIE DE VALIDACIONES
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -344,8 +351,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (campoNumTelefonoMedicosAltas.getText().length() != 10) {
         JOptionPane.showMessageDialog(this, "El número dene ser de 10 digitos ");
-        
-        campoNumTelefonoMedicosAltas.requestFocus(); //este metodo hace que no se vaya el resultado erroneo para el tel.
+        campoNumTelefonoMedicosAltas.requestFocus(); 
         return; 
     }
         
@@ -398,7 +404,16 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
 
     private void campoIdMedicoAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoAltasKeyTyped
         // TODO add your handling code here:
-        soloNumeros(evt);
+        //================ IMPLEMENTACION DE PATRON DE DISENIO DE COMPORTAMIENTO
+        
+        ValidarTexto val = new SoloNumerosStrategy(); 
+        char c = evt.getKeyChar();
+        if (!val.validar(c, campoIdMedicoAltas)) {
+        evt.consume();
+        JOptionPane.showMessageDialog(this, "Solo se permiten numeros");
+        }
+        
+        //soloNumeros(evt);
     }//GEN-LAST:event_campoIdMedicoAltasKeyTyped
 
     private void campoNombreMedicoAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreMedicoAltasKeyTyped

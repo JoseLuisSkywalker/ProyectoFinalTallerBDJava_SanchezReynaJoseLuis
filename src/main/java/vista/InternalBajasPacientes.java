@@ -5,7 +5,10 @@
 package vista;
 
 import controlador.PacienteDAO;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import modelo.ResultSetTableModel;
 
 /**
@@ -26,9 +29,9 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         cargarTodosLosPacientes(tablaBajasPacientes);
         
         
-        campoIDPacienteBajas.addKeyListener(new java.awt.event.KeyAdapter(){
+        campoIDPacienteBajas.addKeyListener(new KeyAdapter(){
             @Override
-            public void keyReleased(java.awt.event.KeyEvent e){
+            public void keyReleased(KeyEvent e){
                 String texto = campoIDPacienteBajas.getText().trim(); 
             
                 if(texto.isEmpty()){
@@ -43,7 +46,7 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
     }
     
     
-    private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes) {
+    private void cargarTodosLosPacientes(JTable tablaPacientes) {
         try {
             String sql = "SELECT * FROM pacientes"; 
             modelo = new ResultSetTableModel(driver, url, sql);
@@ -65,7 +68,7 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         }
     }
     
-    private void filtrar(javax.swing.JTable tabla, String id){
+    private void filtrar(JTable tabla, String id){
         try{
             String sql = "SELECT * FROM pacientes WHERE CAST(id_paciente AS TEXT) ILIKE '%" + id + "%'"; 
             modelo = new ResultSetTableModel(driver, url, sql); 
@@ -80,7 +83,7 @@ public class InternalBajasPacientes extends javax.swing.JInternalFrame {
         cargarTodosLosPacientes(tablaBajasPacientes);
     }
      
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
+    public void soloNumeros(KeyEvent evt) {
         char c = evt.getKeyChar();
             if (!Character.isDigit(c) && c != '\b') {
             evt.consume();

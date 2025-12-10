@@ -1,7 +1,9 @@
 package vista;
 
 import controlador.MedicoDAO;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import modelo.ResultSetTableModel;
 
 /*
@@ -69,7 +71,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         }
     }
     
-    private void filtrar(javax.swing.JTable tabla, String id){
+    private void filtrar(JTable tabla, String id){
         try{
             String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono "+
                     "FROM medicos_cabecera " + "WHERE CAST(id_medico AS TEXT) ILIKE '%" + id + "%'"; 
@@ -86,7 +88,7 @@ public class InternalBajasMedicos extends javax.swing.JInternalFrame {
         cargarTodosLosMedicos(tablaBajasMedicos);
     }
     
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
+    public void soloNumeros(KeyEvent evt) {
         char c = evt.getKeyChar();
             if (!Character.isDigit(c) && c != '\b') {
             evt.consume();

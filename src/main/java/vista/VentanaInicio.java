@@ -160,7 +160,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         panelIzquierdo.setPreferredSize(new java.awt.Dimension(200, 800));
         panelIzquierdo.setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/ProjectoFinalWM_mock/src/main/resources/Imagenes/logo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/josesanchez/Desktop/PROYECTO FINAL/WellmeadowsHospitalProyectoFinal/src/main/resources/Imagenes/logo.png")); // NOI18N
         panelIzquierdo.add(jLabel1);
         jLabel1.setBounds(20, 20, 160, 158);
 
@@ -309,11 +309,13 @@ private void prepararBoton(JButton boton) {
 
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         hacerClickOscuro(btnReporte);
+        IFVistas1.generarReportePDF();
     }//GEN-LAST:event_btnReporteActionPerformed
 
     private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaActionPerformed
         // TODO add your handling code here:
         hacerClickOscuro(btnGrafica);
+        IFVistas1.generarGraficaTop2();
     }//GEN-LAST:event_btnGraficaActionPerformed
 
     /**

@@ -4,6 +4,7 @@ import controlador.MedicoDAO;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import modelo.Medico;
 import modelo.ResultSetTableModel;
@@ -44,7 +45,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     
     
     
-    private void cargarTodosLosMedicos(javax.swing.JTable tablaMedicos) {
+    private void cargarTodosLosMedicos(JTable tablaMedicos) {
         try {
             String sql = "SELECT id_medico, nombre, apellido, numero_departamento, direccion, telefono FROM medicos_cabecera";
             modelo = new ResultSetTableModel(driver, url, sql);

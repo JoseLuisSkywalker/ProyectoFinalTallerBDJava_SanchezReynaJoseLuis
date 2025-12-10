@@ -45,6 +45,7 @@ public class InternalVistas extends javax.swing.JInternalFrame {
     }
     
     
+    
 //============ METODOS DISENO BOTONES *START* ================ 
 private void hacerClickOscuro(JButton boton) {
 

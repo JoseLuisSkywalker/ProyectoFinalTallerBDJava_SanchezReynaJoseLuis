@@ -6,12 +6,14 @@ package vista;
 
 import conexion.ConexionBD;
 import controlador.PacienteDAO;
+import java.awt.event.KeyEvent;
 import java.lang.classfile.Opcode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import modelo.Paciente;
 import modelo.ResultSetTableModel;
 
@@ -44,7 +46,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
       
     }
     
-    private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes){
+    private void cargarTodosLosPacientes(JTable tablaPacientes){
         try {
             String sql = "SELECT * FROM pacientes"; 
             modelo = new ResultSetTableModel(driver, url, sql);
@@ -90,7 +92,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
      
     }
     
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
+    public void soloNumeros(KeyEvent evt) {
         char c = evt.getKeyChar();
             if (!Character.isDigit(c) && c != '\b') {
             evt.consume();
@@ -98,7 +100,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         }
     }
 
-    public void soloLetras(java.awt.event.KeyEvent evt) {
+    public void soloLetras(KeyEvent evt) {
         char c = evt.getKeyChar();
         if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
             evt.consume();
@@ -106,7 +108,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
         }
     }
     
-    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+    public void limitarCaracteres(KeyEvent evt, javax.swing.JTextField campo, int max) {
         if (campo.getText().length() >= max) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");

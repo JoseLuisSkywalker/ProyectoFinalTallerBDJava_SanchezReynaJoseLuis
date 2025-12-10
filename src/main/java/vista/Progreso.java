@@ -4,6 +4,7 @@
  */
 package vista;
 
+import java.awt.Frame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
@@ -18,7 +19,7 @@ public class Progreso extends javax.swing.JDialog {
     /**
      * Creates new form Progreso
      */
-    public Progreso(java.awt.Frame parent, boolean modal) {
+    public Progreso(Frame parent, boolean modal) {
         
         super(parent, modal);
         initComponents();

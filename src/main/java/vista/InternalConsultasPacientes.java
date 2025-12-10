@@ -7,8 +7,11 @@ package vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import modelo.ResultSetTableModel;
 
 /**
@@ -224,7 +227,7 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         }
     }
     
-    private void cargarTodosLosPacientes(javax.swing.JTable tablaPacientes){
+    private void cargarTodosLosPacientes(JTable tablaPacientes){
         try {
             String sql = "SELECT * FROM pacientes"; 
             modelo = new ResultSetTableModel(driver, url, sql);
@@ -234,7 +237,7 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         }
     }
     
-    public void filtrarPacientes(String campo, String valor, javax.swing.JTable tablaPacientes){
+    public void filtrarPacientes(String campo, String valor, JTable tablaPacientes){
         try {
             String sql = "SELECT * FROM pacientes WHERE " + campo + " ILIKE '%" + valor + "%'"; 
             modelo = new ResultSetTableModel(driver, url, sql); 
@@ -378,7 +381,7 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         cargarTodosLosPacientes(tablaConsultasPacientes);
     }
     
-    public void soloNumeros(java.awt.event.KeyEvent evt) {
+    public void soloNumeros(KeyEvent evt) {
         char c = evt.getKeyChar();
             if (!Character.isDigit(c) && c != '\b') {
             evt.consume();
@@ -386,7 +389,7 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         }
     }
 
-    public void soloLetras(java.awt.event.KeyEvent evt) {
+    public void soloLetras(KeyEvent evt) {
         char c = evt.getKeyChar();
         if (!Character.isLetter(c) && !Character.isWhitespace(c) && c != '\b') {
             evt.consume();
@@ -394,14 +397,14 @@ public class InternalConsultasPacientes extends javax.swing.JInternalFrame {
         }
     }
     
-    public void limitarCaracteres(java.awt.event.KeyEvent evt, javax.swing.JTextField campo, int max) {
+    public void limitarCaracteres(KeyEvent evt, JTextField campo, int max) {
         if (campo.getText().length() >= max) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "Máximo permitido: " + max + " caracteres.");
         }
     }
     
-    public void limitarSoloDiez(javax.swing.JTextField campo, java.awt.event.KeyEvent evt) {
+    public void limitarSoloDiez(JTextField campo, KeyEvent evt) {
         if (campo.getText().length() >= 10) {
             evt.consume();
             JOptionPane.showMessageDialog(this, "10 digitos para el telefono, no mas, no menos!");
