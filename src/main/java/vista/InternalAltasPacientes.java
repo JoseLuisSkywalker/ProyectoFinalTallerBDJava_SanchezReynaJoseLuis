@@ -398,7 +398,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
             //                                                       ||||||||||||||||||||||
             //                                                       vvvvvvvvvvvvvvvvvvvvvv
                 JOptionPane.showMessageDialog(this, "Paciente de " + PacienteDAO.getInstancia().obtenerEdadPaciente(p.getIdPaciente()) + " años de edad registrado exitosamente.");
-                
+                restablecerCampos();
             }else{
                 JOptionPane.showMessageDialog(this, "Paciente no se puedo registrar correctamente: verifique el ID para paciente como también a médicos.");
             }
@@ -432,6 +432,7 @@ public class InternalAltasPacientes extends javax.swing.JInternalFrame {
     private void campoIDPacienteAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIDPacienteAltasKeyTyped
         // TODO add your handling code here:
         soloNumeros(evt);
+        limitarCaracteres(evt, campoIdMedicosAltas, 5);
     }//GEN-LAST:event_campoIDPacienteAltasKeyTyped
 
     private void campoNombrePacientesAltasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombrePacientesAltasKeyTyped

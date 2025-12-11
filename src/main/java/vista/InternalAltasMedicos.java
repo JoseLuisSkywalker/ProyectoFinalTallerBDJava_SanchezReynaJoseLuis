@@ -412,7 +412,7 @@ public class InternalAltasMedicos extends javax.swing.JInternalFrame {
         evt.consume();
         JOptionPane.showMessageDialog(this, "Solo se permiten numeros");
         }
-        
+        limitarCaracteres(evt, campoIdMedicoAltas, 5);
         //soloNumeros(evt);
     }//GEN-LAST:event_campoIdMedicoAltasKeyTyped
 

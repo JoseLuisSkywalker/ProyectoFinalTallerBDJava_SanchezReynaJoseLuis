@@ -435,6 +435,7 @@ public class InternalCambiosMedicos extends javax.swing.JInternalFrame {
     private void campoIdMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoIdMedicoCambiosKeyTyped
         // TODO add your handling code here:
         soloNumeros(evt);
+        limitarCaracteres(evt, campoIdMedicoCambios, 5);
     }//GEN-LAST:event_campoIdMedicoCambiosKeyTyped
 
     private void campoNombreMedicoCambiosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNombreMedicoCambiosKeyTyped

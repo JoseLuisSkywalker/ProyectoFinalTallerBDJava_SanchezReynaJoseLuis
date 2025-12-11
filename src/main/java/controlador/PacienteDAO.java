@@ -60,7 +60,7 @@ public class PacienteDAO {
         if(!hayMedicos()){
             return false; 
         }
-        
+        // TRANSACCION - TRANSACCION - TRANSACCION - TRANSACCION - TRANSACCION - TRANSACCION - TRANSACCION - TRANSACCION - TRANSACCION
         conexionBD.abrirConexion();
         
         try{
